@@ -1,0 +1,16 @@
+.container {
+    width: 90%;
+    margin-left: 5%;
+    background-color: gold;
+}
+
+header {
+    width: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: goldenrod;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+}
