@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Aeropuerto busqueda.</h1>
+        </header>
+        <form action="/aeropuertosearch" method="post">
+            <label for="iatahmtl">Codigo IATA:</label><input type="text" name="iatahmtl" placeholder="codigo iata"><br>
+            <button type="submit">Buscar</button>
+        </form>
+        <% if( muestro==true ){ if(registros.length==0){ %>
+            <p>No se encontro el aeropuerto.</p>
+            <% }else{ %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>codigo iata</th>
+                            <th>nombre</th>
+                            <th>ciudad</th>
+                            <th>pais</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%=registros[0].codigoiata %>
+                            </td>
+                            <td>
+                                <%=registros[0].nombre %>
+                            </td>
+                            <td>
+                                <%=registros[0].ciudad %>
+                            </td>
+                            <td>
+                                <%=registros[0].pais %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <%} }else{%>
+                    <p>Nose a buscado algo aun.</p>
+                    <%}%>
+    </div>
+
+</body>
+
+</html>

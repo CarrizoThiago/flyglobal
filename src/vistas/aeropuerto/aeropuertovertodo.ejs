@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Aeropuerto ver todo.</h1>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th>IATA</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Pais</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(registros.length>0){
+                    registros.forEach(aeropuerto=>{ %>
+                    <tr>
+                        <td>
+                            <%=aeropuerto.codigoiata %>
+                        </td>
+                        <td>
+                            <%=aeropuerto.nombre %>
+                        </td>
+                        <td>
+                            <%=aeropuerto.ciudad %>
+                        </td>
+                        <td>
+                            <%=aeropuerto.pais %>
+                        </td>
+                    </tr>
+                    <% }) %>
+                        <% } else{%>
+                            <p>No hay resgistros</p>
+                            <% }%>
+            </tbody>
+        </table>
+
+    </div>
+</body>
+
+</html>

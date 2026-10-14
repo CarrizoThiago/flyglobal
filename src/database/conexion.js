@@ -3,7 +3,7 @@ export async function conectar() {
     try {
         const bdd = await mysql.createPool({
             host: 'localhost',
-            database: 'flyglobal_bd',
+            database: 'ruiz_bd',
             user: 'root',
             password: 'RiverPlate1986!'
         });

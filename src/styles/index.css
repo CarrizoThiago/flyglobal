@@ -1,16 +1,29 @@
 .container {
     width: 90%;
+    margin-top: 0px;
+    min-height: 100vh;
     margin-left: 5%;
     background-color: gold;
+    display: flex;
+    flex-direction: column;
+
+}
+
+body {
+    margin: 0%;
+    padding: 0%;
 }
 
 header {
     width: 100%;
-    padding: 2%;
-    border-radius: 10px;
     background-color: goldenrod;
     display: flex;
     align-content: center;
     justify-content: center;
 
+}
+
+th,
+td {
+    border: 1px solid black;
 }

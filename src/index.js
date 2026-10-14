@@ -14,7 +14,7 @@ const directorio = Path.dirname(fileURLToPath(import.meta.url));
 console.log(directorio);
 app.set('views', Path.join(directorio, 'vistas'));
 
-app.use(express.static(Path.join(directorio, 'public')));
+app.use('/styles', express.static(Path.join(directorio, 'styles')));
 
 
 
