@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
 </head>
 
 <body>
@@ -13,43 +15,53 @@
         <header>
             <h1>Aeropuerto busqueda.</h1>
         </header>
+        <nav>
+            <a href="/aeropuerto">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
         <form action="/aeropuertosearch" method="post">
             <label for="iatahmtl">Codigo IATA:</label><input type="text" name="iatahmtl" placeholder="codigo iata"><br>
-            <button type="submit">Buscar</button>
+            <button type="submit" class="bb">Buscar</button>
         </form>
         <% if( muestro==true ){ if(registros.length==0){ %>
-            <p>No se encontro el aeropuerto.</p>
+            <div class="pneg">
+                <p>No se encontro el aeropuerto.</p>
+            </div>
             <% }else{ %>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>codigo iata</th>
-                            <th>nombre</th>
-                            <th>ciudad</th>
-                            <th>pais</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <%=registros[0].codigoiata %>
-                            </td>
-                            <td>
-                                <%=registros[0].nombre %>
-                            </td>
-                            <td>
-                                <%=registros[0].ciudad %>
-                            </td>
-                            <td>
-                                <%=registros[0].pais %>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <%} }else{%>
-                    <p>Nose a buscado algo aun.</p>
-                    <%}%>
-    </div>
+                <div class="ppos">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>codigo iata</th>
+                                <th>nombre</th>
+                                <th>ciudad</th>
+                                <th>pais</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <%=registros[0].codigoiata %>
+                                </td>
+                                <td>
+                                    <%=registros[0].nombre %>
+                                </td>
+                                <td>
+                                    <%=registros[0].ciudad %>
+                                </td>
+                                <td>
+                                    <%=registros[0].pais %>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <%} }else{%>
+                        <div class="pneu">
+                            <p>Nose a buscado algo aun.</p>
+                        </div>
+                        <%}%>
+                </div>
 
 </body>
 

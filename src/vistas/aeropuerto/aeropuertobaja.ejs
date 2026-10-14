@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
 </head>
 
 <body>
@@ -13,10 +15,54 @@
         <header>
             <h1>Aeropuerto baja.</h1>
         </header>
+        <nav>
+            <a href="/aeropuerto">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
         <form action="/aeropuertodelete" method="post">
             <label for="iatahmtl">Codigo IATA:</label><input type="text" name="iatahmtl" placeholder="codigo iata"><br>
-            <button type="submit">Eliminar</button>
+            <button type="submit" class="bbaja">Eliminar</button>
         </form>
+
+        <% if(muestro==true){if(exito==true){%>
+            <div class="ppos">
+                <p>El aueropuerto se elimino correctamente</p><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IATA</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                            <th>Pais</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= registros.codigoiata%>
+                            </td>
+                            <td>
+                                <%= registros.nombre%>
+                            </td>
+                            <td>
+                                <%= registros.ciudad%>
+                            </td>
+                            <td>
+                                <%= registros.pais%>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%}else{ %>
+                <div class="pneg">
+                    <p>No se pudo eliminar el aueropuerto.</p> <br>
+                    <p>verifique que el codigo IATA sea correcto.</p>
+                </div>
+                <%}%>
+                    <%}%>
     </div>
 
 </body>

@@ -1,0 +1,35 @@
+.pneg {
+    background-color: firebrick;
+    color: white;
+    min-width: 50%;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: solid black 1px;
+    border-radius: 15px;
+}
+
+.ppos {
+    background-color: green;
+    color: white;
+    min-width: 50%;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    border: solid black 1px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.pneu {
+    background-color: steelblue;
+    color: white;
+    min-width: 50%;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: solid black 1px;
+    border-radius: 15px;
+}

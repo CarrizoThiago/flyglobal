@@ -1,0 +1,30 @@
+.bbaja {
+    background-color: red;
+    border-radius: 15px;
+    padding: 7px;
+
+}
+
+.balta {
+    background-color: palegreen;
+    border-radius: 15px;
+    padding: 7px;
+}
+
+.bb {
+    background-color: blue;
+    border-radius: 15px;
+    padding: 7px;
+}
+
+.bvolver {
+    background-color: orange;
+    border-radius: 15px;
+    padding: 7px;
+}
+
+.bvt {
+    background-color: steelblue;
+    border-radius: 15px;
+    padding: 7px;
+}

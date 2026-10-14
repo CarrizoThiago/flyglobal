@@ -18,7 +18,9 @@ export const aeropuertoVerTodo = async (req, res) => {
 
 };
 export const aeropuertoAlta = async (req, res) => {
-    res.render('aeropuerto/aeropuertoalta');
+    let muestro = false;
+    let subido = false;
+    res.render('aeropuerto/aeropuertoalta', { muestro, subido });
 }
 export const aeropuertoNuevo = async (req, res) => {
     let codigoiata, nombre, ciudad, pais;
@@ -30,27 +32,39 @@ export const aeropuertoNuevo = async (req, res) => {
         let auxsql = "INSERT INTO aeropuerto (codigoiata, nombre, ciudad, pais) VALUES ('" + codigoiata + "', '" + nombre + "', '" + ciudad + "', '" + pais + "');"
         console.log(auxsql);
         await bdd.query(auxsql);
-        res.redirect('/aeropuerto');
+        let muestro = true;
+        let subido = true;
+        res.render('aeropuerto/aeropuertoalta', { muestro, subido, codigoiata, ciudad, nombre, pais });
     } catch (error) {
         console.log(error);
-        res.send("error en el alta");
+        let muestro = true;
+        let subido = false;
+        res.render('aeropuerto/aeropuertoalta', { muestro, subido });
     }
 }
 export const aeropuertobaja = async (req, res) => {
-    res.render('aeropuerto/aeropuertobaja');
+    let muestro = false;
+    let exito = false;
+    res.render('aeropuerto/aeropuertobaja', { muestro, exito });
 }
 export const aeropuertodelete = async (req, res) => {
     let iata;
     iata = req.body.iatahmtl.toUpperCase();
     try {
+        let getsql = "SELECT * FROM aeropuerto WHERE codigoiata = '" + iata + "';";
+        const [registros, col] = await bdd.query(getsql);
         let auxsql = "DELETE FROM aeropuerto WHERE codigoiata = '" + iata + "';";
         await bdd.query(auxsql);
         console.log(iata);
         console.log("Aeropuerto eliminado");
-        res.redirect('/aeropuerto');
+        let muestro = true;
+        let exito = true;
+        res.render('aeropuerto/aeropuertobaja', { muestro, exito, registros });
     } catch (error) {
         console.log(error);
-        res.send("error en la baja");
+        let muestro = true;
+        let exito = false;
+        res.render('aeropuerto/aeropuertobaja', { muestro, exito });
     }
 }
 

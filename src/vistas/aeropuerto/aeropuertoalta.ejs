@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
 </head>
 
 <body>
@@ -13,13 +15,54 @@
         <header>
             <h1>Aeropuerto alta.</h1>
         </header>
+        <nav>
+            <a href="/aeropuerto">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
         <form action="/aeropuertonuevo" method="post">
             <label for="iatahmtl">Codigo IATA:</label><input type="text" name="iatahmtl" placeholder="codigo iata"><br>
             <label for="nomhtml">Nombre:</label><input type="text" name="nomhtml" placeholder="nombre"><br>
             <label for="ciuhtml">Ciudad:</label><input type="text" name="ciuhtml" placeholder="ciudad"><br>
             <label for="paihtml">Pais:</label><input type="text" name="paihtml" placeholder="pais"><br>
-            <button type="submit">Guardar</button>
+            <button type="submit" class="balta">Guardar</button>
         </form>
+        <%if(muestro==true){ if(subido==true){%>
+            <div class="ppos">
+                <p>El aueropuerto se agrego correctamente</p><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IATA</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                            <th>Pais</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= codigoiata %>
+                            </td>
+                            <td>
+                                <%= nombre %>
+                            </td>
+                            <td>
+                                <%= ciudad %>
+                            </td>
+                            <td>
+                                <%= pais %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%}else{%>
+                <div class="pneg">
+                    <p>No se pudo subir el regsitro.</p>
+                </div>
+                <%} %>
+                    <%}%>
     </div>
 </body>
 
