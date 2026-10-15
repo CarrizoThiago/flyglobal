@@ -1,0 +1,18 @@
+th {
+    background-color: firebrick;
+}
+
+.tdpar {
+    background-color: grey;
+}
+
+.tdimpar {
+    background-color: lightgrey;
+}
+
+table {
+    background-color: darkgrey;
+    border-radius: 15px;
+    padding: 10px;
+    border: solid black 1px;
+}

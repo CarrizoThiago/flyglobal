@@ -15,6 +15,7 @@ console.log(directorio);
 app.set('views', Path.join(directorio, 'vistas'));
 
 app.use('/styles', express.static(Path.join(directorio, 'styles')));
+app.use('/img', express.static(Path.join(directorio, 'img')));
 
 
 
