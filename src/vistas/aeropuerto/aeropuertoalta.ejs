@@ -58,12 +58,39 @@
                     </tbody>
                 </table>
             </div>
-            <%}else{%>
+            <%}else{ if(err==true){%>
                 <div class="pneg">
                     <p>No se pudo subir el regsitro.</p>
                 </div>
-                <%} %>
+                <%}else{ %>
+                    <div class="pneg">
+                        <%if(coniata==false){%>
+                            <p style="background-color: black; color: red; text-decoration: underline;">El codigo IATA
+                                es incorrecto. <br> Este debe
+                                tener un largo de 3 letras exactas sin
+                                caracteres especiales y/o numeros, ademas no puede ser nulo. <br> Arreglelo y subalo.
+                            </p>
+                            <%}%>
+                                <%if(connom==false){%>
+                                    <p style="background-color: black; color: red; text-decoration: underline;">El
+                                        nombre es incorrecto.<br>Este debe tener
+                                        un largo de entre 2 y 70 caracteres. <br> Arreglelo y subalo.</p>
+                                    <%}%>
+                                        <%if(conciu==false){%>
+                                            <p style="background-color: black; color: red; text-decoration: underline;">
+                                                La ciudad es incorrecta. <br> Este debe tener un largo de entre 2 y 45
+                                                caracteres y no puede contener numeros ni caracteres especiales.</p>
+                                            <%}%>
+                                                <%if(conpai==false){%>
+                                                    <p
+                                                        style="background-color: black; color: red; text-decoration: underline;">
+                                                        El pais es incorrecto. <br> Este debe tener un largo de entre 2
+                                                        y 45 caracteres y no puede contener numeros ni caracteres
+                                                        especiales.</p>
+                                                    <%}%>
+                    </div>
                     <%}%>
+                        <%}}%>
     </div>
 </body>
 

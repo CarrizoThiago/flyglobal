@@ -23,23 +23,46 @@ export const aeropuertoAlta = async (req, res) => {
     res.render('aeropuerto/aeropuertoalta', { muestro, subido });
 }
 export const aeropuertoNuevo = async (req, res) => {
+    let consigna = 0;
+    let coniata = true, connom = true, conciu = true, conpai = true;
     let codigoiata, nombre, ciudad, pais;
     codigoiata = req.body.iatahmtl.toUpperCase();
     nombre = req.body.nomhtml.toUpperCase();
     ciudad = req.body.ciuhtml.toUpperCase();
     pais = req.body.paihtml.toUpperCase();
-    try {
-        let auxsql = "INSERT INTO aeropuerto (codigoiata, nombre, ciudad, pais) VALUES ('" + codigoiata + "', '" + nombre + "', '" + ciudad + "', '" + pais + "');"
-        console.log(auxsql);
-        await bdd.query(auxsql);
-        let muestro = true;
-        let subido = true;
-        res.render('aeropuerto/aeropuertoalta', { muestro, subido, codigoiata, ciudad, nombre, pais });
-    } catch (error) {
-        console.log(error);
+    coniata = /^[a-zA-Z]{3}$/.test(codigoiata);
+    if (nombre.length < 71 && nombre.length > 1) {
+        connom = true;
+    } else {
+        connom = false;
+    }
+    conciu = /^[a-zA-Z]{1,45}$/.test(ciudad);
+    conpai = /^[a-zA-Z]{1,45}$/.test(pais);
+    if (coniata == false) { consigna++; }
+    if (connom == false) { consigna++; }
+    if (conciu == false) { consigna++; }
+    if (conpai == false) { consigna++; }
+    console.log(consigna);
+    if (consigna == 0) {
+        try {
+            let auxsql = "INSERT INTO aeropuerto (codigoiata, nombre, ciudad, pais) VALUES ('" + codigoiata + "', '" + nombre + "', '" + ciudad + "', '" + pais + "');"
+            console.log(auxsql);
+            await bdd.query(auxsql);
+            let muestro = true;
+            let subido = true;
+            res.render('aeropuerto/aeropuertoalta', { muestro, subido, codigoiata, ciudad, nombre, pais });
+        } catch (error) {
+            console.log(error);
+            let err = true;
+            let muestro = true;
+            let subido = false;
+            res.render('aeropuerto/aeropuertoalta', { muestro, subido, err });
+        }
+    } else {
+        let err = false;
         let muestro = true;
         let subido = false;
-        res.render('aeropuerto/aeropuertoalta', { muestro, subido });
+        res.render('aeropuerto/aeropuertoalta', { muestro, subido, codigoiata, coniata, ciudad, conciu, nombre, connom, pais, conpai, err });
     }
 }
 export const aeropuertobaja = async (req, res) => {
