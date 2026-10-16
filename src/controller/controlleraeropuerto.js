@@ -81,7 +81,11 @@ export const aeropuertodelete = async (req, res) => {
         console.log(iata);
         console.log("Aeropuerto eliminado");
         let muestro = true;
-        let exito = true;
+        if (registros[0].codigoiata != null) {
+            let exito = true;
+        } else {
+            let exito = false;
+        }
         res.render('aeropuerto/aeropuertobaja', { muestro, exito, registros });
     } catch (error) {
         console.log(error);
