@@ -115,20 +115,27 @@
                             <div class="pneg">
                                 <p>Aeropuerto no modificado.</p>
                                 <%if(coniata==false){%>
-                                    <p>El codigo IATA no es valido: <%= iata %> debe tener 3 letras exactas sin
+                                    <p style="background-color: black; color: red; text-decoration: underline;">El
+                                        codigo IATA no es valido: <%= iata %> debe tener 3 letras exactas sin
                                             caracteres especiales y/o numeros.</p>
                                     <%}%>
                                         <%if(connom==false){%>
-                                            <p>El nombre no es valido: <%= nombre %> puede tener un largo maximo de 70
+                                            <p style="background-color: black; color: red; text-decoration: underline;">
+                                                El nombre no es valido: <%= nombre %> puede tener un largo maximo de 70
                                                     caracteres.</p>
                                             <%}%>
                                                 <%if(conciu==false){%>
-                                                    <p>La ciudad no es valida: <%= ciudad %> puede tener un largo maximo
+                                                    <p
+                                                        style="background-color: black; color: red; text-decoration: underline;">
+                                                        La ciudad no es valida: <%= ciudad %> puede tener un largo
+                                                            maximo
                                                             de 45 caracteres y no puede contener numeros ni caracteres
                                                             especiales.</p>
                                                     <%}%>
                                                         <%if(conpai==false){%>
-                                                            <p>El pais no es valido: <%= pais %> puede tener un largo
+                                                            <p
+                                                                style="background-color: black; color: red; text-decoration: underline;">
+                                                                El pais no es valido: <%= pais %> puede tener un largo
                                                                     maximo de 45 caracteres y no puede contener numeros
                                                                     ni caracteres especiales.</p>
                                                             <%}%>
