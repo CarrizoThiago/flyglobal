@@ -28,16 +28,16 @@ export const aeropuertoNuevo = async (req, res) => {
     let codigoiata, nombre, ciudad, pais;
     codigoiata = req.body.iatahmtl.toUpperCase();
     nombre = req.body.nomhtml.toUpperCase();
-    ciudad = req.body.ciuhtml.toUpperCase();
-    pais = req.body.paihtml.toUpperCase();
+    ciudad = req.body.ciuhtml.trim().toUpperCase();
+    pais = req.body.paihtml.trim().toUpperCase();
     coniata = /^[a-zA-Z]{3}$/.test(codigoiata);
     if (nombre.length < 71 && nombre.length > 1) {
         connom = true;
     } else {
         connom = false;
     }
-    conciu = /^[a-zA-Z]{1,45}$/.test(ciudad);
-    conpai = /^[a-zA-Z]{1,45}$/.test(pais);
+    conciu = /^[a-zA-ZñÑ ]{1,45}$/.test(ciudad);
+    conpai = /^[a-zA-ZñÑ ]{1,45}$/.test(pais);
     if (coniata == false) { consigna++; }
     if (connom == false) { consigna++; }
     if (conciu == false) { consigna++; }
@@ -115,3 +115,80 @@ export const aeropuertobusqueda = async (req, res) => {
     let muestro = false;
     res.render('aeropuerto/aeropuertobusqueda', { muestro });
 }
+
+export const aeropuertomodificaciones = async (req, res) => {
+    let muestro = false, muestro2 = false;
+    res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2 });
+}
+
+export const aeropuertomodificacionesagarre = async (req, res) => {
+    let muestro = true, muestro2 = false;
+    let iata;
+    iata = req.body.iatahtml.toUpperCase();
+    try {
+        let auxsql = "SELECT * FROM aeropuerto WHERE codigoiata = '" + iata + "';";
+        const [registros, col] = await bdd.query(auxsql);
+        let encontrado = true;
+        if (registros.length == 0) {
+            encontrado = false;
+        }
+        res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, registros, encontrado });
+    } catch (error) {
+        console.log(error);
+        let muestro = true, encontrado = false;
+        res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, encontrado });
+    }
+}
+
+export const aeropuertomodificacion = async (req, res) => {
+    let muestro = true, muestro2 = true, encontrado = true, cambiado = false;
+    let registros = [], registros2 = [];
+
+    let iataoriginal = req.body.iataoriginal.toUpperCase();
+    let iata = req.body.iatahtml2.trim().toUpperCase();
+    let nombre = req.body.nombrehtml.trim().toUpperCase();
+    let ciudad = req.body.ciudadhtml.trim().toUpperCase();
+    let pais = req.body.paishtml.trim().toUpperCase();
+
+    let consigna = 0;
+    let coniata = true; if (iata != "") { coniata = /^[a-zA-Z]{3}$/.test(iata); }
+    let connom = true; if (nombre != "") { connom = (nombre.length < 71 && nombre.length > 1); }
+    let conciu = true; if (ciudad != "") { conciu = /^[a-zA-ZñÑ ]{1,45}$/.test(ciudad); }
+    let conpai = true; if (pais != "") { conpai = /^[a-zA-ZñÑ ]{1,45}$/.test(pais); }
+    if (coniata == false) { consigna++; }
+    if (connom == false) { consigna++; }
+    if (conciu == false) { consigna++; }
+    if (conpai == false) { consigna++; }
+
+    let selectsql = "SELECT * FROM aeropuerto WHERE codigoiata = '" + iataoriginal + "';";
+    let selectsqlfinal = "SELECT * FROM aeropuerto WHERE codigoiata = '" + iata + "';";
+    let paissql = "UPDATE aeropuerto SET pais = '" + pais + "' WHERE codigoiata = '" + iataoriginal + "';";
+    let ciudadsql = "UPDATE aeropuerto SET ciudad = '" + ciudad + "' WHERE codigoiata = '" + iataoriginal + "';";
+    let nombresql = "UPDATE aeropuerto SET nombre = '" + nombre + "' WHERE codigoiata = '" + iataoriginal + "';";
+    let iatasql = "UPDATE aeropuerto SET codigoiata = '" + iata + "' WHERE codigoiata = '" + iataoriginal + "';";
+
+    try {
+        [registros] = await bdd.query(selectsql);
+
+        if (pais == "" && ciudad == "" && nombre == "" && iata == "") {
+            muestro2 = false;
+        } else if (consigna == 0) {
+            if (pais != "") { await bdd.query(paissql); }
+            if (ciudad != "") { await bdd.query(ciudadsql); }
+            if (nombre != "") { await bdd.query(nombresql); }
+            if (iata != "") {
+                await bdd.query(iatasql);
+                [registros2] = await bdd.query(selectsqlfinal);
+            } else { [registros2] = await bdd.query(selectsql); }
+
+
+            cambiado = true;
+        }
+    } catch (error) {
+        console.log(error);
+        cambiado = false;
+    }
+
+    res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conciu, connom, conpai, coniata, ciudad, nombre, pais, iata });
+}
+

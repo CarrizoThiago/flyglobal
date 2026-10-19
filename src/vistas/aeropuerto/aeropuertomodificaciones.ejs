@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Aeropuerto modificaciones</h1>
+        </header>
+        <nav>
+            <a href="/aeropuerto">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <form action="/aeropuertomodificacionagarre" method="post">
+            <label for="iatahtml">Codigo IATA: </label>
+            <input type="text" name="iatahtml" id="iatahtml">
+            <button type="submit" class="bb">ubicar</button>
+        </form>
+        <% if(muestro){if(encontrado){%>
+            <div class="ppos">
+                <p>Se encontro el aeropuerto.</p> <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IATA</th>
+                            <th>Nombre</th>
+                            <th>Ciudad</th>
+                            <th>Pais</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= registros[0].codigoiata %>
+                            </td>
+                            <td>
+                                <%= registros[0].nombre %>
+                            </td>
+                            <td>
+                                <%= registros[0].ciudad %>
+                            </td>
+                            <td>
+                                <%= registros[0].pais %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <p style="text-decoration: underline; font-size: 1.5em;">Solo escriba los campos que quiera modificar.
+                </p>
+                <form action="/aeropuertomodificacion" method="post">
+                    <input type="hidden" name="iataoriginal" value="<%= registros[0].codigoiata %>">
+                    <input type="hidden" name="nombreoriginal" value="<%= registros[0].nombre %>">
+                    <input type="hidden" name="ciudadoriginal" value="<%= registros[0].ciudad %>">
+                    <input type="hidden" name="paisoriginal" value="<%= registros[0].pais %>">
+                    <label for="iatahtml2">Codigo IATA: </label>
+                    <input type="text" name="iatahtml2" id="iatahtml2">
+                    <label for="nombrehtml">Nombre: </label>
+                    <input type="text" name="nombrehtml" id="nombrehtml">
+                    <label for="ciudadhtml">Ciudad: </label>
+                    <input type="text" name="ciudadhtml" id="ciudadhtml">
+                    <label for="paishtml">Pais: </label>
+                    <input type="text" name="paishtml" id="paishtml">
+                    <button type="submit" class="balta">modificar</button>
+                </form>
+            </div>
+            <%}else{%>
+                <div class="pneg">
+                    <p>No se encontro el aeropuerto.</p>
+                </div>
+                <%} }%>
+                    <% if (muestro2){if(cambiado){%>
+                        <div class="ppos">
+                            <p>Aeropuerto modificado correctamente.</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>IATA</th>
+                                        <th>Nombre</th>
+                                        <th>Ciudad</th>
+                                        <th>Pais</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <%= registros2[0].codigoiata %>
+                                        </td>
+                                        <td>
+                                            <%= registros2[0].nombre %>
+                                        </td>
+                                        <td>
+                                            <%= registros2[0].ciudad %>
+                                        </td>
+                                        <td>
+                                            <%= registros2[0].pais %>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <%}else{%>
+                            <div class="pneg">
+                                <p>Aeropuerto no modificado.</p>
+                                <%if(coniata==false){%>
+                                    <p>El codigo IATA no es valido: <%= iata %> debe tener 3 letras exactas sin
+                                            caracteres especiales y/o numeros.</p>
+                                    <%}%>
+                                        <%if(connom==false){%>
+                                            <p>El nombre no es valido: <%= nombre %> puede tener un largo maximo de 70
+                                                    caracteres.</p>
+                                            <%}%>
+                                                <%if(conciu==false){%>
+                                                    <p>La ciudad no es valida: <%= ciudad %> puede tener un largo maximo
+                                                            de 45 caracteres y no puede contener numeros ni caracteres
+                                                            especiales.</p>
+                                                    <%}%>
+                                                        <%if(conpai==false){%>
+                                                            <p>El pais no es valido: <%= pais %> puede tener un largo
+                                                                    maximo de 45 caracteres y no puede contener numeros
+                                                                    ni caracteres especiales.</p>
+                                                            <%}%>
+                            </div>
+                            <%} }%>
+    </div>
+
+</body>
+
+</html>
