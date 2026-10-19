@@ -117,12 +117,12 @@ export const aeropuertobusqueda = async (req, res) => {
 }
 
 export const aeropuertomodificaciones = async (req, res) => {
-    let muestro = false, muestro2 = false;
-    res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2 });
+    let muestro = false, muestro2 = false, cambiado = false;
+    res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, cambiado });
 }
 
 export const aeropuertomodificacionesagarre = async (req, res) => {
-    let muestro = true, muestro2 = false;
+    let muestro = true, muestro2 = false, cambiado = false;
     let iata;
     iata = req.body.iatahtml.toUpperCase();
     try {
@@ -132,11 +132,11 @@ export const aeropuertomodificacionesagarre = async (req, res) => {
         if (registros.length == 0) {
             encontrado = false;
         }
-        res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, registros, encontrado });
+        res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, registros, encontrado, cambiado });
     } catch (error) {
         console.log(error);
         let muestro = true, encontrado = false;
-        res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, encontrado });
+        res.render('aeropuerto/aeropuertomodificaciones', { muestro, muestro2, encontrado, cambiado });
     }
 }
 
@@ -183,7 +183,7 @@ export const aeropuertomodificacion = async (req, res) => {
 
 
             cambiado = true;
-        }
+        } else { cambiado = false; }
     } catch (error) {
         console.log(error);
         cambiado = false;
