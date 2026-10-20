@@ -104,7 +104,25 @@ export const usuariodelete = async (req, res) => {
         err = true;
         res.render('usuario/usuariobaja', { muestro, exito, err });
     }
+}
 
+export const usuariobusqueda = async (req, res) => {
+    let muestro = false;
+    res.render('usuario/usuariobusqueda', { muestro });
+}
 
-
+export const usuariosearch = async (req, res) => {
+    let muestro = true, err = false, exito = false;
+    let id = req.body.idhtml;
+    let auxsql = "SELECT * FROM usuario WHERE idusuario = " + id + ";";
+    try {
+        const [registros, col] = await bdd.query(auxsql);
+        exito = true;
+        res.render('usuario/usuariobusqueda', { muestro, exito, registros, err });
+    } catch (error) {
+        console.log(error);
+        let exito = false;
+        err = true;
+        res.render('usuario/usuariobusqueda', { muestro, exito, err });
+    }
 }
