@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/banner.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Alta de Aviones</h1>
+        </header>
+        <a href="/avion">
+            <button class="bvolver" style="margin: 2%;">Volver al Menu</button>
+        </a>
+        <div class="pneu" style="margin: 2%; padding: 2%;">
+            <form action="/avionnuevo" method="post">
+                <label for="matriculahtml">Matricula:</label>
+                <input type="text" name="matriculahtml" placeholder="XX-000">
+                <br><br>
+                <label for="modelohtml">Modelo:</label>
+                <input type="text" name="modelohtml" placeholder="Modelo">
+                <br><br>
+                <label for="capacidadhtml">Capacidad:</label>
+                <input type="text" name="capacidadhtml" placeholder="Capacidad">
+                <br><br>
+                <button type="submit" class="balta">Agregar</button>
+            </form>
+        </div>
+        <%if(muestro==true){ if(subido==true){%>
+            <div class="ppos" style="margin: 2%;">
+                <p>El avion se agrego correctamente</p><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= matricula %>
+                            </td>
+                            <td>
+                                <%= modelo %>
+                            </td>
+                            <td>
+                                <%= capacidad %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%}else{%>
+                <div class="pneg" style="margin: 2%;">
+                    <p>No se pudo subir el registro.</p>
+                </div>
+                <div class="pneg" style="margin: 2%;">
+                    <%if(conmat==false){%>
+                        <p style="background-color: black; color: red; text-decoration: underline;">La matricula es
+                            incorrecta.<br>Este debe tener
+                            un largo de entre 1 y 10 caracteres. <br> Arreglelo y subalo.</p>
+                        <%}%>
+                            <%if(conmod==false){%>
+                                <p style="background-color: black; color: red; text-decoration: underline;">El
+                                    modelo es incorrecto.<br>Este debe
+                                    tener un largo de entre 1 y 50 caracteres. <br> Arreglelo y subalo.</p>
+                                <%}%>
+                                    <%if(concap==false){%>
+                                        <p style="background-color: black; color: red; text-decoration: underline;">
+                                            La capacidad es incorrecta.<br>Este debe
+                                            tener un largo de entre 1 y 10 caracteres numericos. <br> Arreglelo y
+                                            subalo.
+                                        </p>
+                                        <%}%>
+                </div>
+                <%}%>
+                    <%}%>
+    </div>
+
+</body>
+
+</html>

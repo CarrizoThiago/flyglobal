@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/banner.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Baja de Aviones</h1>
+        </header>
+        <a href="/avion">
+            <button class="bvolver" style="margin: 2%;"> Volver al menu</button>
+        </a>
+        <div class="pneu" style="margin: 2%; padding: 2%;">
+            <form action="/aviondelete" method="post">
+                <label for="matricula">Matricula:</label>
+                <input type="text" name="matriculahtml" id="matricula">
+                <button type="submit" class="bbaja">Borrar</button>
+            </form>
+        </div>
+        <% if(muestro){if(borrado){ %>
+            <div class="ppos">
+                <p>Borrado con exito</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdimpar">
+                            <td>
+                                <%= registro[0].matricula %>
+                            </td>
+                            <td>
+                                <%= registro[0].modelo %>
+                            </td>
+                            <td>
+                                <%= registro[0].capacidad %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%} else{%>
+                <div class="pneg">
+                    <p>No se encontro la matricula <%= matricula %>
+                    </p>
+                </div>
+                <%}%>
+                    <%}%>
+
+    </div>
+
+</body>
+
+</html>

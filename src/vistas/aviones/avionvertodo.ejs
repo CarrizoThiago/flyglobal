@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/banner.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Ver todos los Aviones</h1>
+        </header>
+        <button class="bvolver" style="margin: 2%;"><a href="/avion">Volver al menu</a></button>
+        <%if(registro.length==0){%>
+            <div class="pneg" style="margin: 2%;">
+                <p>No se encontro ningun avion.</p>
+            </div>
+            <%}else{%>
+                <table style="margin: 2%;">
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<registro.length;i++) {%>
+                            <tr <% if(i%2==0){%> class="tdpar" <%}else{%> class="tdimpar" <%}%> >
+                                        <td>
+                                            <%= registro[i].matricula %>
+                                        </td>
+                                        <td>
+                                            <%= registro[i].modelo %>
+                                        </td>
+                                        <td>
+                                            <%= registro[i].capacidad %>
+                                        </td>
+                            </tr>
+                            <%}%>
+                    </tbody>
+                </table>
+                <%}%>
+    </div>
+
+</body>
+
+</html>
