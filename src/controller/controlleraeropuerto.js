@@ -28,8 +28,8 @@ export const aeropuertoNuevo = async (req, res) => {
     let codigoiata, nombre, ciudad, pais;
     codigoiata = req.body.iatahmtl.toUpperCase();
     nombre = req.body.nomhtml.toUpperCase();
-    ciudad = req.body.ciuhtml.trim().toUpperCase();
-    pais = req.body.paihtml.trim().toUpperCase();
+    ciudad = req.body.ciuhtml.toUpperCase();
+    pais = req.body.paihtml.toUpperCase();
     coniata = /^[a-zA-Z]{3}$/.test(codigoiata);
     if (nombre.length < 71 && nombre.length > 1) {
         connom = true;
@@ -145,10 +145,10 @@ export const aeropuertomodificacion = async (req, res) => {
     let registros = [], registros2 = [];
 
     let iataoriginal = req.body.iataoriginal.toUpperCase();
-    let iata = req.body.iatahtml2.trim().toUpperCase();
-    let nombre = req.body.nombrehtml.trim().toUpperCase();
-    let ciudad = req.body.ciudadhtml.trim().toUpperCase();
-    let pais = req.body.paishtml.trim().toUpperCase();
+    let iata = req.body.iatahtml2.toUpperCase();
+    let nombre = req.body.nombrehtml.toUpperCase();
+    let ciudad = req.body.ciudadhtml.toUpperCase();
+    let pais = req.body.paishtml.toUpperCase();
 
     let consigna = 0;
     let coniata = true; if (iata != "") { coniata = /^[a-zA-Z]{3}$/.test(iata); }

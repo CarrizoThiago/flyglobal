@@ -66,10 +66,6 @@ export const aviondelete = async (req, res) => {
     }
 }
 
-export const avionmodificaciones = async (req, res) => {
-    res.render('aviones/avionmodificaciones');
-}
-
 export const avionvertodo = async (req, res) => {
     const auxsql = "SELECT * FROM `ruiz_bd`.`avion`;";
     try {
@@ -84,5 +80,97 @@ export const avionvertodo = async (req, res) => {
 }
 
 export const avionbusqueda = async (req, res) => {
-    res.render('aviones/avionbusqueda');
+    let muestro = false;
+    res.render('aviones/avionbusqueda', { muestro });
+}
+
+export const avionsearch = async (req, res) => {
+    let matricula = req.body.matriculahtml.toUpperCase();
+    let auxsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';";
+    let muestro = true;
+    try {
+        const [registro, col] = await bdd.query(auxsql);
+        if (registro.length == 0) {
+            let encontrado = false;
+            res.render('aviones/avionbusqueda', { muestro, encontrado, matricula });
+        } else {
+            let encontrado = true;
+            res.render('aviones/avionbusqueda', { muestro, encontrado, matricula, registro });
+        }
+    } catch (error) {
+        console.log(error);
+        let muestro = true, encontrado = false;
+        res.render('aviones/avionbusqueda', { muestro, encontrado, matricula });
+    }
+}
+
+export const avionmodificaciones = async (req, res) => {
+    let muestro = false, muestro2 = false, cambiado = false;
+    res.render('aviones/avionmodificaciones', { muestro, muestro2, cambiado });
+}
+
+export const avionmodificacionagarre = async (req, res) => {
+    let muestro = true, muestro2 = false, cambiado = false;
+    let matricula;
+    matricula = req.body.matriculahtml.toUpperCase();
+    try {
+        let auxsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';";
+        const [registros, col] = await bdd.query(auxsql);
+        let encontrado = true;
+        if (registros.length == 0) {
+            encontrado = false;
+        }
+        res.render('aviones/avionmodificaciones', { muestro, muestro2, registros, encontrado, cambiado });
+    } catch (error) {
+        console.log(error);
+        let muestro = true, muestro2 = false, encontrado = false, cambiado = false;
+        res.render('aviones/avionmodificaciones', { muestro, muestro2, encontrado, cambiado });
+    }
+}
+
+export const avionmodificacion = async (req, res) => {
+    let muestro = true, muestro2 = true, encontrado = true, cambiado = false;
+    let registros = [], registros2 = [];
+
+    let matriculaoriginal = req.body.matriculaoriginal.toUpperCase();
+    let matricula = req.body.matriculahtml2.toUpperCase();
+    let modelo = req.body.modelohtml.toUpperCase();
+    let capacidad = req.body.capacidadhtml;
+
+    let consigna = 0;
+    let conmat = true; if (matricula != "") { conmat = /^[a-zA-Z0-9-]{1,10}$/.test(matricula); }
+    let conmod = true; if (modelo != "") { conmod = /^[a-zA-ZñÑ ]{1,50}$/.test(modelo); }
+    let concap = true; if (capacidad != "") { concap = /^[0-9]{1,10}$/.test(capacidad); }
+
+    if (conmat == false) { consigna++; }
+    if (conmod == false) { consigna++; }
+    if (concap == false) { consigna++; }
+
+    let selectsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matriculaoriginal + "';";
+    let selectsqlfinal = "SELECT * FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';";
+    let matsql = "UPDATE `ruiz_bd`.`avion` SET `matricula` = '" + matricula + "' WHERE `matricula` = '" + matriculaoriginal + "';";
+    let modsql = "UPDATE `ruiz_bd`.`avion` SET `modelo` = '" + modelo + "' WHERE `matricula` = '" + matriculaoriginal + "';";
+    let capsql = "UPDATE `ruiz_bd`.`avion` SET `capacidad` = '" + capacidad + "' WHERE `matricula` = '" + matriculaoriginal + "';";
+
+    try {
+        [registros] = await bdd.query(selectsql);
+
+        if (modelo == "" && capacidad == "" && matricula == "") {
+            muestro2 = false;
+        } else if (consigna == 0) {
+            if (modelo != "") { await bdd.query(modsql); }
+            if (capacidad != "") { await bdd.query(capsql); }
+            if (matricula != "") {
+                await bdd.query(matsql);
+                [registros2] = await bdd.query(selectsqlfinal);
+            } else { [registros2] = await bdd.query(selectsql); }
+
+            cambiado = true;
+        } else { cambiado = false; }
+    } catch (error) {
+        console.log(error);
+        cambiado = false;
+    }
+
+    res.render('aviones/avionmodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conmat, conmod, concap, matricula, modelo, capacidad });
 }

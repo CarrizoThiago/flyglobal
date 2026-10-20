@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../styles/index.css">
     <link rel="stylesheet" href="../../styles/button.css">
     <link rel="stylesheet" href="../../styles/banner.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
 </head>
 
 <body>
@@ -15,6 +17,51 @@
         <header>
             <h1>Busqueda de Aviones</h1>
         </header>
+        <a href="/avion">
+            <button class="bvolver" style="margin: 2%;">Volver al Menu</button>
+        </a>
+        <div class="pneu" style="margin: 2%; padding: 2%;">
+            <form action="/avionsearch" method="post">
+                <label for="matricula">Matricula:</label>
+                <input type="text" name="matriculahtml" id="matricula">
+                <button type="submit" class="bb">Buscar</button>
+            </form>
+        </div>
+        <%if(muestro){ if(encontrado){%>
+            <div class="ppos" style="margin: 2%; padding: 2%;">
+                <p>Avion encontrado.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%=registro[0].matricula%>
+                            </td>
+                            <td>
+                                <%=registro[0].modelo%>
+                            </td>
+                            <td>
+                                <%=registro[0].capacidad%>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <%}else{%>
+                <div class="pneg" style="margin: 2%; padding: 2%;">
+                    <p>No se encontro el avion con la matricula
+                        <%=matricula%>
+                    </p>
+                </div>
+                <%}%>
+                    <%}%>
     </div>
 
 </body>

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../styles/index.css">
     <link rel="stylesheet" href="../../styles/button.css">
     <link rel="stylesheet" href="../../styles/banner.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
 </head>
 
 <body>
@@ -16,6 +18,112 @@
             <h1>Modificaciones de Aviones</h1>
         </header>
 
+        <a href="/avion" style="margin: 2%;">
+            <button class="bvolver">volver al menu</button>
+        </a>
+
+        <div class="pneu" style="margin-top: 2%; margin-bottom: 2%; padding: 2%;">
+            <form action="/avionmodificacionagarre" method="post">
+                <label for="matriculahtml">Matricula: </label>
+                <input type="text" name="matriculahtml">
+                <button type="submit" class="bb">ubicar</button>
+            </form>
+        </div>
+        <% if(muestro){if(encontrado){%>
+            <div class="ppos">
+                <p>Se encontro el avion.</p> <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Matricula</th>
+                            <th>Modelo</th>
+                            <th>Capacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= registros[0].matricula %>
+                            </td>
+                            <td>
+                                <%= registros[0].modelo %>
+                            </td>
+                            <td>
+                                <%= registros[0].capacidad %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%if (muestro2){}else{ if (cambiado){}else{%>
+                <div>
+                    <p style="text-decoration: underline; font-size: 1.5em;">Solo escriba los campos que quiera
+                        modificar.
+                    </p>
+                    <form action="/avionmodificacion" method="post">
+                        <input type="hidden" name="matriculaoriginal" value="<%= registros[0].matricula %>">
+                        <input type="hidden" name="modelooriginal" value="<%= registros[0].modelo %>">
+                        <input type="hidden" name="capacidadoriginal" value="<%= registros[0].capacidad %>">
+                        <label for="matriculahtml2">Matricula: </label>
+                        <input type="text" name="matriculahtml2">
+                        <label for="modelohtml">Modelo: </label>
+                        <input type="text" name="modelohtml">
+                        <label for="capacidadhtml">Capacidad: </label>
+                        <input type="text" name="capacidadhtml">
+                        <button type="submit" class="balta">modificar</button>
+                    </form>
+                </div>
+                <%} }%>
+                    <%}else{ %>
+                        <div class="pneg" style="margin-top: 2%;">
+                            <p>No se encontro el avion.</p>
+                        </div>
+                        <%} }%>
+                            <% if (muestro2){if(cambiado){%>
+                                <div class="ppos" style="margin-top: 2%;">
+                                    <p>Avion modificado correctamente.</p>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Matricula</th>
+                                                <th>Modelo</th>
+                                                <th>Capacidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <%= registros2[0].matricula %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].modelo %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].capacidad %>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <%}else{%>
+                                    <div class="pneg">
+                                        <p>Avion no modificado.</p>
+                                        <%if(conmat==false){%>
+                                            <p>Matricula incorrecta, Esta como mucho debe de tener 10 caracteres
+                                                alfanumericos.</p>
+                                            <%}%>
+                                                <%if(conmod==false){%>
+                                                    <p>Modelo incorrecto, Esta como mucho debe de tener 50 caracteres
+                                                        alfanumericos.</p>
+                                                    <%}%>
+                                                        <%if(concap==false){%>
+                                                            <p>Capacidad incorrecta, Esta como mucho debe de tener 10
+                                                                digitos.</p>
+                                                            <%}%>
+
+                                    </div>
+                                    <%} }%>
     </div>
 
 </body>
