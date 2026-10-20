@@ -65,3 +65,15 @@ export const usuarionuevo = async (req, res) => {
         res.render('usuario/usuarioalta', { muestro, subido, conid, conpasaporte, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
     }
 }
+
+export const usuariovertodo = async (req, res) => {
+    const sql = "select * from usuario";
+    try {
+        const [registros, col] = await bdd.query(sql);
+        res.render('usuario/usuariovertodo', { registros });
+    } catch (error) {
+        console.log(error);
+        const registros = null;
+        res.render('usuario/usuariovertodo', { registros });
+    }
+}

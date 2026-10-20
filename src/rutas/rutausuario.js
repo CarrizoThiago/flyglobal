@@ -1,9 +1,11 @@
 import express from "express";
-import { usuariomenu, usuarioalta, usuarionuevo } from "../controller/controllerusuario.js";
+import { usuariomenu, usuarioalta, usuariovertodo, usuarionuevo } from "../controller/controllerusuario.js";
 
 const rusuario = express.Router();
 
 rusuario.get('/usuario', usuariomenu)
+
+rusuario.get('/usuariovertodo', usuariovertodo)
 
 rusuario.get('/usuarioalta', usuarioalta)
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Usuario ver todo</h1>
+        </header>
+        <nav>
+            <a href="/usuario">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Pasaporte</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Contraseña</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(registros!=null && registros.length>0){ %>
+                    <% for(let i=0; i<registros.length; i++){ %>
+                        <tr class="<% if(i%2==0){%>tdpar<%}else{%>tdimpar<%};%>">
+                            <td>
+                                <%= registros[i].idusuario %>
+                            </td>
+                            <td>
+                                <%= registros[i].pasaporte %>
+                            </td>
+                            <td>
+                                <%= registros[i].nombre %>
+                            </td>
+                            <td>
+                                <%= registros[i].apellido %>
+                            </td>
+                            <td>
+                                <%= registros[i].email %>
+                            </td>
+                            <td>
+                                <%= registros[i].telefono %>
+                            </td>
+                            <%if(registros[i].contraseña!=null && registros[i].contraseña!="" ){%>
+                                <td>
+                                    <%= registros[i].contraseña %>
+                                </td>
+                                <%}else{%>
+                                    <td>Usuario sin contraseña.</td>
+                                    <%}%>
+                        </tr>
+                        <%}%>
+                            <%}if (registros!=null && registros.length==0){%>
+                                <tr>
+                                    <td colspan=" 7">No hay registros</td>
+                                </tr>
+                                <%} if(registros==null){%>
+                                    <tr>
+                                        <td colspan="7">Error al obtener los registros</td>
+                                    </tr>
+                                    <%} %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
