@@ -71,7 +71,7 @@ export const aeropuertobaja = async (req, res) => {
     res.render('aeropuerto/aeropuertobaja', { muestro, exito });
 }
 export const aeropuertodelete = async (req, res) => {
-    let iata;
+    let iata, exito = false;
     iata = req.body.iatahmtl.toUpperCase();
     try {
         let getsql = "SELECT * FROM aeropuerto WHERE codigoiata = '" + iata + "';";
@@ -82,9 +82,9 @@ export const aeropuertodelete = async (req, res) => {
         console.log("Aeropuerto eliminado");
         let muestro = true;
         if (registros[0].codigoiata != null) {
-            let exito = true;
+            exito = true;
         } else {
-            let exito = false;
+            exito = false;
         }
         res.render('aeropuerto/aeropuertobaja', { muestro, exito, registros });
     } catch (error) {

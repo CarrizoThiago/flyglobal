@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Usuario baja.</h1>
+        </header>
+        <nav>
+            <a href="/usuario">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <form action="/usuariodelete" method="post">
+            <label for="idhtml">id:</label><input type="text" name="idhtml" placeholder="id"><br>
+            <button type="submit" class="bbaja">Eliminar</button>
+        </form>
+
+        <% if(muestro==true){if(exito==true){%>
+            <div class="ppos">
+                <p>El usuario se elimino correctamente</p><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pasaporte</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Contraseña</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= registros[0].idusuario%>
+                            </td>
+                            <td>
+                                <%= registros[0].pasaporte%>
+                            </td>
+                            <td>
+                                <%= registros[0].nombre%>
+                            </td>
+                            <td>
+                                <%= registros[0].apellido%>
+                            </td>
+                            <td>
+                                <%= registros[0].email%>
+                            </td>
+                            <td>
+                                <%= registros[0].telefono%>
+                            </td>
+                            <td>
+                                <%if(registros[0].contraseña !=null && registros[0].contraseña !="" ){%>
+                                    <%= registros[0].contraseña %>
+                                        <%}else{%>Usuario sin contraseña.
+                                            <%}%>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%}else{ %>
+                <div class="pneg">
+                    <p>No se pudo eliminar el usuario.</p> <br>
+                    <p>verifique que el id sea correcto.</p>
+                </div>
+                <%} if(err==true){%>
+                    <div class="pneg">
+                        <p>No se pudo eliminar el usuario.</p> <br>
+                        <p>No se pudo ejecutar la query.</p>
+                    </div>
+                    <%}}%>
+    </div>
+
+</body>
+
+</html>

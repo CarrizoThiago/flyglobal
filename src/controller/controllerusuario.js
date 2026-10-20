@@ -77,3 +77,34 @@ export const usuariovertodo = async (req, res) => {
         res.render('usuario/usuariovertodo', { registros });
     }
 }
+
+export const usuariobaja = async (req, res) => {
+    let muestro = false, err = false;
+    res.render('usuario/usuariobaja', { muestro, err });
+}
+
+export const usuariodelete = async (req, res) => {
+    let muestro = true, exito, err = false;
+    let id = req.body.idhtml;
+    try {
+        let auxsql = "SELECT * FROM usuario WHERE idusuario = " + id + ";";
+        const [registros, col] = await bdd.query(auxsql);
+        if (registros[0].idusuario == null) {
+            exito = false;
+            res.render('usuario/usuariobaja', { muestro, exito, err });
+        } else {
+            exito = true;
+            auxsql = "DELETE FROM usuario WHERE idusuario = '" + id + "';";
+            await bdd.query(auxsql);
+            res.render('usuario/usuariobaja', { muestro, exito, registros, err });
+        }
+    } catch (error) {
+        console.log(error);
+        let exito = false;
+        err = true;
+        res.render('usuario/usuariobaja', { muestro, exito, err });
+    }
+
+
+
+}
