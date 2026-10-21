@@ -18,9 +18,9 @@
             <h1>Busqueda de Aviones</h1>
         </header>
         <a href="/avion">
-            <button class="bvolver" style="margin: 2%;">Volver al Menu</button>
+            <button class="bvolver">Volver al Menu</button>
         </a>
-        <div class="pneu" style="margin: 2%; padding: 2%;">
+        <div class="pneu">
             <form action="/avionsearch" method="post">
                 <label for="matricula">Matricula:</label>
                 <input type="text" name="matriculahtml" id="matricula">
@@ -28,7 +28,7 @@
             </form>
         </div>
         <%if(muestro){ if(encontrado){%>
-            <div class="ppos" style="margin: 2%; padding: 2%;">
+            <div class="ppos">
                 <p>Avion encontrado.</p>
                 <table>
                     <thead>
@@ -55,7 +55,7 @@
 
             </div>
             <%}else{%>
-                <div class="pneg" style="margin: 2%; padding: 2%;">
+                <div class="pneg">
                     <p>No se encontro el avion con la matricula
                         <%=matricula%>
                     </p>

@@ -18,11 +18,11 @@
             <h1>Modificaciones de Aviones</h1>
         </header>
 
-        <a href="/avion" style="margin: 2%;">
+        <a href="/avion">
             <button class="bvolver">volver al menu</button>
         </a>
 
-        <div class="pneu" style="margin-top: 2%; margin-bottom: 2%; padding: 2%;">
+        <div class="pneu">
             <form action="/avionmodificacionagarre" method="post">
                 <label for="matriculahtml">Matricula: </label>
                 <input type="text" name="matriculahtml">
@@ -58,7 +58,7 @@
             </div>
             <%if (muestro2){}else{ if (cambiado){}else{%>
                 <div>
-                    <p style="text-decoration: underline; font-size: 1.5em;">Solo escriba los campos que quiera
+                    <p>Solo escriba los campos que quiera
                         modificar.
                     </p>
                     <form action="/avionmodificacion" method="post">
@@ -76,12 +76,12 @@
                 </div>
                 <%} }%>
                     <%}else{ %>
-                        <div class="pneg" style="margin-top: 2%;">
+                        <div class="pneg">
                             <p>No se encontro el avion.</p>
                         </div>
                         <%} }%>
                             <% if (muestro2){if(cambiado){%>
-                                <div class="ppos" style="margin-top: 2%;">
+                                <div class="ppos">
                                     <p>Avion modificado correctamente.</p>
                                     <table>
                                         <thead>
@@ -110,19 +110,17 @@
                                     <div class="pneg">
                                         <p>Avion no modificado.</p>
                                         <%if(conmat==false){%>
-                                            <p style="background-color: black; color: red; text-decoration: underline;">
+                                            <p>
                                                 Matricula incorrecta, Esta como mucho debe de tener 10 caracteres
                                                 alfanumericos.</p>
                                             <%}%>
                                                 <%if(conmod==false){%>
-                                                    <p
-                                                        style="background-color: black; color: red; text-decoration: underline;">
+                                                    <p>
                                                         Modelo incorrecto, Esta como mucho debe de tener 50 caracteres
                                                         alfanumericos.</p>
                                                     <%}%>
                                                         <%if(concap==false){%>
-                                                            <p
-                                                                style="background-color: black; color: red; text-decoration: underline;">
+                                                            <p>
                                                                 Capacidad incorrecta, Esta como mucho debe de tener 10
                                                                 digitos y solo numericos.</p>
                                                             <%}%>

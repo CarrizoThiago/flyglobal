@@ -33,7 +33,7 @@ export const usuarionuevo = async (req, res) => {
     conema = /^[a-zA-Z0-9@._-]{1,50}$/.test(email);
     contele = /^[0-9+\- ]{1,20}$/.test(telefono);
     if (contraseña != "") {
-        if (contraseña.length >= 45) { concontra = false; } else { concontra = true; }
+        if (contraseña.length > 45) { concontra = false; } else { concontra = true; }
     } else {
         concontra = true;
         contraseña = null;
@@ -87,7 +87,7 @@ export const usuariodelete = async (req, res) => {
     let muestro = true, exito, err = false;
     let id = req.body.idhtml;
     try {
-        let auxsql = "SELECT * FROM usuario WHERE idusuario = " + id + ";";
+        let auxsql = "SELECT * FROM usuario WHERE idusuario = '" + id + "';";
         const [registros, col] = await bdd.query(auxsql);
         if (registros[0].idusuario == null) {
             exito = false;
@@ -125,4 +125,126 @@ export const usuariosearch = async (req, res) => {
         err = true;
         res.render('usuario/usuariobusqueda', { muestro, exito, err });
     }
+}
+
+export const usuariomodificaciones = async (req, res) => {
+    let muestro = false, muestro2 = false, cambiado = false;
+    res.render('usuario/usuariomodificaciones', { muestro, muestro2, cambiado });
+}
+
+export const usuariomodificacionagarre = async (req, res) => {
+    let muestro = true, muestro2 = false, cambiado = false;
+    let id;
+    id = req.body.idhtml;
+    try {
+        let auxsql = "SELECT * FROM usuario WHERE idusuario = '" + id + "';";
+        const [registros, col] = await bdd.query(auxsql);
+        let encontrado = true;
+        if (registros.length == 0) {
+            encontrado = false;
+        }
+        res.render('usuario/usuariomodificaciones', { muestro, muestro2, registros, encontrado, cambiado });
+    } catch (error) {
+        console.log(error);
+        let muestro = true, encontrado = false;
+        res.render('usuario/usuariomodificaciones', { muestro, muestro2, encontrado, cambiado });
+    }
+}
+
+export const usuariomodificacion = async (req, res) => {
+    let muestro = true, muestro2 = true, encontrado = true, cambiado = false;
+    let registros = [], registros2 = [];
+    let conid, conpasaporte, connom, conape, conema, contele, concontra;
+    let consigna = 0;
+
+    let idoriginal = req.body.idoriginal;
+    let id = req.body.idhtml2;
+    let pasaporte = req.body.pasaportehtml.toUpperCase();
+    let nombre = req.body.nombrehtml.toUpperCase();
+    let apellido = req.body.apellidohtml.toUpperCase();
+    let email = req.body.emailhtml;
+    let telefono = req.body.telefonohtml;
+    let contraseña = req.body.contraseñahtml;
+
+    if (id != "") {
+        conid = /^[0-9]{1,10}$/.test(id);
+    } else {
+        conid = true;
+    }
+    if (pasaporte != "") {
+        conpasaporte = /^[A-Z 0-9]{2,9}$/.test(pasaporte);
+    } else {
+        conpasaporte = true;
+    }
+    if (nombre != "") {
+        connom = /^[A-ZÑÁÉÍÓÚ ]{1,30}$/.test(nombre);
+    } else {
+        connom = true;
+    }
+    if (apellido != "") {
+        conape = /^[A-ZÑÁÉÍÓÚ ]{1,25}$/.test(apellido);
+    } else {
+        conape = true;
+    }
+    if (email != "") {
+        conema = /^[a-zA-Z0-9@._-]{1,50}$/.test(email);
+    } else {
+        conema = true;
+    }
+    if (telefono != "") {
+        contele = /^[0-9+\- ]{1,20}$/.test(telefono);
+    } else {
+        contele = true;
+    }
+    if (contraseña != "") {
+        if (contraseña.length > 45) { concontra = false; } else { concontra = true; }
+    } else {
+        concontra = true;
+    }
+    if (conid == false) { consigna++; }
+    if (conpasaporte == false) { consigna++; }
+    if (connom == false) { consigna++; }
+    if (conape == false) { consigna++; }
+    if (conema == false) { consigna++; }
+    if (contele == false) { consigna++; }
+    if (concontra == false) { consigna++; }
+
+
+
+    let selectsql = "SELECT * FROM usuario WHERE idusuario = '" + idoriginal + "';";
+    let selectsqlfinal = "SELECT * FROM usuario WHERE idusuario = '" + id + "';";
+    let idsql = "UPDATE usuario SET idusuario = '" + id + "' WHERE idusuario = '" + idoriginal + "';";
+    let pasaportesql = "UPDATE usuario SET pasaporte = '" + pasaporte + "' WHERE idusuario = '" + idoriginal + "';";
+    let nombresql = "UPDATE usuario SET nombre = '" + nombre + "' WHERE idusuario = '" + idoriginal + "';";
+    let apellidosql = "UPDATE usuario SET apellido = '" + apellido + "' WHERE idusuario = '" + idoriginal + "';";
+    let emailsql = "UPDATE usuario SET email = '" + email + "' WHERE idusuario = '" + idoriginal + "';";
+    let telefonosql = "UPDATE usuario SET telefono = '" + telefono + "' WHERE idusuario = '" + idoriginal + "';";
+    let contraseñasql = "UPDATE usuario SET contraseña = '" + contraseña + "' WHERE idusuario = '" + idoriginal + "';";
+
+    try {
+        [registros] = await bdd.query(selectsql);
+
+        if (id == "" && pasaporte == "" && nombre == "" && apellido == "" && email == "" && telefono == "" && contraseña == "") {
+            muestro2 = false;
+        } else if (consigna == 0) {
+            if (pasaporte != "") { await bdd.query(pasaportesql); }
+            if (nombre != "") { await bdd.query(nombresql); }
+            if (apellido != "") { await bdd.query(apellidosql); }
+            if (email != "") { await bdd.query(emailsql); }
+            if (telefono != "") { await bdd.query(telefonosql); }
+            if (contraseña != "") { await bdd.query(contraseñasql); }
+            if (id != "") {
+                await bdd.query(idsql);
+                [registros2] = await bdd.query(selectsqlfinal);
+            } else { [registros2] = await bdd.query(selectsql); }
+
+
+            cambiado = true;
+        } else { cambiado = false; }
+    } catch (error) {
+        console.log(error);
+        cambiado = false;
+    }
+
+    res.render('usuario/usuariomodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conid, conpasaporte, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
 }

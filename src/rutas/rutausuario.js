@@ -1,5 +1,5 @@
 import express from "express";
-import { usuariomenu, usuarioalta, usuariovertodo, usuarionuevo, usuariobaja, usuariodelete, usuariobusqueda, usuariosearch } from "../controller/controllerusuario.js";
+import { usuariomenu, usuarioalta, usuariovertodo, usuarionuevo, usuariobaja, usuariodelete, usuariobusqueda, usuariosearch, usuariomodificaciones, usuariomodificacionagarre, usuariomodificacion } from "../controller/controllerusuario.js";
 
 const rusuario = express.Router();
 
@@ -18,5 +18,11 @@ rusuario.post('/usuariodelete', usuariodelete)
 rusuario.get('/usuariobusqueda', usuariobusqueda)
 
 rusuario.post('/usuariosearch', usuariosearch)
+
+rusuario.get('/usuariomodificaciones', usuariomodificaciones)
+
+rusuario.post('/usuariomodificacionagarre', usuariomodificacionagarre)
+
+rusuario.post('/usuariomodificacion', usuariomodificacion)
 
 export { rusuario }

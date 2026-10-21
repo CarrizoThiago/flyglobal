@@ -18,9 +18,9 @@
             <h1>Alta de Aviones</h1>
         </header>
         <a href="/avion">
-            <button class="bvolver" style="margin: 2%;">Volver al Menu</button>
+            <button class="bvolver">Volver al Menu</button>
         </a>
-        <div class="pneu" style="margin: 2%; padding: 2%;">
+        <div class="pneu">
             <form action="/avionnuevo" method="post">
                 <label for="matriculahtml">Matricula:</label>
                 <input type="text" name="matriculahtml" placeholder="XX-000">
@@ -35,7 +35,7 @@
             </form>
         </div>
         <%if(muestro==true){ if(subido==true){%>
-            <div class="ppos" style="margin: 2%;">
+            <div class="ppos">
                 <p>El avion se agrego correctamente</p><br>
                 <table>
                     <thead>
@@ -61,22 +61,22 @@
                 </table>
             </div>
             <%}else{%>
-                <div class="pneg" style="margin: 2%;">
+                <div class="pneg">
                     <p>No se pudo subir el registro.</p>
                 </div>
-                <div class="pneg" style="margin: 2%;">
+                <div class="pneg">
                     <%if(conmat==false){%>
-                        <p style="background-color: black; color: red; text-decoration: underline;">La matricula es
+                        <p>La matricula es
                             incorrecta.<br>Este debe tener
                             un largo de entre 1 y 10 caracteres. <br> Arreglelo y subalo.</p>
                         <%}%>
                             <%if(conmod==false){%>
-                                <p style="background-color: black; color: red; text-decoration: underline;">El
+                                <p>El
                                     modelo es incorrecto.<br>Este debe
                                     tener un largo de entre 1 y 50 caracteres. <br> Arreglelo y subalo.</p>
                                 <%}%>
                                     <%if(concap==false){%>
-                                        <p style="background-color: black; color: red; text-decoration: underline;">
+                                        <p>
                                             La capacidad es incorrecta.<br>Este debe
                                             tener un largo de entre 1 y 10 caracteres numericos. <br> Arreglelo y
                                             subalo.

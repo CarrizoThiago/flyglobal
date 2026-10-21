@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Usuario modificaciones</h1>
+        </header>
+        <nav>
+            <a href="/usuario">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <div class="pneu">
+            <form action="/usuariomodificacionagarre" method="post">
+                <label for="idhtml">ID: </label>
+                <input type="text" name="idhtml" id="idhtml">
+                <button type="submit" class="bb">ubicar</button>
+            </form>
+        </div>
+        <% if(muestro){if(encontrado){%>
+            <div class="ppos">
+                <p>Se encontro el usuario.</p> <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Pasaporte</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Contraseña</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <%= registros[0].idusuario %>
+                            </td>
+                            <td>
+                                <%= registros[0].pasaporte %>
+                            </td>
+                            <td>
+                                <%= registros[0].nombre %>
+                            </td>
+                            <td>
+                                <%= registros[0].apellido %>
+                            </td>
+                            <td>
+                                <%= registros[0].email %>
+                            </td>
+                            <td>
+                                <%= registros[0].telefono %>
+                            </td>
+                            <td>
+                                <%if(registros[0].contraseña !=null && registros[0].contraseña !="" ){%>
+                                    <%=registros[0].contraseña %>
+                                        <%}else{%>Usuario sin contraseña.
+                                            <%}%>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%if (muestro2){}else{ if (cambiado){}else{%>
+                <div>
+                    <p>Solo escriba los campos que quiera
+                        modificar.
+                    </p>
+                    <form action="/usuariomodificacion" method="post">
+                        <input type="hidden" name="idoriginal" value="<%= registros[0].idusuario %>">
+                        <input type="hidden" name="pasaporteoriginal" value="<%= registros[0].pasaporte %>">
+                        <input type="hidden" name="nombreoriginal" value="<%= registros[0].nombre %>">
+                        <input type="hidden" name="apellidooriginal" value="<%= registros[0].apellido %>">
+                        <input type="hidden" name="emailoriginal" value="<%= registros[0].email %>">
+                        <input type="hidden" name="telefonoriginal" value="<%= registros[0].telefono %>">
+                        <input type="hidden" name="contraseñoriginal" value="<%= registros[0].contraseña %>">
+                        <label for="idhtml2">ID: </label>
+                        <input type="text" name="idhtml2" id="idhtml2">
+                        <label for="pasaportehtml">Pasaporte: </label>
+                        <input type="text" name="pasaportehtml" id="pasaportehtml">
+                        <label for="nombrehtml">Nombre: </label>
+                        <input type="text" name="nombrehtml" id="nombrehtml">
+                        <label for="apellidohtml">Apellido: </label>
+                        <input type="text" name="apellidohtml" id="apellidohtml">
+                        <label for="emailhtml">Email: </label>
+                        <input type="text" name="emailhtml" id="emailhtml">
+                        <label for="telefonohtml">Telefono: </label>
+                        <input type="text" name="telefonohtml" id="telefonohtml">
+                        <label for="contraseñahtml">Contraseña: </label>
+                        <input type="text" name="contraseñahtml" id="contraseñahtml">
+                        <button type="submit" class="balta">modificar</button>
+                    </form>
+                </div>
+                <%} }%>
+                    <%}else{ %>
+                        <div class="pneg">
+                            <p>No se encontro el usuario.</p>
+                        </div>
+                        <%} }%>
+                            <% if (muestro2){if(cambiado){%>
+                                <div class="ppos">
+                                    <p>Usuario modificado correctamente.</p>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Pasaporte</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Email</th>
+                                                <th>Telefono</th>
+                                                <th>Contraseña</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <%= registros2[0].idusuario %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].pasaporte %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].nombre %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].apellido %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].email %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].telefono %>
+                                                </td>
+                                                <td>
+                                                    <%if(registros2[0].contraseña !=null && registros2[0].contraseña !=""
+                                                        ){%>
+                                                        <%=registros2[0].contraseña %>
+                                                            <%}else{%>Usuario sin contraseña.
+                                                                <%}%>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <%}else{%>
+                                    <div class="pneg">
+                                        <p>Usuario no modificado.</p>
+                                        <%if(conid==false){%>
+                                            <p>
+                                                El
+                                                ID no es valido: <%= id %> debe tener un largo maximo de 10 digitos y
+                                                    solo deben ser numeros.
+                                            </p>
+                                            <%}%>
+                                                <%if(conpasaporte==false){%>
+                                                    <p>
+                                                        El pasaporte no es valido: <%= pasaporte %> puede tener de 2 a
+                                                            9 letras y/o numeros.</p>
+                                                    <%}%>
+                                                        <%if(connom==false){%>
+                                                            <p>
+                                                                El nombre no es valido: <%= nombre %> puede tener un
+                                                                    largo
+                                                                    maximo de 30 caracteres.</p>
+                                                            <%}%>
+                                                                <%if(conape==false){%>
+                                                                    <p>
+                                                                        El apellido no es valido: <%= apellido %> puede
+                                                                            tener
+                                                                            un largo maximo de 25 caracteres.
+                                                                    </p>
+                                                                    <%}%>
+                                                                        <%if(conema==false){%>
+                                                                            <p>
+                                                                                El email no es valido: <%= email %>
+                                                                                    puede tener un
+                                                                                    largo
+                                                                                    maximo de 50 caracteres.</p>
+                                                                            <%}%>
+
+                                                                                <%if(contele==false){%>
+                                                                                    <p>
+                                                                                        El telefono no es
+                                                                                        valido: <%= telefono %>
+                                                                                            puede tener
+                                                                                            un
+                                                                                            largo
+                                                                                            maximo de 20
+                                                                                            caracteres y no
+                                                                                            puede contener
+                                                                                            letras.
+                                                                                    </p>
+                                                                                    <%}%>
+                                                                                        <%if(concontra==false){%>
+                                                                                            <p>
+                                                                                                La contraseña no
+                                                                                                es valida: <%=
+                                                                                                    contraseña %>
+                                                                                                    puede tener
+                                                                                                    un largo
+                                                                                                    maximo de 45
+                                                                                                    caracteres.
+                                                                                            </p>
+                                                                                            <%}%>
+                                    </div>
+                                    <%} }%>
+    </div>
+
+</body>
+
+</html>

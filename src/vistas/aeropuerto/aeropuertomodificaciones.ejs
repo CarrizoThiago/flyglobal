@@ -21,7 +21,7 @@
                 <button class="bvolver">volver al menu</button>
             </a>
         </nav>
-        <div class="pneu" style="margin-top: 2%; margin-bottom: 2%; padding: 2%;">
+        <div class="pneu">
             <form action="/aeropuertomodificacionagarre" method="post">
                 <label for="iatahtml">Codigo IATA: </label>
                 <input type="text" name="iatahtml" id="iatahtml">
@@ -61,7 +61,7 @@
             </div>
             <%if (muestro2){}else{ if (cambiado){}else{%>
                 <div>
-                    <p style="text-decoration: underline; font-size: 1.5em;">Solo escriba los campos que quiera
+                    <p>Solo escriba los campos que quiera
                         modificar.
                     </p>
                     <form action="/aeropuertomodificacion" method="post">
@@ -82,12 +82,12 @@
                 </div>
                 <%} }%>
                     <%}else{ %>
-                        <div class="pneg" style="margin-top: 2%;">
+                        <div class="pneg">
                             <p>No se encontro el aeropuerto.</p>
                         </div>
                         <%} }%>
                             <% if (muestro2){if(cambiado){%>
-                                <div class="ppos" style="margin-top: 2%;">
+                                <div class="ppos">
                                     <p>Aeropuerto modificado correctamente.</p>
                                     <table>
                                         <thead>
@@ -120,21 +120,21 @@
                                     <div class="pneg">
                                         <p>Aeropuerto no modificado.</p>
                                         <%if(coniata==false){%>
-                                            <p style="background-color: black; color: red; text-decoration: underline;">
+                                            <p>
                                                 El
                                                 codigo IATA no es valido: <%= iata %> debe tener 3 letras exactas sin
                                                     caracteres especiales y/o numeros.</p>
                                             <%}%>
                                                 <%if(connom==false){%>
                                                     <p
-                                                        style="background-color: black; color: red; text-decoration: underline;">
+                                                       >
                                                         El nombre no es valido: <%= nombre %> puede tener un largo
                                                             maximo de 70
                                                             caracteres.</p>
                                                     <%}%>
                                                         <%if(conciu==false){%>
                                                             <p
-                                                                style="background-color: black; color: red; text-decoration: underline;">
+                                                               >
                                                                 La ciudad no es valida: <%= ciudad %> puede tener un
                                                                     largo
                                                                     maximo
@@ -144,7 +144,7 @@
                                                             <%}%>
                                                                 <%if(conpai==false){%>
                                                                     <p
-                                                                        style="background-color: black; color: red; text-decoration: underline;">
+                                                                       >
                                                                         El pais no es valido: <%= pais %> puede tener un
                                                                             largo
                                                                             maximo de 45 caracteres y no puede contener
