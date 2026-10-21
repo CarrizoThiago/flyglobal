@@ -1,35 +1,41 @@
 .pneg {
-    background-color: firebrick;
-    color: white;
+    background-color: #C8102E;
+    color: #D9D9D6;
     min-width: 50%;
     width: fit-content;
     align-items: center;
     justify-content: center;
     text-align: center;
-    border: solid black 1px;
+    border: solid #101820 1px;
     border-radius: 15px;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .ppos {
-    background-color: green;
-    color: white;
+    background-color: #009639;
+    color: #101820;
     min-width: 50%;
     width: fit-content;
     align-items: center;
     justify-content: center;
-    border: solid black 1px;
+    border: solid #101820 1px;
     border-radius: 15px;
     padding: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .pneu {
-    background-color: steelblue;
-    color: white;
+    background-color: #FFC72C;
+    color: #101820;
     min-width: 50%;
     width: fit-content;
     align-items: center;
     justify-content: center;
     text-align: center;
-    border: solid black 1px;
+    border: solid #101820 1px;
     border-radius: 15px;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }

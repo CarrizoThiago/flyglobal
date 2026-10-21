@@ -4,7 +4,7 @@
     align-items: center;
     max-width: 12%;
     padding: 0.5%;
-    background-color: black;
+    background-color: #0C2340;
     border-radius: 15px;
 }
 
@@ -30,7 +30,7 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #D9D9D6;
     font-size: 1.2em;
 }
 

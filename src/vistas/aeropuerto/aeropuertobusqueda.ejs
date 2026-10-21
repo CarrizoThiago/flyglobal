@@ -22,7 +22,16 @@
             </a>
         </nav>
         <form action="/aeropuertosearch" method="post">
-            <label for="iatahmtl">Codigo IATA:</label><input type="text" name="iatahmtl" placeholder="codigo iata"><br>
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="iatahmtl">Codigo IATA:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="iatahmtl" placeholder="codigo iata">
+                    </td>
+                </tr>
+            </table>
             <button type="submit" class="bb">Buscar</button>
         </form>
         <% if( muestro==true ){ if(registros.length==0){ %>

@@ -22,7 +22,16 @@
             </a>
         </nav>
         <form action="/usuariosearch" method="post">
-            <label for="idhtml">Id:</label><input type="text" name="idhtml" placeholder="id"><br>
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idhtml">Id:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idhtml" placeholder="id">
+                    </td>
+                </tr>
+            </table>
             <button type="submit" class="bb">Buscar</button>
         </form>
         <% if( muestro==true ){ if(exito==false){ %>

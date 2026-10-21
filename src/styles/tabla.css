@@ -1,18 +1,55 @@
 th {
-    background-color: firebrick;
+    background-color: #0C2340;
+    color: #00A9E0;
 }
 
 .tdpar {
-    background-color: grey;
+    background-color: #D9D9D6;
+    color: #101820;
 }
 
 .tdimpar {
-    background-color: lightgrey;
+    background-color: #53565A;
+    color: #D9D9D6;
 }
 
 table {
-    background-color: darkgrey;
+    background-color: #D9D9D6;
+    color: #101820;
     border-radius: 15px;
     padding: 10px;
-    border: solid black 1px;
+    border: solid #101820 1px;
+}
+
+th,
+td {
+    border: 1px solid #101820;
+}
+
+input {
+    background-color: #D9D9D6;
+    color: #101820;
+    border-radius: 15px;
+    max-width: 100%;
+    padding: 3%;
+}
+
+label {
+    color: #D9D9D6;
+}
+
+.tdlabel {
+    border-radius: 15px;
+    background-color: #0C2340;
+    color: #D9D9D6;
+}
+
+.tdinput {
+    border-radius: 15px;
+    border: 0px;
+}
+
+table {
+    margin-top: 2%;
+    margin-bottom: 2%;
 }

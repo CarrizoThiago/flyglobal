@@ -23,8 +23,16 @@
         </nav>
         <div class="pneu">
             <form action="/aeropuertomodificacionagarre" method="post">
-                <label for="iatahtml">Codigo IATA: </label>
-                <input type="text" name="iatahtml" id="iatahtml">
+                <table>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="iatahtml">Codigo IATA: </label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="iatahtml" id="iatahtml">
+                        </td>
+                    </tr>
+                </table>
                 <button type="submit" class="bb">ubicar</button>
             </form>
         </div>
@@ -69,14 +77,40 @@
                         <input type="hidden" name="nombreoriginal" value="<%= registros[0].nombre %>">
                         <input type="hidden" name="ciudadoriginal" value="<%= registros[0].ciudad %>">
                         <input type="hidden" name="paisoriginal" value="<%= registros[0].pais %>">
-                        <label for="iatahtml2">Codigo IATA: </label>
-                        <input type="text" name="iatahtml2" id="iatahtml2">
-                        <label for="nombrehtml">Nombre: </label>
-                        <input type="text" name="nombrehtml" id="nombrehtml">
-                        <label for="ciudadhtml">Ciudad: </label>
-                        <input type="text" name="ciudadhtml" id="ciudadhtml">
-                        <label for="paishtml">Pais: </label>
-                        <input type="text" name="paishtml" id="paishtml">
+                        <table>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="iatahtml2">Codigo IATA: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="iatahtml2" id="iatahtml2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="nombrehtml">Nombre: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="nombrehtml" id="nombrehtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="ciudadhtml">Ciudad: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="ciudadhtml" id="ciudadhtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="paishtml">Pais: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="paishtml" id="paishtml">
+                                </td>
+                            </tr>
+                        </table>
                         <button type="submit" class="balta">modificar</button>
                     </form>
                 </div>

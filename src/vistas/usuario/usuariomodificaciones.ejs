@@ -23,8 +23,16 @@
         </nav>
         <div class="pneu">
             <form action="/usuariomodificacionagarre" method="post">
-                <label for="idhtml">ID: </label>
-                <input type="text" name="idhtml" id="idhtml">
+                <table>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="idhtml">ID: </label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="idhtml" id="idhtml">
+                        </td>
+                    </tr>
+                </table>
                 <button type="submit" class="bb">ubicar</button>
             </form>
         </div>
@@ -87,20 +95,64 @@
                         <input type="hidden" name="emailoriginal" value="<%= registros[0].email %>">
                         <input type="hidden" name="telefonoriginal" value="<%= registros[0].telefono %>">
                         <input type="hidden" name="contraseñoriginal" value="<%= registros[0].contraseña %>">
-                        <label for="idhtml2">ID: </label>
-                        <input type="text" name="idhtml2" id="idhtml2">
-                        <label for="pasaportehtml">Pasaporte: </label>
-                        <input type="text" name="pasaportehtml" id="pasaportehtml">
-                        <label for="nombrehtml">Nombre: </label>
-                        <input type="text" name="nombrehtml" id="nombrehtml">
-                        <label for="apellidohtml">Apellido: </label>
-                        <input type="text" name="apellidohtml" id="apellidohtml">
-                        <label for="emailhtml">Email: </label>
-                        <input type="text" name="emailhtml" id="emailhtml">
-                        <label for="telefonohtml">Telefono: </label>
-                        <input type="text" name="telefonohtml" id="telefonohtml">
-                        <label for="contraseñahtml">Contraseña: </label>
-                        <input type="text" name="contraseñahtml" id="contraseñahtml">
+                        <table>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="idhtml2">ID: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="idhtml2" id="idhtml2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="pasaportehtml">Pasaporte: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="pasaportehtml" id="pasaportehtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="nombrehtml">Nombre: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="nombrehtml" id="nombrehtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="apellidohtml">Apellido: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="apellidohtml" id="apellidohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="emailhtml">Email: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="emailhtml" id="emailhtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="telefonohtml">Telefono: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="telefonohtml" id="telefonohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="contraseñahtml">Contraseña: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="contraseñahtml" id="contraseñahtml">
+                                </td>
+                            </tr>
+                        </table>
                         <button type="submit" class="balta">modificar</button>
                     </form>
                 </div>

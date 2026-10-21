@@ -22,10 +22,40 @@
             </a>
         </nav>
         <form action="/aeropuertonuevo" method="post">
-            <label for="iatahmtl">Codigo IATA:</label><input type="text" name="iatahmtl" placeholder="codigo iata"><br>
-            <label for="nomhtml">Nombre:</label><input type="text" name="nomhtml" placeholder="nombre"><br>
-            <label for="ciuhtml">Ciudad:</label><input type="text" name="ciuhtml" placeholder="ciudad"><br>
-            <label for="paihtml">Pais:</label><input type="text" name="paihtml" placeholder="pais"><br>
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="iatahmtl">Codigo IATA:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="iatahmtl" placeholder="codigo iata">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="nomhtml">Nombre:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="nomhtml" placeholder="nombre">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="ciuhtml">Ciudad:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="ciuhtml" placeholder="ciudad">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="paihtml">Pais:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="paihtml" placeholder="pais">
+                    </td>
+                </tr>
+            </table>
             <button type="submit" class="balta">Guardar</button>
         </form>
         <%if(muestro==true){ if(subido==true){%>

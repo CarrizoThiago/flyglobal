@@ -22,15 +22,32 @@
         </a>
         <div class="pneu">
             <form action="/avionnuevo" method="post">
-                <label for="matriculahtml">Matricula:</label>
-                <input type="text" name="matriculahtml" placeholder="XX-000">
-                <br><br>
-                <label for="modelohtml">Modelo:</label>
-                <input type="text" name="modelohtml" placeholder="Modelo">
-                <br><br>
-                <label for="capacidadhtml">Capacidad:</label>
-                <input type="text" name="capacidadhtml" placeholder="Capacidad">
-                <br><br>
+                <table>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="matriculahtml">Matricula:</label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="matriculahtml" placeholder="XX-000">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="modelohtml">Modelo:</label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="modelohtml" placeholder="Modelo">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="capacidadhtml">Capacidad:</label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="capacidadhtml" placeholder="Capacidad">
+                        </td>
+                    </tr>
+                </table>
                 <button type="submit" class="balta">Agregar</button>
             </form>
         </div>

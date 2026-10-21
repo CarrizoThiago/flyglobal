@@ -22,17 +22,64 @@
             </a>
         </nav>
         <form action="/usuarionuevo" method="post">
-            <label for="idhtml">id:</label><input type="text" name="idhtml" placeholder="id"><br>
-            <label for="pasaportehtml">Pasaporte:</label><input type="text" name="pasaportehtml"
-                placeholder="pasaporte"><br>
-            <label for="nombrehtml">Nombre:</label><input type="text" name="nombrehtml" placeholder="nombre"><br>
-            <label for="apellidohtml">Apellido:</label><input type="text" name="apellidohtml"
-                placeholder="apellido"><br>
-            <label for="emailhtml">Email:</label><input type="text" name="emailhtml" placeholder="email"><br>
-            <label for="telefonohtml">Telefono:</label><input type="text" name="telefonohtml"
-                placeholder="telefono"><br>
-            <label for="contraseñahtml">Contraseña:</label><input type="text" name="contraseñahtml"
-                placeholder="contraseña"><br>
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idhtml">id:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idhtml" placeholder="id">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="pasaportehtml">Pasaporte:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="pasaportehtml" placeholder="pasaporte">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="nombrehtml">Nombre:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="nombrehtml" placeholder="nombre">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="apellidohtml">Apellido:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="apellidohtml" placeholder="apellido">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="emailhtml">Email:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="emailhtml" placeholder="email">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="telefonohtml">Telefono:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="telefonohtml" placeholder="telefono">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="contraseñahtml">Contraseña:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="contraseñahtml" placeholder="contraseña">
+                    </td>
+                </tr>
+            </table>
             <button type="submit" class="balta">Guardar</button>
         </form>
         <%if(muestro==true){ if(subido==true){%>
@@ -106,29 +153,25 @@
                                             caracteres y no puede contener numeros ni caracteres especiales.</p>
                                         <%}%>
                                             <%if(conape==false){%>
-                                                <p
-                                                   >
+                                                <p>
                                                     El apellido es incorrecto. <br> Este debe tener un largo de entre 2
                                                     y 25 caracteres y no puede contener numeros ni caracteres
                                                     especiales.</p>
                                                 <%}%>
                                                     <%if(conema==false){%>
-                                                        <p
-                                                           >
+                                                        <p>
                                                             El email es incorrecto. <br> Este debe tener un largo de
                                                             entre 2 y 50
                                                             .</p>
                                                         <%}%>
                                                             <%if(contele==false){%>
-                                                                <p
-                                                                   >
+                                                                <p>
                                                                     El telefono es incorrecto.<br>Este debe tener
                                                                     un largo de entre 2 y 20 caracteres. <br> Arreglelo
                                                                     y subalo.</p>
                                                                 <%}%>
                                                                     <%if(concontra==false){%>
-                                                                        <p
-                                                                           >
+                                                                        <p>
                                                                             La contraseña es incorrecta.<br>Este debe
                                                                             tener
                                                                             un largo de entre 2 y 45 caracteres. <br>

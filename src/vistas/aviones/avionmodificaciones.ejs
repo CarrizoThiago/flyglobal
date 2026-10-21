@@ -24,8 +24,16 @@
 
         <div class="pneu">
             <form action="/avionmodificacionagarre" method="post">
-                <label for="matriculahtml">Matricula: </label>
-                <input type="text" name="matriculahtml">
+                <table>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="matriculahtml">Matricula: </label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="matriculahtml">
+                        </td>
+                    </tr>
+                </table>
                 <button type="submit" class="bb">ubicar</button>
             </form>
         </div>
@@ -65,12 +73,32 @@
                         <input type="hidden" name="matriculaoriginal" value="<%= registros[0].matricula %>">
                         <input type="hidden" name="modelooriginal" value="<%= registros[0].modelo %>">
                         <input type="hidden" name="capacidadoriginal" value="<%= registros[0].capacidad %>">
-                        <label for="matriculahtml2">Matricula: </label>
-                        <input type="text" name="matriculahtml2">
-                        <label for="modelohtml">Modelo: </label>
-                        <input type="text" name="modelohtml">
-                        <label for="capacidadhtml">Capacidad: </label>
-                        <input type="text" name="capacidadhtml">
+                        <table>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="matriculahtml2">Matricula: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="matriculahtml2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="modelohtml">Modelo: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="modelohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="capacidadhtml">Capacidad: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="capacidadhtml">
+                                </td>
+                            </tr>
+                        </table>
                         <button type="submit" class="balta">modificar</button>
                     </form>
                 </div>
