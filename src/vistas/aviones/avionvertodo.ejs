@@ -7,8 +7,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../styles/index.css">
     <link rel="stylesheet" href="../../styles/button.css">
-    <link rel="stylesheet" href="../../styles/banner.css">
     <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+
 </head>
 
 <body>
@@ -16,7 +17,9 @@
         <header>
             <h1>Ver todos los Aviones</h1>
         </header>
-        <button class="bvolver"><a href="/avion">Volver al menu</a></button>
+        <a href="/avion">
+            <button class="bvolver">Volver al menu</button>
+        </a>
         <%if(registro.length==0){%>
             <div class="pneg">
                 <p>No se encontro ningun avion.</p>

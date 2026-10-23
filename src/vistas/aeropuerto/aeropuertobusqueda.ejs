@@ -31,8 +31,12 @@
                         <input type="text" name="iatahmtl" placeholder="codigo iata">
                     </td>
                 </tr>
+                <tr>
+                    <td class="tdbutton" colspan="2">
+                        <button type="submit" class="bb">Buscar</button>
+                    </td>
+                </tr>
             </table>
-            <button type="submit" class="bb">Buscar</button>
         </form>
         <% if( muestro==true ){ if(registros.length==0){ %>
             <div class="pneg">
@@ -68,7 +72,7 @@
                     </table>
                     <%} }else{%>
                         <div class="pneu">
-                            <p>Nose a buscado algo aun.</p>
+                            <p>No se ha buscado nada aun.</p>
                         </div>
                         <%}%>
                 </div>

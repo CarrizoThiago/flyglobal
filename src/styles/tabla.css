@@ -53,3 +53,8 @@ table {
     margin-top: 2%;
     margin-bottom: 2%;
 }
+
+.tdbutton {
+    border-radius: 0px;
+    border: 0px;
+}

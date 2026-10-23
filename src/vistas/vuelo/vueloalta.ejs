@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Vuelo alta.</h1>
+        </header>
+        <nav>
+            <a href="/vuelo">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <form action="/vuelonuevo" method="post">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idhtml">ID de vuelo:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idhtml" placeholder="ID de vuelo">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="numerovuelohtml">Numero de vuelo:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="numerovuelohtml" placeholder="Numero de vuelo">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="iataorigenhtml">IATA de origen:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="iataorigenhtml" placeholder="IATA de origen">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="iatadestinohtml">IATA de destino:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="iatadestinohtml" placeholder="IATA de destino">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="fechasalidahtml">Fecha de salida:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="fechasalidahtml" placeholder="YYYY-MM-DD HH:MM:SS">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="fechallegadahtml">Fecha de llegada:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="fechallegadahtml" placeholder="YYYY-MM-DD HH:MM:SS">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="matriculahtml">Matricula del avion:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="matriculahtml" placeholder="Matricula">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdbutton" colspan="2">
+                        <button type="submit" class="balta">Guardar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <% if(muestro == true){ if(subido == true){ %>
+            <div class="ppos">
+                <p>El vuelo se agrego correctamente</p><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IDvuelo</th>
+                            <th>Numero de vuelo</th>
+                            <th>IATA de origen</th>
+                            <th>IATA de destino</th>
+                            <th>Fecha de salida</th>
+                            <th>Fecha de llegada</th>
+                            <th>Matricula del Avion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= idvuelo %>
+                            </td>
+                            <td>
+                                <%= numerovuelo %>
+                            </td>
+                            <td>
+                                <%= iataorigen %>
+                            </td>
+                            <td>
+                                <%= iatadestino %>
+                            </td>
+                            <td>
+                                <%= fechasalida %>
+                            </td>
+                            <td>
+                                <%= fechallegada %>
+                            </td>
+                            <td>
+                                <%= matricula %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <% } else { %>
+                <div class="pneg">
+                    <p>No se pudo subir el registro.</p>
+                </div>
+                <div class="pneg">
+                    <% if(conid == false){ %>
+                        <p>El ID de vuelo es incorrecto.<br>Este debe ser numerico (de 1 a 10 digitos).</p>
+                    <% } %>
+                    <% if(connum == false){ %>
+                        <p>El numero de vuelo es incorrecto.<br>Este debe ser numerico (de 1 a 10 digitos).</p>
+                    <% } %>
+                    <% if(coniataorigen == false){ %>
+                        <p>El codigo IATA de origen es incorrecto o no existe en la base de datos.<br>Debe tener 3 letras y corresponder a un aeropuerto registrado.</p>
+                    <% } %>
+                    <% if(coniatadestino == false){ %>
+                        <p>El codigo IATA de destino es incorrecto o no existe en la base de datos.<br>Debe tener 3 letras y corresponder a un aeropuerto registrado.</p>
+                    <% } %>
+                    <% if(confechasalida == false){ %>
+                        <p>La fecha de salida es incorrecta.<br>Formato requerido: YYYY-MM-DD HH:MM:SS.</p>
+                    <% } %>
+                    <% if(confechallegada == false){ %>
+                        <p>La fecha de llegada es incorrecta.<br>Formato requerido: YYYY-MM-DD HH:MM:SS.</p>
+                    <% } %>
+                    <% if(conmatricula == false){ %>
+                        <p>La matricula del avion es incorrecta o no existe en la base de datos.<br>Debe corresponder a un avion registrado.</p>
+                    <% } %>
+                    <% if(err == true){ %>
+                        <p>Error al ejecutar la query en la base de datos.</p>
+                    <% } %>
+                </div>
+            <% } } %>
+    </div>
+</body>
+
+</html>

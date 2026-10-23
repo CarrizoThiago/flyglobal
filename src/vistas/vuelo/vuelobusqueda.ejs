@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Vuelo busqueda.</h1>
+        </header>
+        <nav>
+            <a href="/vuelo"><button class="bvolver">volver al menu</button></a>
+        </nav>
+        <form action="/vuelosearch" method="post">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idhtml">ID de vuelo</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idhtml" placeholder="ID de vuelo">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdbutton" colspan="2">
+                        <button type="submit" class="bb">Buscar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <%if(muestro==false){%>
+            <div class="pneu">
+                <p>No se ha buscado nada aun.</p>
+            </div>
+            <%}else{if(registros.length==0){%>
+                <div class="pneg">
+                    <p>No se ha encontrado el vuelo.</p>
+                </div>
+                <%}else{%>
+                    <div class="ppos">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>IDvuelo</th>
+                                    <th>Numero de vuelo</th>
+                                    <th>IATA de origen</th>
+                                    <th>IATA de destino</th>
+                                    <th>Fecha de salida</th>
+                                    <th>Fecha de llegada</th>
+                                    <th>Matricula del Avion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tdpar">
+                                    <td>
+                                        <%=registros[0].idvuelo%>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].numerovuelo%>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].aeropuerto_codigoiata_origen%>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].aeropuerto_codigoiata_destino%>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].fecha_salida%>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].fecha_llegada%>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].avion_matricula%>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <%} if(err==true){%>
+                        <div class="pneg">
+                            <p>Error al buscar el vuelo.</p>
+                        </div>
+                        <%}}%>
+
+
+    </div>
+
+</body>
+
+</html>

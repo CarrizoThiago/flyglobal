@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/banner.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Modificaciones de Vuelos</h1>
+        </header>
+
+        <a href="/vuelo">
+            <button class="bvolver">volver al menu</button>
+        </a>
+
+        <div class="pneu">
+            <form action="/vuelomodificacionagarre" method="post">
+                <table>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="idhtml">ID de vuelo: </label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="idhtml" id="idhtml">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdbutton" colspan="2">
+                            <button type="submit" class="bb">ubicar</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <% if(muestro){if(encontrado){%>
+            <div class="ppos">
+                <p>Se encontro el vuelo.</p> <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IDvuelo</th>
+                            <th>Numero de vuelo</th>
+                            <th>IATA de origen</th>
+                            <th>IATA de destino</th>
+                            <th>Fecha de salida</th>
+                            <th>Fecha de llegada</th>
+                            <th>Matricula del Avion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= registros[0].idvuelo %>
+                            </td>
+                            <td>
+                                <%= registros[0].numerovuelo %>
+                            </td>
+                            <td>
+                                <%= registros[0].aeropuerto_codigoiata_origen %>
+                            </td>
+                            <td>
+                                <%= registros[0].aeropuerto_codigoiata_destino %>
+                            </td>
+                            <td>
+                                <%= registros[0].fecha_salida %>
+                            </td>
+                            <td>
+                                <%= registros[0].fecha_llegada %>
+                            </td>
+                            <td>
+                                <%= registros[0].avion_matricula %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%if (muestro2){}else{ if (cambiado){}else{%>
+                <div>
+                    <p>Solo escriba los campos que quiera
+                        modificar.
+                    </p>
+                    <form action="/vuelomodificacion" method="post">
+                        <input type="hidden" name="idoriginal" value="<%= registros[0].idvuelo %>">
+                        <table>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="idhtml2">ID de vuelo: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="idhtml2" id="idhtml2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="numerovuelohtml">Numero de vuelo: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="numerovuelohtml" id="numerovuelohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="iataorigenhtml">IATA origen: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="iataorigenhtml" id="iataorigenhtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="iatadestinohtml">IATA destino: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="iatadestinohtml" id="iatadestinohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="fechasalidahtml">Fecha de salida: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="fechasalidahtml" id="fechasalidahtml" placeholder="YYYY-MM-DD HH:MM:SS">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="fechallegadahtml">Fecha de llegada: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="fechallegadahtml" id="fechallegadahtml" placeholder="YYYY-MM-DD HH:MM:SS">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="matriculahtml">Matricula avion: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="matriculahtml" id="matriculahtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdbutton" colspan="2">
+                                    <button type="submit" class="balta">modificar</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <%} }%>
+                    <%}else{ %>
+                        <div class="pneg">
+                            <p>No se encontro el vuelo.</p>
+                        </div>
+                        <%} }%>
+                            <% if (muestro2){if(cambiado){%>
+                                <div class="ppos">
+                                    <p>Vuelo modificado correctamente.</p>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>IDvuelo</th>
+                                                <th>Numero de vuelo</th>
+                                                <th>IATA de origen</th>
+                                                <th>IATA de destino</th>
+                                                <th>Fecha de salida</th>
+                                                <th>Fecha de llegada</th>
+                                                <th>Matricula del Avion</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="tdpar">
+                                                <td>
+                                                    <%= registros2[0].idvuelo %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].numerovuelo %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].aeropuerto_codigoiata_origen %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].aeropuerto_codigoiata_destino %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].fecha_salida %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].fecha_llegada %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].avion_matricula %>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <%}else{%>
+                                    <div class="pneg">
+                                        <p>Vuelo no modificado.</p>
+                                        <%if(conid==false){%>
+                                            <p>ID de vuelo incorrecto, debe ser numerico de 1 a 10 digitos.</p>
+                                        <%}%>
+                                        <%if(connum==false){%>
+                                            <p>Numero de vuelo incorrecto, debe ser numerico de 1 a 10 digitos.</p>
+                                        <%}%>
+                                        <%if(coniataorigen==false){%>
+                                            <p>IATA de origen incorrecto o no existe en la base de datos.</p>
+                                        <%}%>
+                                        <%if(coniatadestino==false){%>
+                                            <p>IATA de destino incorrecto o no existe en la base de datos.</p>
+                                        <%}%>
+                                        <%if(confechasalida==false){%>
+                                            <p>Fecha de salida incorrecta, formato requerido: YYYY-MM-DD HH:MM:SS.</p>
+                                        <%}%>
+                                        <%if(confechallegada==false){%>
+                                            <p>Fecha de llegada incorrecta, formato requerido: YYYY-MM-DD HH:MM:SS.</p>
+                                        <%}%>
+                                        <%if(conmatricula==false){%>
+                                            <p>Matricula de avion incorrecta o no existe en la base de datos.</p>
+                                        <%}%>
+                                    </div>
+                                    <%} }%>
+    </div>
+
+</body>
+
+</html>
