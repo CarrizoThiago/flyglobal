@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/banner.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Modificaciones de Reservas</h1>
+        </header>
+
+        <a href="/reserva">
+            <button class="bvolver">volver al menu</button>
+        </a>
+
+        <div class="pneu">
+            <form action="/reservamodificacionagarre" method="post">
+                <table>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="idhtml">ID de reserva: </label>
+                        </td>
+                        <td class="tdinput">
+                            <input type="text" name="idhtml" id="idhtml">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdbutton" colspan="2">
+                            <button type="submit" class="bb">ubicar</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <% if(muestro){if(encontrado){%>
+            <div class="ppos">
+                <p>Se encontro la reserva.</p> <br>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IDreserva</th>
+                            <th>IDvuelo</th>
+                            <th>Fechas de la reserva</th>
+                            <th>Asiento asignado</th>
+                            <th>Costo</th>
+                            <th>IDusuario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= registros[0].idreserva %>
+                            </td>
+                            <td>
+                                <%= registros[0].vuelo_idvuelo %>
+                            </td>
+                            <td>
+                                <%= registros[0].fecha %>
+                            </td>
+                            <td>
+                                <%= registros[0].asiento %>
+                            </td>
+                            <td>
+                                <%= registros[0].costo %>
+                            </td>
+                            <td>
+                                <%= registros[0].usuario_idusuario %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <%if (muestro2){}else{ if (cambiado){}else{%>
+                <div>
+                    <p>Solo escriba los campos que quiera
+                        modificar.
+                    </p>
+                    <form action="/reservamodificacion" method="post">
+                        <input type="hidden" name="idoriginal" value="<%= registros[0].idreserva %>">
+                        <table>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="idhtml2">ID de reserva: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="idhtml2" id="idhtml2">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="idvuelohtml">ID de vuelo: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="idvuelohtml" id="idvuelohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="fechahtml">Fecha de la reserva: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="fechahtml" id="fechahtml" placeholder="YYYY-MM-DD">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="asientohtml">Asiento asignado: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="asientohtml" id="asientohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="costohtml">Costo: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="costohtml" id="costohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdlabel">
+                                    <label for="idusuariohtml">ID de usuario: </label>
+                                </td>
+                                <td class="tdinput">
+                                    <input type="text" name="idusuariohtml" id="idusuariohtml">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdbutton" colspan="2">
+                                    <button type="submit" class="balta">modificar</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <%} }%>
+                    <%}else{ %>
+                        <div class="pneg">
+                            <p>No se encontro la reserva.</p>
+                        </div>
+                        <%} }%>
+                            <% if (muestro2){if(cambiado){%>
+                                <div class="ppos">
+                                    <p>Reserva modificada correctamente.</p>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>IDreserva</th>
+                                                <th>IDvuelo</th>
+                                                <th>Fechas de la reserva</th>
+                                                <th>Asiento asignado</th>
+                                                <th>Costo</th>
+                                                <th>IDusuario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="tdpar">
+                                                <td>
+                                                    <%= registros2[0].idreserva %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].vuelo_idvuelo %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].fecha %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].asiento %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].costo %>
+                                                </td>
+                                                <td>
+                                                    <%= registros2[0].usuario_idusuario %>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <%}else{%>
+                                    <div class="pneg">
+                                        <p>Reserva no modificada.</p>
+                                        <%if(conid==false){%>
+                                            <p>ID de reserva incorrecto, debe ser numerico de 1 a 10 digitos.</p>
+                                        <%}%>
+                                        <%if(convuelo==false){%>
+                                            <p>ID de vuelo incorrecto o no existe en la base de datos.</p>
+                                        <%}%>
+                                        <%if(confecha==false){%>
+                                            <p>Fecha incorrecta, formato requerido: YYYY-MM-DD.</p>
+                                        <%}%>
+                                        <%if(conasiento==false){%>
+                                            <p>Asiento asignado incorrecto, debe tener hasta 5 caracteres alfanumericos.</p>
+                                        <%}%>
+                                        <%if(concosto==false){%>
+                                            <p>Costo incorrecto, debe ser numerico de 1 a 10 digitos.</p>
+                                        <%}%>
+                                        <%if(conusuario==false){%>
+                                            <p>ID de usuario incorrecto o no existe en la base de datos.</p>
+                                        <%}%>
+                                    </div>
+                                    <%} }%>
+    </div>
+
+</body>
+
+</html>

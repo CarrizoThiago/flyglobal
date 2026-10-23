@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Reserva ver todo.</h1>
+        </header>
+        <nav>
+            <a href="/reserva">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <%if(registros.length>0){%>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IDreserva</th>
+                        <th>IDvuelo</th>
+                        <th>Fechas de la reserva</th>
+                        <th>Asiento asignado</th>
+                        <th>Costo</th>
+                        <th>IDusuario</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(let i=0;i<registros.length;i++){%>
+                        <tr<%if(i%2==0) {%> class="tdpar"<% }else{%> class="tdimpar"<% }%> >
+                                    <td>
+                                        <%=registros[i].idreserva%>
+                                    </td>
+                                    <td>
+                                        <%=registros[i].vuelo_idvuelo%>
+                                    </td>
+                                    <td>
+                                        <%=registros[i].fecha%>
+                                    </td>
+                                    <td>
+                                        <%=registros[i].asiento%>
+                                    </td>
+                                    <td>
+                                        <%=registros[i].costo%>
+                                    </td>
+                                    <td>
+                                        <%=registros[i].usuario_idusuario%>
+                                    </td>
+                                    </tr>
+                                    <%}%>
+                </tbody>
+            </table>
+            <%}else{%>
+                <p>No hay resgistros</p>
+                <% }%>
+    </div>
+
+</body>
+
+</html>

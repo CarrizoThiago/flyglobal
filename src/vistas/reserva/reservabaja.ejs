@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Reserva baja.</h1>
+        </header>
+        <nav>
+            <a href="/reserva">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <form action="/reservadelete" method="post">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idhtml">ID de reserva:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idhtml" placeholder="ID de reserva">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdbutton" colspan="2">
+                        <button type="submit" class="bbaja">Eliminar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        <% if(muestro == true){ if(exito == true){ %>
+            <div class="ppos">
+                <p>La reserva se elimino correctamente</p><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IDreserva</th>
+                            <th>IDvuelo</th>
+                            <th>Fechas de la reserva</th>
+                            <th>Asiento asignado</th>
+                            <th>Costo</th>
+                            <th>IDusuario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= registros[0].idreserva %>
+                            </td>
+                            <td>
+                                <%= registros[0].vuelo_idvuelo %>
+                            </td>
+                            <td>
+                                <%= registros[0].fecha %>
+                            </td>
+                            <td>
+                                <%= registros[0].asiento %>
+                            </td>
+                            <td>
+                                <%= registros[0].costo %>
+                            </td>
+                            <td>
+                                <%= registros[0].usuario_idusuario %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <% } else { %>
+                <div class="pneg">
+                    <p>No se pudo eliminar la reserva.</p><br>
+                    <p>Verifique que el ID de reserva sea correcto.</p>
+                </div>
+            <% } if(err == true){ %>
+                <div class="pneg">
+                    <p>No se pudo eliminar la reserva.</p><br>
+                    <p>No se pudo ejecutar la query.</p>
+                </div>
+            <% } } %>
+    </div>
+</body>
+
+</html>

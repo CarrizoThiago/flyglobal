@@ -8,8 +8,8 @@ export const vuelomenu = async (req, res) => {
 
 export const vuelovertodo = async (req, res) => {
     let auxsql = "SELECT * FROM ruiz_bd.vuelo;";
-    let avionsql = "SELECT * FROM ruiz_bd.avion WHERE matricula =;";
-    let registros = [], col = [], auxiliar = [];
+
+    let registros = [], col = [];
 
     try {
         [registros, col] = await bdd.query(auxsql);
@@ -255,7 +255,7 @@ export const vuelomodificacion = async (req, res) => {
                     coniataorigen = false;
                     consigna++;
                 }
-            } catch (e) {
+            } catch (error) {
                 coniataorigen = false;
                 consigna++;
             }
@@ -274,7 +274,7 @@ export const vuelomodificacion = async (req, res) => {
                     coniatadestino = false;
                     consigna++;
                 }
-            } catch (e) {
+            } catch (error) {
                 coniatadestino = false;
                 consigna++;
             }
@@ -293,7 +293,7 @@ export const vuelomodificacion = async (req, res) => {
                     conmatricula = false;
                     consigna++;
                 }
-            } catch (e) {
+            } catch (error) {
                 conmatricula = false;
                 consigna++;
             }

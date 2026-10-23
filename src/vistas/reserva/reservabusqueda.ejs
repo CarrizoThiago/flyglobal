@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Reserva Busqueda</h1>
+        </header>
+        <nav>
+            <a href="/reserva"><button class="bvolver">Volver al Menu</button></a>
+        </nav>
+        <form action="/reservasearch" method="post">
+            <table>
+                <tr>
+                    <td class="tdlabel"><label for="idhtml">ID:</label></td>
+                    <td class="tdinput"><input type="text" name="idhtml"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tdbutton"><button type="submit" class="bb">Buscar</button></td>
+                </tr>
+            </table>
+        </form>
+        <% if (muestro){if(err){%>
+            <div class="pneg">
+                <p>Error en la query.</p>
+            </div>
+            <%}else{ if(registros.length>0){%>
+                <div class="ppos">
+                    <p>Datos de la reserva:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>IDvuelo</th>
+                                <th>Fecha de la reserva</th>
+                                <th>Asiento asignado</th>
+                                <th>Costo</th>
+                                <th>IDusuario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tdpar">
+                                <td>
+                                    <%= registros[0].idreserva %>
+                                </td>
+                                <td>
+                                    <%= registros[0].vuelo_idvuelo%>
+                                </td>
+                                <td>
+                                    <%= registros[0].fecha%>
+                                </td>
+                                <td>
+                                    <%= registros[0].asiento%>
+                                </td>
+                                <td>
+                                    <%= registros[0].costo%>
+                                </td>
+                                <td>
+                                    <%= registros[0].usuario_idusuario%>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Datos del vuelo:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>IDvuelo</th>
+                                <th>Numero de vuelo</th>
+                                <th>IATA de origen</th>
+                                <th>IATA de destino</th>
+                                <th>Fecha de salida</th>
+                                <th>Fecha de llegada</th>
+                                <th>Matricula del Avion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tdpar">
+                                <td>
+                                    <%=registros2[0].idvuelo%>
+                                </td>
+                                <td>
+                                    <%=registros2[0].numerovuelo%>
+                                </td>
+                                <td>
+                                    <%=registros2[0].aeropuerto_codigoiata_origen%>
+                                </td>
+                                <td>
+                                    <%=registros2[0].aeropuerto_codigoiata_destino%>
+                                </td>
+                                <td>
+                                    <%=registros2[0].fecha_salida%>
+                                </td>
+                                <td>
+                                    <%=registros2[0].fecha_llegada%>
+                                </td>
+                                <td>
+                                    <%=registros2[0].avion_matricula%>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Datos del usuario:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>pasaporte</th>
+                                <th>nombre</th>
+                                <th>apellido</th>
+                                <th>email</th>
+                                <th>telefono</th>
+                                <th>contraseña</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="tdpar">
+                                <td>
+                                    <%=registros3[0].idusuario %>
+                                </td>
+                                <td>
+                                    <%=registros3[0].pasaporte %>
+                                </td>
+                                <td>
+                                    <%=registros3[0].nombre %>
+                                </td>
+                                <td>
+                                    <%=registros3[0].apellido %>
+                                </td>
+                                <td>
+                                    <%=registros3[0].email %>
+                                </td>
+                                <td>
+                                    <%=registros3[0].telefono %>
+                                </td>
+                                <td>
+                                    <%if(registros3[0].contraseña !=null && registros3[0].contraseña !="" ){%>
+                                        <%=registros3[0].contraseña %>
+                                            <%}else{%>Usuario sin contraseña.
+                                                <%}%>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <% }else{%>
+                    <div class="pneg">
+                        <p>No se encontro la reserva.</p>
+                    </div>
+                    <% } } }else{ %>
+                        <div class="pneu">
+                            <p>Aún no has realizado ninguna búsqueda.</p>
+                        </div>
+                        <%}%>
+    </div>
+
+</body>
+
+</html>

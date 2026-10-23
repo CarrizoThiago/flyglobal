@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../styles/button.css">
+    <link rel="stylesheet" href="../../styles/index.css">
+    <link rel="stylesheet" href="../../styles/tabla.css">
+    <link rel="stylesheet" href="../../styles/panel.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Reserva alta.</h1>
+        </header>
+        <nav>
+            <a href="/reserva">
+                <button class="bvolver">volver al menu</button>
+            </a>
+        </nav>
+        <form action="/reservanuevo" method="post">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idhtml">ID de reserva:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idhtml" placeholder="ID de reserva">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idvuelohtml">ID de vuelo:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idvuelohtml" placeholder="ID de vuelo">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="fechahtml">Fecha de la reserva:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="fechahtml" placeholder="YYYY-MM-DD">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="asientohtml">Asiento:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="asientohtml" placeholder="Asiento">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="costohtml">Costo:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="costohtml" placeholder="Costo">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="idusuariohtml">ID de usuario:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="idusuariohtml" placeholder="ID de usuario">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdbutton" colspan="2">
+                        <button type="submit" class="balta">Guardar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <% if(muestro == true){ if(subido == true){ %>
+            <div class="ppos">
+                <p>La reserva se agrego correctamente</p><br>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IDreserva</th>
+                            <th>IDvuelo</th>
+                            <th>Fechas de la reserva</th>
+                            <th>Asiento asignado</th>
+                            <th>Costo</th>
+                            <th>IDusuario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= idreserva %>
+                            </td>
+                            <td>
+                                <%= idvuelo %>
+                            </td>
+                            <td>
+                                <%= fecha %>
+                            </td>
+                            <td>
+                                <%= asiento %>
+                            </td>
+                            <td>
+                                <%= costo %>
+                            </td>
+                            <td>
+                                <%= idusuario %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <% } else { %>
+                <div class="pneg">
+                    <p>No se pudo subir el registro.</p>
+                </div>
+                <div class="pneg">
+                    <% if(conid == false){ %>
+                        <p>El ID de reserva es incorrecto.<br>Este debe ser numerico (de 1 a 10 digitos).</p>
+                    <% } %>
+                    <% if(convuelo == false){ %>
+                        <p>El ID de vuelo es incorrecto o no existe en la base de datos.<br>Debe ser numerico y corresponder a un vuelo registrado.</p>
+                    <% } %>
+                    <% if(confecha == false){ %>
+                        <p>La fecha de la reserva es incorrecta.<br>Formato requerido: YYYY-MM-DD.</p>
+                    <% } %>
+                    <% if(conasiento == false){ %>
+                        <p>El asiento asignado es incorrecto.<br>Debe tener hasta 5 caracteres alfanumericos.</p>
+                    <% } %>
+                    <% if(concosto == false){ %>
+                        <p>El costo es incorrecto.<br>Debe ser numerico (de 1 a 10 digitos).</p>
+                    <% } %>
+                    <% if(conusuario == false){ %>
+                        <p>El ID de usuario es incorrecto o no existe en la base de datos.<br>Debe ser numerico y corresponder a un usuario registrado.</p>
+                    <% } %>
+                    <% if(err == true){ %>
+                        <p>Error al ejecutar la query en la base de datos.</p>
+                    <% } %>
+                </div>
+            <% } } %>
+    </div>
+</body>
+
+</html>
