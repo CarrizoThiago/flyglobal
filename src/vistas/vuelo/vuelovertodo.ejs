@@ -22,50 +22,64 @@
                 <button class="bvolver">volver al menu</button>
             </a>
         </nav>
-        <%if(registros.length>0){%>
-            <table>
-                <thead>
-                    <tr>
-                        <th>IDvuelo</th>
-                        <th>Numero de vuelo</th>
-                        <th>IATA de origen</th>
-                        <th>IATA de destino</th>
-                        <th>Fecha de salida</th>
-                        <th>Fecha de llegada</th>
-                        <th>Matricula del Avion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%for(let i=0;i<registros.length;i++){%>
-                        <tr<%if(i%2==0) {%> class="tdpar"<% }else{%> class="tdimpar"<% }%> >
-                                    <td>
-                                        <%=registros[i].idvuelo%>
-                                    </td>
-                                    <td>
-                                        <%=registros[i].numerovuelo%>
-                                    </td>
-                                    <td>
-                                        <%=registros[i].aeropuerto_codigoiata_origen%>
-                                    </td>
-                                    <td>
-                                        <%=registros[i].aeropuerto_codigoiata_destino%>
-                                    </td>
-                                    <td>
-                                        <%=registros[i].fecha_salida%>
-                                    </td>
-                                    <td>
-                                        <%=registros[i].fecha_llegada%>
-                                    </td>
-                                    <td>
-                                        <%=registros[i].avion_matricula%>
-                                    </td>
-                                    </tr>
-                                    <%}%>
-                </tbody>
-            </table>
-            <%}else{%>
-                <p>No hay resgistros</p>
-                <% }%>
+        <%if(muestro==true){%>
+            <%if(registros.length>0){%>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IDvuelo</th>
+                            <th>Numero de vuelo</th>
+                            <th>IATA de origen</th>
+                            <th>IATA de destino</th>
+                            <th>Fecha de salida</th>
+                            <th>Fecha de llegada</th>
+                            <th>Matricula del Avion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<registros.length;i++){%>
+                            <tr<%if(i%2==0) {%> class="tdpar"<% }else{%> class="tdimpar"<% }%> >
+                                        <td>
+                                            <%=registros[i].idvuelo%>
+                                        </td>
+                                        <td>
+                                            <%=registros[i].numerovuelo%>
+                                        </td>
+                                        <td>
+                                            <%=registros[i].aeropuerto_codigoiata_origen%>
+                                        </td>
+                                        <td>
+                                            <%=registros[i].aeropuerto_codigoiata_destino%>
+                                        </td>
+                                        <td>
+                                            <%=registros[i].fecha_salida%>
+                                        </td>
+                                        <td>
+                                            <%=registros[i].fecha_llegada%>
+                                        </td>
+                                        <td>
+                                            <%=registros[i].avion_matricula%>
+                                        </td>
+                                        </tr>
+                                        <%}%>
+                    </tbody>
+                </table>
+                <%}else{%>
+                    <p>No hay resgistros</p>
+                    <% }}%>
+                        <table>
+                            <form action="/vuelovervigente" method="post">
+                                <td class="tdbutton" colspan="2"><button class="bb">Solo ver vigentes</button></td>
+                            </form>
+                            <form action="/vuelovertodo" method="post">
+                                <td class="tdbutton" colspan="2"><button class="bb">Ver todos</button></td>
+                            </form>
+                        </table>
+
+
+
+
+
     </div>
 
 </body>

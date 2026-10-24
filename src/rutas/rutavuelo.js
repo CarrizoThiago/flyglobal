@@ -1,11 +1,15 @@
 import express from "express";
-import { vuelomenu, vuelovertodo, vuelobusqueda, vuelosearch, vueloalta, vuelonuevo, vuelobaja, vuelodelete, vuelomodificaciones, vuelomodificacionagarre, vuelomodificacion } from "../controller/controllervuelo.js"
+import { vuelomenu, vuelover, vuelovertodo, vuelovervigente, vuelobusqueda, vuelosearch, vueloalta, vuelonuevo, vuelobaja, vuelodelete, vuelomodificaciones, vuelomodificacionagarre, vuelomodificacion } from "../controller/controllervuelo.js"
 
 const rvuelo = express.Router();
 
 rvuelo.get('/vuelo', vuelomenu)
 
-rvuelo.get('/vuelovertodo', vuelovertodo)
+rvuelo.get('/vuelover', vuelover)
+
+rvuelo.post('/vuelovertodo', vuelovertodo)
+
+rvuelo.post('/vuelovervigente', vuelovervigente)
 
 rvuelo.get('/vuelobusqueda', vuelobusqueda)
 

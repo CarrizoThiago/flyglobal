@@ -84,7 +84,49 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <% if (registros2.length> 0) { %>
+                            <p>Reservas para el vuelo:</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>IDvuelo</th>
+                                        <th>Fecha de la reserva</th>
+                                        <th>Asiento asignado</th>
+                                        <th>Costo</th>
+                                        <th>IDusuario</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (let i=0; i < registros2.length; i++) { %>
+                                        <tr <% if(i%2==0){%> class="tdpar" <%}else{%> class="tdimpar" <%}%> >
+                                                    <td>
+                                                        <%=registros2[i].idreserva%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].vuelo_idvuelo%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].fecha%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].asiento%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].costo%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].usuario_idusuario%>
+                                                    </td>
+
+
+                                        </tr>
+                                        <%}%>
+                                </tbody>
+                            </table>
+                            <%}%>
                     </div>
+
                     <%} if(err==true){%>
                         <div class="pneg">
                             <p>Error al buscar el vuelo.</p>

@@ -42,7 +42,7 @@
             <div class="pneg">
                 <p>No se encontro el usuario.</p>
             </div>
-            <% }else{ %>
+            <% }else{if (registros.length>0){ %>
                 <div class="ppos">
                     <table>
                         <thead>
@@ -86,15 +86,19 @@
                         </tbody>
                     </table>
 
-                    <%} if(err==true){%>
+                    <%}else{ %>
                         <div class="pneg">
-                            <p>No se pudo ejecutar la query.</p>
+                            <p>No se encontro un usuario con ese id.</p>
                         </div>
-                        <%}}else{%>
-                            <div class="pneu">
-                                <p>Nose a buscado algo aun.</p>
+                        <%}} if(err==true){%>
+                            <div class="pneg">
+                                <p>No se pudo ejecutar la query.</p>
                             </div>
-                            <%}%>
+                            <%}}else{%>
+                                <div class="pneu">
+                                    <p>Nose a buscado algo aun.</p>
+                                </div>
+                                <%}%>
                 </div>
 
 </body>

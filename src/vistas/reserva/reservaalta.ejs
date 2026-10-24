@@ -41,14 +41,6 @@
                 </tr>
                 <tr>
                     <td class="tdlabel">
-                        <label for="fechahtml">Fecha de la reserva:</label>
-                    </td>
-                    <td class="tdinput">
-                        <input type="text" name="fechahtml" placeholder="YYYY-MM-DD">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdlabel">
                         <label for="asientohtml">Asiento:</label>
                     </td>
                     <td class="tdinput">
@@ -78,7 +70,7 @@
                 </tr>
             </table>
         </form>
-        <% if(muestro == true){ if(subido == true){ %>
+        <% if(muestro==true){ if(subido==true){ %>
             <div class="ppos">
                 <p>La reserva se agrego correctamente</p><br>
                 <table>
@@ -115,35 +107,122 @@
                         </tr>
                     </tbody>
                 </table>
+                <p>Datos del vuelo asignado:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>IDvuelo</th>
+                            <th>Numero de vuelo</th>
+                            <th>IATA de origen</th>
+                            <th>IATA de destino</th>
+                            <th>Fecha de salida</th>
+                            <th>Fecha de llegada</th>
+                            <th>Matricula del Avion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%= regVue[0].idvuelo %>
+                            </td>
+                            <td>
+                                <%= regVue[0].numerovuelo %>
+                            </td>
+                            <td>
+                                <%= regVue[0].aeropuerto_codigoiata_origen %>
+                            </td>
+                            <td>
+                                <%= regVue[0].aeropuerto_codigoiata_destino %>
+                            </td>
+                            <td>
+                                <%= regVue[0].fecha_salida %>
+                            </td>
+                            <td>
+                                <%= regVue[0].fecha_llegada %>
+                            </td>
+                            <td>
+                                <%= regVue[0].avion_matricula %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>Datos del usuario asignado:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>pasaporte</th>
+                            <th>nombre</th>
+                            <th>apellido</th>
+                            <th>email</th>
+                            <th>telefono</th>
+                            <th>contraseña</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="tdpar">
+                            <td>
+                                <%=regUsu[0].idusuario %>
+                            </td>
+                            <td>
+                                <%=regUsu[0].pasaporte %>
+                            </td>
+                            <td>
+                                <%=regUsu[0].nombre %>
+                            </td>
+                            <td>
+                                <%=regUsu[0].apellido %>
+                            </td>
+                            <td>
+                                <%=regUsu[0].email %>
+                            </td>
+                            <td>
+                                <%=regUsu[0].telefono %>
+                            </td>
+                            <td>
+                                <%if(regUsu[0].contraseña !=null && regUsu[0].contraseña !="" ){%>
+                                    <%=regUsu[0].contraseña %>
+                                        <%}else{%>Usuario sin contraseña.
+                                            <%}%>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <% } else { %>
                 <div class="pneg">
                     <p>No se pudo subir el registro.</p>
                 </div>
                 <div class="pneg">
-                    <% if(conid == false){ %>
+                    <% if(conid==false){ %>
                         <p>El ID de reserva es incorrecto.<br>Este debe ser numerico (de 1 a 10 digitos).</p>
-                    <% } %>
-                    <% if(convuelo == false){ %>
-                        <p>El ID de vuelo es incorrecto o no existe en la base de datos.<br>Debe ser numerico y corresponder a un vuelo registrado.</p>
-                    <% } %>
-                    <% if(confecha == false){ %>
-                        <p>La fecha de la reserva es incorrecta.<br>Formato requerido: YYYY-MM-DD.</p>
-                    <% } %>
-                    <% if(conasiento == false){ %>
-                        <p>El asiento asignado es incorrecto.<br>Debe tener hasta 5 caracteres alfanumericos.</p>
-                    <% } %>
-                    <% if(concosto == false){ %>
-                        <p>El costo es incorrecto.<br>Debe ser numerico (de 1 a 10 digitos).</p>
-                    <% } %>
-                    <% if(conusuario == false){ %>
-                        <p>El ID de usuario es incorrecto o no existe en la base de datos.<br>Debe ser numerico y corresponder a un usuario registrado.</p>
-                    <% } %>
-                    <% if(err == true){ %>
-                        <p>Error al ejecutar la query en la base de datos.</p>
-                    <% } %>
+                        <% } %>
+                            <% if(convuelo==false){ %>
+                                <p>El ID de vuelo es incorrecto o no existe en la base de datos.<br>Debe ser numerico y
+                                    corresponder a un vuelo registrado.</p>
+                                <% } %>
+                                    <% if(confecha==false){ %>
+                                        <p>La fecha de la reserva es incorrecta.<br>Formato requerido: YYYY-MM-DD.</p>
+                                        <% } %>
+                                            <% if(conasiento==false){ %>
+                                                <p>El asiento asignado es incorrecto.<br>Debe tener hasta 5 caracteres
+                                                    alfanumericos.</p>
+                                                <% } %>
+                                                    <% if(concosto==false){ %>
+                                                        <p>El costo es incorrecto.<br>Debe ser numerico (de 1 a 10
+                                                            digitos).</p>
+                                                        <% } %>
+                                                            <% if(conusuario==false){ %>
+                                                                <p>El ID de usuario es incorrecto o no existe en la base
+                                                                    de datos.<br>Debe ser numerico y corresponder a un
+                                                                    usuario registrado.</p>
+                                                                <% } %>
+                                                                    <% if(err==true){ %>
+                                                                        <p>Error al ejecutar la query en la base de
+                                                                            datos.</p>
+                                                                        <% } %>
                 </div>
-            <% } } %>
+                <% } } %>
     </div>
 </body>
 

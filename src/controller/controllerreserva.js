@@ -57,9 +57,11 @@ export const reservanuevo = async (req, res) => {
     let consigna = 0;
     let conid = true, convuelo = true, confecha = true, conasiento = true, concosto = true, conusuario = true;
 
+    let regUsu = [], regVue = [], col = [];
+    const fechaActual = new Date().toLocaleDateString('en-CA');
     idreserva = req.body.idhtml;
     idvuelo = req.body.idvuelohtml;
-    fecha = req.body.fechahtml;
+    fecha = fechaActual;
     if (req.body.asientohtml) {
         asiento = req.body.asientohtml.toUpperCase();
     } else {
@@ -73,12 +75,12 @@ export const reservanuevo = async (req, res) => {
 
     if (/^[0-9]{1,10}$/.test(idvuelo)) {
         try {
-            const [regVue] = await bdd.query("SELECT idvuelo FROM vuelo WHERE idvuelo = '" + idvuelo + "';");
+            [regVue, col] = await bdd.query("SELECT * FROM vuelo WHERE idvuelo = '" + idvuelo + "';");
             if (regVue.length == 0) {
                 convuelo = false;
                 consigna++;
             }
-        } catch (e) {
+        } catch (error) {
             convuelo = false;
             consigna++;
         }
@@ -98,12 +100,12 @@ export const reservanuevo = async (req, res) => {
 
     if (/^[0-9]{1,10}$/.test(idusuario)) {
         try {
-            const [regUsu] = await bdd.query("SELECT idusuario FROM usuario WHERE idusuario = '" + idusuario + "';");
+            [regUsu, col] = await bdd.query("SELECT * FROM usuario WHERE idusuario = '" + idusuario + "';");
             if (regUsu.length == 0) {
                 conusuario = false;
                 consigna++;
             }
-        } catch (e) {
+        } catch (error) {
             conusuario = false;
             consigna++;
         }
@@ -117,7 +119,7 @@ export const reservanuevo = async (req, res) => {
             let auxsql = "INSERT INTO `ruiz_bd`.`reserva`(`idreserva`,`vuelo_idvuelo`,`fecha`,`asiento`,`costo`,`usuario_idusuario`)VALUES('" + idreserva + "','" + idvuelo + "','" + fecha + "','" + asiento + "','" + costo + "','" + idusuario + "');";
             await bdd.query(auxsql);
             subido = true;
-            res.render('reserva/reservaalta', { muestro, subido, err, idreserva, idvuelo, fecha, asiento, costo, idusuario });
+            res.render('reserva/reservaalta', { muestro, subido, err, idreserva, idvuelo, fecha, asiento, costo, idusuario, regUsu, regVue });
         } else {
             subido = false;
             res.render('reserva/reservaalta', { muestro, subido, err, conid, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });

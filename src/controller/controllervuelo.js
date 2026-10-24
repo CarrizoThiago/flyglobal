@@ -6,20 +6,42 @@ export const vuelomenu = async (req, res) => {
     res.render('vuelo/vuelomenu')
 }
 
+export const vuelover = async (req, res) => {
+    let muestro = false;
+    res.render('vuelo/vuelovertodo', { muestro });
+}
+
 export const vuelovertodo = async (req, res) => {
     let auxsql = "SELECT * FROM ruiz_bd.vuelo;";
 
-    let registros = [], col = [];
+    let registros = [], col = [], muestro = true;
 
     try {
         [registros, col] = await bdd.query(auxsql);
         console.log(registros);
-        res.render('vuelo/vuelovertodo', { registros });
+        res.render('vuelo/vuelovertodo', { muestro, registros });
 
     } catch (error) {
         console.log(error);
         let registros = null;
-        res.render('vuelo/vuelovertodo', { registros });
+        res.render('vuelo/vuelovertodo', { muestro, registros });
+    }
+}
+
+export const vuelovervigente = async (req, res) => {
+    let auxsql = "SELECT * FROM ruiz_bd.vuelo where fecha_salida >= now();";
+
+    let registros = [], col = [], muestro = true;
+
+    try {
+        [registros, col] = await bdd.query(auxsql);
+        console.log(registros);
+        res.render('vuelo/vuelovertodo', { muestro, registros });
+
+    } catch (error) {
+        console.log(error);
+        let registros = null;
+        res.render('vuelo/vuelovertodo', { muestro, registros });
     }
 }
 
@@ -29,13 +51,20 @@ export const vuelobusqueda = async (req, res) => {
 }
 
 export const vuelosearch = async (req, res) => {
-    let auxsql, muestro = true, err = false, registros = [], id;
+    let auxsql, muestro = true, err = false, registros = [], registros2 = [], col = [], col2 = [], id;
     try {
         id = req.body.idhtml;
         auxsql = "SELECT * FROM vuelo WHERE idvuelo = " + id + ";";
-        const [registros, col] = await bdd.query(auxsql);
+        [registros, col] = await bdd.query(auxsql);
+        if (registros.length == 0 || registros[0].idvuelo == null) {
+        } else {
+            let ressql = "SELECT * FROM ruiz_bd.reserva where vuelo_idvuelo = " + id + ";";
+            [registros2, col2] = await bdd.query(ressql);
+        }
 
-        res.render('vuelo/vuelobusqueda', { muestro, err, registros });
+
+
+        res.render('vuelo/vuelobusqueda', { muestro, err, registros, registros2 });
     } catch (error) {
         err = true;
         res.render('vuelo/vuelobusqueda', { muestro, err, registros });
