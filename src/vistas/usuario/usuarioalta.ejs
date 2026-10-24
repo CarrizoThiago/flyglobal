@@ -25,14 +25,6 @@
             <table>
                 <tr>
                     <td class="tdlabel">
-                        <label for="idhtml">id:</label>
-                    </td>
-                    <td class="tdinput">
-                        <input type="text" name="idhtml" placeholder="id">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdlabel">
                         <label for="pasaportehtml">Pasaporte:</label>
                     </td>
                     <td class="tdinput">
@@ -140,15 +132,14 @@
                 </div>
 
                 <div class="pneg">
-                    <%if(conid==false){%>
-                        <p>El id
-                            es incorrecto. <br> Este debe tener un largo de entre 1 y 10 caracteres y solo debe contener numeros, ademas no puede ser nulo. <br> Arreglelo y subalo.
-                        </p>
+                    <%if(conpasaporte==false){%>
+                        <p>El
+                            pasaporte es incorrecto.<br>Este debe tener
+                            un largo de entre 2 y 9 caracteres. <br> Arreglelo y subalo.</p>
                         <%}%>
-                            <%if(conpasaporte==false){%>
+                            <%if(conpasaporte2==false){%>
                                 <p>El
-                                    pasaporte es incorrecto.<br>Este debe tener
-                                    un largo de entre 2 y 9 caracteres. <br> Arreglelo y subalo.</p>
+                                    pasaporte ya existe.</p>
                                 <%}%>
                                     <%if(connom==false){%>
                                         <p>

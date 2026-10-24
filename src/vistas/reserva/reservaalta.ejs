@@ -25,14 +25,6 @@
             <table>
                 <tr>
                     <td class="tdlabel">
-                        <label for="idhtml">ID de reserva:</label>
-                    </td>
-                    <td class="tdinput">
-                        <input type="text" name="idhtml" placeholder="ID de reserva">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdlabel">
                         <label for="idvuelohtml">ID de vuelo:</label>
                     </td>
                     <td class="tdinput">
@@ -194,33 +186,30 @@
                     <p>No se pudo subir el registro.</p>
                 </div>
                 <div class="pneg">
-                    <% if(conid==false){ %>
-                        <p>El ID de reserva es incorrecto.<br>Este debe ser numerico (de 1 a 10 digitos).</p>
+                    <% if(convuelo==false){ %>
+                        <p>El ID de vuelo es incorrecto o no existe en la base de datos.<br>Debe ser numerico y
+                            corresponder a un vuelo registrado.</p>
                         <% } %>
-                            <% if(convuelo==false){ %>
-                                <p>El ID de vuelo es incorrecto o no existe en la base de datos.<br>Debe ser numerico y
-                                    corresponder a un vuelo registrado.</p>
+                            <% if(confecha==false){ %>
+                                <p>La fecha de la reserva es incorrecta.<br>Formato requerido: YYYY-MM-DD.</p>
                                 <% } %>
-                                    <% if(confecha==false){ %>
-                                        <p>La fecha de la reserva es incorrecta.<br>Formato requerido: YYYY-MM-DD.</p>
+                                    <% if(conasiento==false){ %>
+                                        <p>El asiento asignado es incorrecto.<br>Debe tener hasta 5 caracteres
+                                            alfanumericos.</p>
                                         <% } %>
-                                            <% if(conasiento==false){ %>
-                                                <p>El asiento asignado es incorrecto.<br>Debe tener hasta 5 caracteres
-                                                    alfanumericos.</p>
+                                            <% if(concosto==false){ %>
+                                                <p>El costo es incorrecto.<br>Debe ser numerico (de 1 a 10
+                                                    digitos).</p>
                                                 <% } %>
-                                                    <% if(concosto==false){ %>
-                                                        <p>El costo es incorrecto.<br>Debe ser numerico (de 1 a 10
-                                                            digitos).</p>
+                                                    <% if(conusuario==false){ %>
+                                                        <p>El ID de usuario es incorrecto o no existe en la base
+                                                            de datos.<br>Debe ser numerico y corresponder a un
+                                                            usuario registrado.</p>
                                                         <% } %>
-                                                            <% if(conusuario==false){ %>
-                                                                <p>El ID de usuario es incorrecto o no existe en la base
-                                                                    de datos.<br>Debe ser numerico y corresponder a un
-                                                                    usuario registrado.</p>
+                                                            <% if(err==true){ %>
+                                                                <p>Error al ejecutar la query en la base de
+                                                                    datos.</p>
                                                                 <% } %>
-                                                                    <% if(err==true){ %>
-                                                                        <p>Error al ejecutar la query en la base de
-                                                                            datos.</p>
-                                                                        <% } %>
                 </div>
                 <% } } %>
     </div>

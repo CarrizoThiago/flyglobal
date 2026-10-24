@@ -60,11 +60,10 @@ export const reservanuevo = async (req, res) => {
     let idreserva, idvuelo, fecha, asiento, costo, idusuario;
     let muestro = true, subido = false, err = false;
     let consigna = 0;
-    let conid = true, convuelo = true, confecha = true, conasiento = true, concosto = true, conusuario = true;
+    let convuelo = true, confecha = true, conasiento = true, concosto = true, conusuario = true;
 
     let regUsu = [], regVue = [], col = [];
     const fechaActual = new Date().toLocaleDateString('en-CA');
-    idreserva = req.body.idhtml;
     idvuelo = req.body.idvuelohtml;
     fecha = fechaActual;
     if (req.body.asientohtml) {
@@ -75,8 +74,7 @@ export const reservanuevo = async (req, res) => {
     costo = req.body.costohtml;
     idusuario = req.body.idusuariohtml;
 
-    conid = /^[0-9]{1,10}$/.test(idreserva);
-    if (conid == false) { consigna++; }
+
 
     if (/^[0-9]{1,10}$/.test(idvuelo)) {
         try {
@@ -121,19 +119,34 @@ export const reservanuevo = async (req, res) => {
 
     try {
         if (consigna == 0) {
+            let coincidencia, idsql = "SELECT idreserva FROM reserva;", idreg = [];
+            [idreg] = await bdd.query(idsql);
+            for (let i = 1; i < idreg.length + 2; i++) {
+                coincidencia = false;
+                for (let j = 0; j < idreg.length; j++) {
+                    if (idreg[j].idreserva == i) {
+                        coincidencia = true;
+                        break;
+                    }
+                }
+                if (coincidencia == false) {
+                    idreserva = i;
+                    break;
+                }
+            }
             let auxsql = "INSERT INTO `ruiz_bd`.`reserva`(`idreserva`,`vuelo_idvuelo`,`fecha`,`asiento`,`costo`,`usuario_idusuario`)VALUES('" + idreserva + "','" + idvuelo + "','" + fecha + "','" + asiento + "','" + costo + "','" + idusuario + "');";
             await bdd.query(auxsql);
             subido = true;
             res.render('reserva/reservaalta', { muestro, subido, err, idreserva, idvuelo, fecha, asiento, costo, idusuario, regUsu, regVue });
         } else {
             subido = false;
-            res.render('reserva/reservaalta', { muestro, subido, err, conid, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
+            res.render('reserva/reservaalta', { muestro, subido, err, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
         }
     } catch (error) {
         console.log(error);
         subido = false;
         err = true;
-        res.render('reserva/reservaalta', { muestro, subido, err, conid, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
+        res.render('reserva/reservaalta', { muestro, subido, err, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
     }
 }
 

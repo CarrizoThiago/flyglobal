@@ -25,14 +25,6 @@
             <table>
                 <tr>
                     <td class="tdlabel">
-                        <label for="idhtml">ID de vuelo:</label>
-                    </td>
-                    <td class="tdinput">
-                        <input type="text" name="idhtml" placeholder="ID de vuelo">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdlabel">
                         <label for="numerovuelohtml">Numero de vuelo:</label>
                     </td>
                     <td class="tdinput">
@@ -86,7 +78,7 @@
                 </tr>
             </table>
         </form>
-        <% if(muestro == true){ if(subido == true){ %>
+        <% if(muestro==true){ if(subido==true){ %>
             <div class="ppos">
                 <p>El vuelo se agrego correctamente</p><br>
                 <table>
@@ -133,32 +125,36 @@
                     <p>No se pudo subir el registro.</p>
                 </div>
                 <div class="pneg">
-                    <% if(conid == false){ %>
-                        <p>El ID de vuelo es incorrecto.<br>Este debe ser numerico (de 1 a 10 digitos).</p>
-                    <% } %>
-                    <% if(connum == false){ %>
+                    <% if(connum==false){ %>
                         <p>El numero de vuelo es incorrecto.<br>Este debe ser numerico (de 1 a 10 digitos).</p>
-                    <% } %>
-                    <% if(coniataorigen == false){ %>
-                        <p>El codigo IATA de origen es incorrecto o no existe en la base de datos.<br>Debe tener 3 letras y corresponder a un aeropuerto registrado.</p>
-                    <% } %>
-                    <% if(coniatadestino == false){ %>
-                        <p>El codigo IATA de destino es incorrecto o no existe en la base de datos.<br>Debe tener 3 letras y corresponder a un aeropuerto registrado.</p>
-                    <% } %>
-                    <% if(confechasalida == false){ %>
-                        <p>La fecha de salida es incorrecta.<br>Formato requerido: YYYY-MM-DD HH:MM:SS.</p>
-                    <% } %>
-                    <% if(confechallegada == false){ %>
-                        <p>La fecha de llegada es incorrecta.<br>Formato requerido: YYYY-MM-DD HH:MM:SS.</p>
-                    <% } %>
-                    <% if(conmatricula == false){ %>
-                        <p>La matricula del avion es incorrecta o no existe en la base de datos.<br>Debe corresponder a un avion registrado.</p>
-                    <% } %>
-                    <% if(err == true){ %>
-                        <p>Error al ejecutar la query en la base de datos.</p>
-                    <% } %>
+                        <% } %>
+                            <% if(coniataorigen==false){ %>
+                                <p>El codigo IATA de origen es incorrecto o no existe en la base de datos.<br>Debe tener
+                                    3 letras y corresponder a un aeropuerto registrado.</p>
+                                <% } %>
+                                    <% if(coniatadestino==false){ %>
+                                        <p>El codigo IATA de destino es incorrecto o no existe en la base de
+                                            datos.<br>Debe tener 3 letras y corresponder a un aeropuerto registrado.</p>
+                                        <% } %>
+                                            <% if(confechasalida==false){ %>
+                                                <p>La fecha de salida es incorrecta.<br>Formato requerido: YYYY-MM-DD
+                                                    HH:MM:SS.</p>
+                                                <% } %>
+                                                    <% if(confechallegada==false){ %>
+                                                        <p>La fecha de llegada es incorrecta.<br>Formato requerido:
+                                                            YYYY-MM-DD HH:MM:SS.</p>
+                                                        <% } %>
+                                                            <% if(conmatricula==false){ %>
+                                                                <p>La matricula del avion es incorrecta o no existe en
+                                                                    la base de datos.<br>Debe corresponder a un avion
+                                                                    registrado.</p>
+                                                                <% } %>
+                                                                    <% if(err==true){ %>
+                                                                        <p>Error al ejecutar la query en la base de
+                                                                            datos.</p>
+                                                                        <% } %>
                 </div>
-            <% } } %>
+                <% } } %>
     </div>
 </body>
 

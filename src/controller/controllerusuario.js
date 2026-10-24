@@ -16,7 +16,6 @@ export const usuarionuevo = async (req, res) => {
     let muestro = true;
     let auxsql;
 
-    id = req.body.idhtml || "";
     pasaporte = (req.body.pasaportehtml || "").toUpperCase();
     nombre = (req.body.nombrehtml || "").toUpperCase();
     apellido = (req.body.apellidohtml || "").toUpperCase();
@@ -24,10 +23,24 @@ export const usuarionuevo = async (req, res) => {
     telefono = req.body.telefonohtml || "";
     contraseña = req.body.contraseñahtml || "";
 
-    let consigna = 0, conid, conpasaporte, connom, conape, conema, contele, concontra;
+    let consigna = 0, conpasaporte, conpasaporte2, connom, conape, conema, contele, concontra;
 
-    conid = /^[0-9]{1,10}$/.test(id);
     conpasaporte = /^[A-Z 0-9]{2,9}$/.test(pasaporte);
+    if (conpasaporte) {
+        try {
+            let passsql = "SELECT pasaporte FROM usuario WHERE pasaporte = '" + pasaporte + "';";
+            const [regpasaporte, col] = await bdd.query(passsql);
+            if (regpasaporte.length > 0) {
+                conpasaporte2 = false;
+            } else {
+                conpasaporte2 = true;
+            }
+        } catch (error) {
+            conpasaporte2 = false;
+        }
+    } else {
+        conpasaporte2 = true;
+    }
     connom = /^[A-ZÑÁÉÍÓÚ ]{1,30}$/.test(nombre);
     conape = /^[A-ZÑÁÉÍÓÚ ]{1,25}$/.test(apellido);
     conema = /^[a-zA-Z0-9@._-]{1,50}$/.test(email);
@@ -38,8 +51,8 @@ export const usuarionuevo = async (req, res) => {
         concontra = true;
         contraseña = null;
     }
-    if (conid == false) { consigna++; }
     if (conpasaporte == false) { consigna++; }
+    if (conpasaporte2 == false) { consigna++; }
     if (connom == false) { consigna++; }
     if (conape == false) { consigna++; }
     if (conema == false) { consigna++; }
@@ -47,6 +60,24 @@ export const usuarionuevo = async (req, res) => {
     if (concontra == false) { consigna++; }
     try {
         if (consigna == 0) {
+            let idreg = [], coincidencia;
+
+            let idsql = "SELECT idusuario FROM usuario;";
+            [idreg] = await bdd.query(idsql);
+            for (let i = 1; i < idreg.length + 2; i++) {
+                id = i;
+                coincidencia = false;
+                for (let j = 0; j < idreg.length; j++) {
+                    if (id == idreg[j].idusuario) {
+                        coincidencia = true;
+                        break;
+                    }
+                }
+                if (coincidencia == false) {
+                    break;
+                }
+            }
+
             if (contraseña == null) {
                 auxsql = "INSERT INTO `ruiz_bd`.`usuario`(`idusuario`,`pasaporte`,`nombre`,`apellido`,`email`,`telefono`,`contraseña`)VALUES('" + id + "','" + pasaporte + "','" + nombre + "','" + apellido + "','" + email + "','" + telefono + "', null);";
             } else {
@@ -57,12 +88,12 @@ export const usuarionuevo = async (req, res) => {
             res.render('usuario/usuarioalta', { muestro, subido, id, pasaporte, nombre, apellido, email, telefono, contraseña });
         } else {
             let subido = false;
-            res.render('usuario/usuarioalta', { muestro, subido, conid, conpasaporte, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
+            res.render('usuario/usuarioalta', { muestro, subido, conpasaporte, conpasaporte2, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
         }
     } catch (error) {
         console.log(error);
         let subido = false;
-        res.render('usuario/usuarioalta', { muestro, subido, conid, conpasaporte, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
+        res.render('usuario/usuarioalta', { muestro, subido, conpasaporte, conpasaporte2, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
     }
 }
 

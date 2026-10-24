@@ -83,10 +83,9 @@ export const vuelonuevo = async (req, res) => {
     let idvuelo, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula;
     let muestro = true, subido = false, err = false;
     let consigna = 0;
-    let conid = true, connum = true, coniataorigen = true, coniatadestino = true;
+    let connum = true, coniataorigen = true, coniatadestino = true;
     let confechasalida = true, confechallegada = true, conmatricula = true;
 
-    idvuelo = req.body.idhtml;
     numerovuelo = req.body.numerovuelohtml;
     if (req.body.iataorigenhtml) {
         iataorigen = req.body.iataorigenhtml.toUpperCase();
@@ -105,9 +104,6 @@ export const vuelonuevo = async (req, res) => {
     } else {
         matricula = "";
     }
-
-    conid = /^[0-9]{1,10}$/.test(idvuelo);
-    if (conid == false) { consigna++; }
 
     connum = /^[0-9]{1,10}$/.test(numerovuelo);
     if (connum == false) { consigna++; }
@@ -168,19 +164,35 @@ export const vuelonuevo = async (req, res) => {
 
     try {
         if (consigna == 0) {
+            let idsql = "SELECT idvuelo FROM vuelo;";
+            let idreg = [], coincidencia;
+            [idreg] = await bdd.query(idsql);
+            for (let i = 1; i < idreg.length + 2; i++) {
+                idvuelo = i;
+                coincidencia = false;
+                for (let j = 0; j < idreg.length; j++) {
+                    if (idvuelo == idreg[j].idvuelo) {
+                        coincidencia = true;
+                        break;
+                    }
+                }
+                if (coincidencia == false) {
+                    break;
+                }
+            }
             let auxsql = "INSERT INTO `ruiz_bd`.`vuelo`(`idvuelo`,`numerovuelo`,`aeropuerto_codigoiata_origen`,`aeropuerto_codigoiata_destino`,`fecha_salida`,`fecha_llegada`,`avion_matricula`)VALUES('" + idvuelo + "','" + numerovuelo + "','" + iataorigen + "','" + iatadestino + "','" + fechasalida + "','" + fechallegada + "','" + matricula + "');";
             await bdd.query(auxsql);
             subido = true;
             res.render('vuelo/vueloalta', { muestro, subido, err, idvuelo, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula });
         } else {
             subido = false;
-            res.render('vuelo/vueloalta', { muestro, subido, err, conid, connum, coniataorigen, coniatadestino, confechasalida, confechallegada, conmatricula, idvuelo, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula });
+            res.render('vuelo/vueloalta', { muestro, subido, err, connum, coniataorigen, coniatadestino, confechasalida, confechallegada, conmatricula, idvuelo, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula });
         }
     } catch (error) {
         console.log(error);
         subido = false;
         err = true;
-        res.render('vuelo/vueloalta', { muestro, subido, err, conid, connum, coniataorigen, coniatadestino, confechasalida, confechallegada, conmatricula, idvuelo, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula });
+        res.render('vuelo/vueloalta', { muestro, subido, err, connum, coniataorigen, coniatadestino, confechasalida, confechallegada, conmatricula, idvuelo, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula });
     }
 }
 
