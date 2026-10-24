@@ -25,10 +25,10 @@
             <table>
                 <tr>
                     <td class="tdlabel">
-                        <label for="iatahmtl">Codigo IATA:</label>
+                        <label for="iatahtml">Codigo IATA:</label>
                     </td>
                     <td class="tdinput">
-                        <input type="text" name="iatahmtl" placeholder="codigo iata">
+                        <input type="text" name="iatahtml" placeholder="codigo iata">
                     </td>
                 </tr>
                 <tr>
@@ -41,7 +41,7 @@
 
         <% if(muestro==true){if(exito==true){%>
             <div class="ppos">
-                <p>El aueropuerto se elimino correctamente</p><br>
+                <p>El aeropuerto se elimino correctamente</p><br>
                 <table>
                     <thead>
                         <tr>
@@ -72,8 +72,8 @@
             </div>
             <%}else{ %>
                 <div class="pneg">
-                    <p>No se pudo eliminar el aueropuerto.</p> <br>
-                    <p>verifique que el codigo IATA sea correcto.</p>
+                    <p>No se pudo eliminar el aeropuerto.</p> <br>
+                    <p>Verifique que el codigo IATA sea correcto o que no tenga vuelos asociados.</p>
                 </div>
                 <%}%>
                     <%}%>

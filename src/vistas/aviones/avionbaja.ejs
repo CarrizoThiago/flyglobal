@@ -67,7 +67,7 @@
             </div>
             <%} else{%>
                 <div class="pneg">
-                    <p>No se encontro la matricula <%= matricula %>
+                    <p>No se pudo eliminar el avion <%= typeof matricula != 'undefined' && matricula ? matricula : '' %> (verifique que exista y que no tenga vuelos asignados).
                     </p>
                 </div>
                 <%}%>

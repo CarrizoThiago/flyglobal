@@ -40,7 +40,11 @@
             <div class="pneu">
                 <p>No se ha buscado nada aun.</p>
             </div>
-            <%}else{if(registros.length==0){%>
+            <%}else if(err==true){%>
+                <div class="pneg">
+                    <p>Error al buscar el vuelo.</p>
+                </div>
+            <%}else if(registros.length==0){%>
                 <div class="pneg">
                     <p>No se ha encontrado el vuelo.</p>
                 </div>
@@ -127,11 +131,7 @@
                             <%}%>
                     </div>
 
-                    <%} if(err==true){%>
-                        <div class="pneg">
-                            <p>Error al buscar el vuelo.</p>
-                        </div>
-                        <%}}%>
+                    <%}%>
 
 
     </div>

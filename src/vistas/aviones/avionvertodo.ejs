@@ -20,11 +20,11 @@
         <a href="/avion">
             <button class="bvolver">Volver al menu</button>
         </a>
-        <%if(registro.length==0){%>
+        <%if(registro!=null && registro.length==0){%>
             <div class="pneg">
                 <p>No se encontro ningun avion.</p>
             </div>
-            <%}else{%>
+            <%}else if(registro!=null && registro.length>0){%>
                 <table>
                     <thead>
                         <tr>
@@ -49,6 +49,10 @@
                             <%}%>
                     </tbody>
                 </table>
+                <%}else{%>
+                    <div class="pneg">
+                        <p>Error al obtener los registros de aviones.</p>
+                    </div>
                 <%}%>
     </div>
 

@@ -77,15 +77,15 @@
                     </tbody>
                 </table>
             </div>
+            <% } else if(err == true){ %>
+                <div class="pneg">
+                    <p>No se pudo eliminar la reserva.</p><br>
+                    <p>No se pudo ejecutar la query o la reserva tiene datos asociados.</p>
+                </div>
             <% } else { %>
                 <div class="pneg">
                     <p>No se pudo eliminar la reserva.</p><br>
                     <p>Verifique que el ID de reserva sea correcto.</p>
-                </div>
-            <% } if(err == true){ %>
-                <div class="pneg">
-                    <p>No se pudo eliminar la reserva.</p><br>
-                    <p>No se pudo ejecutar la query.</p>
                 </div>
             <% } } %>
     </div>

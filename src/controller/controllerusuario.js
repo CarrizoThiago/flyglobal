@@ -16,13 +16,13 @@ export const usuarionuevo = async (req, res) => {
     let muestro = true;
     let auxsql;
 
-    id = req.body.idhtml;
-    pasaporte = req.body.pasaportehtml.toUpperCase();
-    nombre = req.body.nombrehtml.toUpperCase();
-    apellido = req.body.apellidohtml.toUpperCase();
-    email = req.body.emailhtml;
-    telefono = req.body.telefonohtml;
-    contraseña = req.body.contraseñahtml;
+    id = req.body.idhtml || "";
+    pasaporte = (req.body.pasaportehtml || "").toUpperCase();
+    nombre = (req.body.nombrehtml || "").toUpperCase();
+    apellido = (req.body.apellidohtml || "").toUpperCase();
+    email = req.body.emailhtml || "";
+    telefono = req.body.telefonohtml || "";
+    contraseña = req.body.contraseñahtml || "";
 
     let consigna = 0, conid, conpasaporte, connom, conape, conema, contele, concontra;
 
@@ -84,12 +84,12 @@ export const usuariobaja = async (req, res) => {
 }
 
 export const usuariodelete = async (req, res) => {
-    let muestro = true, exito, err = false;
-    let id = req.body.idhtml;
+    let muestro = true, exito = false, err = false;
+    let id = req.body.idhtml || "";
     try {
         let auxsql = "SELECT * FROM usuario WHERE idusuario = '" + id + "';";
         const [registros, col] = await bdd.query(auxsql);
-        if (registros[0].idusuario == null) {
+        if (registros.length == 0 || registros[0].idusuario == null) {
             exito = false;
             res.render('usuario/usuariobaja', { muestro, exito, err });
         } else {
@@ -113,12 +113,17 @@ export const usuariobusqueda = async (req, res) => {
 
 export const usuariosearch = async (req, res) => {
     let muestro = true, err = false, exito = false;
-    let id = req.body.idhtml;
-    let auxsql = "SELECT * FROM usuario WHERE idusuario = " + id + ";";
+    let id = req.body.idhtml || "";
     try {
-        const [registros, col] = await bdd.query(auxsql);
-        exito = true;
-        res.render('usuario/usuariobusqueda', { muestro, exito, registros, err });
+        if (id == "" || !/^[0-9]+$/.test(id)) {
+            exito = false;
+            res.render('usuario/usuariobusqueda', { muestro, exito, err });
+        } else {
+            let auxsql = "SELECT * FROM usuario WHERE idusuario = " + id + ";";
+            const [registros, col] = await bdd.query(auxsql);
+            exito = true;
+            res.render('usuario/usuariobusqueda', { muestro, exito, registros, err });
+        }
     } catch (error) {
         console.log(error);
         let exito = false;
@@ -134,8 +139,7 @@ export const usuariomodificaciones = async (req, res) => {
 
 export const usuariomodificacionagarre = async (req, res) => {
     let muestro = true, muestro2 = false, cambiado = false;
-    let id;
-    id = req.body.idhtml;
+    let id = req.body.idhtml || "";
     try {
         let auxsql = "SELECT * FROM usuario WHERE idusuario = '" + id + "';";
         const [registros, col] = await bdd.query(auxsql);
@@ -157,14 +161,14 @@ export const usuariomodificacion = async (req, res) => {
     let conid, conpasaporte, connom, conape, conema, contele, concontra;
     let consigna = 0;
 
-    let idoriginal = req.body.idoriginal;
-    let id = req.body.idhtml2;
-    let pasaporte = req.body.pasaportehtml.toUpperCase();
-    let nombre = req.body.nombrehtml.toUpperCase();
-    let apellido = req.body.apellidohtml.toUpperCase();
-    let email = req.body.emailhtml;
-    let telefono = req.body.telefonohtml;
-    let contraseña = req.body.contraseñahtml;
+    let idoriginal = req.body.idoriginal || "";
+    let id = req.body.idhtml2 || "";
+    let pasaporte = (req.body.pasaportehtml || "").toUpperCase();
+    let nombre = (req.body.nombrehtml || "").toUpperCase();
+    let apellido = (req.body.apellidohtml || "").toUpperCase();
+    let email = req.body.emailhtml || "";
+    let telefono = req.body.telefonohtml || "";
+    let contraseña = req.body.contraseñahtml || "";
 
     if (id != "") {
         conid = /^[0-9]{1,10}$/.test(id);

@@ -81,15 +81,15 @@
                     </tbody>
                 </table>
             </div>
+            <% } else if(err == true){ %>
+                <div class="pneg">
+                    <p>No se pudo eliminar el vuelo.</p><br>
+                    <p>No se pudo ejecutar la query o el vuelo tiene reservas asignadas.</p>
+                </div>
             <% } else { %>
                 <div class="pneg">
                     <p>No se pudo eliminar el vuelo.</p><br>
                     <p>Verifique que el ID de vuelo sea correcto.</p>
-                </div>
-            <% } if(err == true){ %>
-                <div class="pneg">
-                    <p>No se pudo eliminar el vuelo.</p><br>
-                    <p>No se pudo ejecutar la query.</p>
                 </div>
             <% } } %>
     </div>

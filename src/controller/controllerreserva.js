@@ -26,21 +26,26 @@ export const reservabusqueda = async (req, res) => {
 export const reservasearch = async (req, res) => {
     let muestro = true, err = false, registros = [], registros2 = [], registros3 = [], col = [];
     let id = req.body.idhtml;
-    let auxsql = "select * from reserva where idreserva = " + id + ";";
     try {
-        if (id == "" || id == null) {
+        if (id == "" || id == null || !/^[0-9]+$/.test(id)) {
             muestro = false;
-            res.render('reserva/reservabusqueda', { muestro, err, registros })
+            res.render('reserva/reservabusqueda', { muestro, err, registros });
         } else {
+            let auxsql = "select * from reserva where idreserva = " + id + ";";
             [registros, col] = await bdd.query(auxsql);
-            let vuelosql = "select * from vuelo where idvuelo = " + registros[0].vuelo_idvuelo + ";";
-            [registros2, col] = await bdd.query(vuelosql);
-            let usuariosql = "select * from usuario where idusuario = " + registros[0].usuario_idusuario + ";";
-            [registros3, col] = await bdd.query(usuariosql);
-            res.render('reserva/reservabusqueda', { muestro, err, registros, registros2, registros3 });
+            if (registros.length == 0) {
+                res.render('reserva/reservabusqueda', { muestro, err, registros });
+            } else {
+                let vuelosql = "select * from vuelo where idvuelo = " + registros[0].vuelo_idvuelo + ";";
+                [registros2, col] = await bdd.query(vuelosql);
+                let usuariosql = "select * from usuario where idusuario = " + registros[0].usuario_idusuario + ";";
+                [registros3, col] = await bdd.query(usuariosql);
+                res.render('reserva/reservabusqueda', { muestro, err, registros, registros2, registros3 });
+            }
         }
 
     } catch (error) {
+        console.log(error);
         err = true;
         res.render('reserva/reservabusqueda', { muestro, err, registros });
     }

@@ -13,12 +13,12 @@ export const avionalta = async (req, res) => {
 export const avionnuevo = async (req, res) => {
     let matricula, modelo, capacidad;
     let consigna = 0, conmat = true, conmod = true, concap = true;
-    matricula = req.body.matriculahtml.toUpperCase();
-    modelo = req.body.modelohtml.toUpperCase();
-    capacidad = req.body.capacidadhtml;
+    matricula = (req.body.matriculahtml || "").toUpperCase();
+    modelo = (req.body.modelohtml || "").toUpperCase();
+    capacidad = req.body.capacidadhtml || "";
     let auxsql = "INSERT INTO `ruiz_bd`.`avion`(`matricula`,`modelo`,`capacidad`)VALUES('" + matricula + "','" + modelo + "','" + capacidad + "');";
     conmat = /^[a-zA-Z0-9-]{1,10}$/.test(matricula);
-    conmod = /^[a-zA-ZñÑ ]{1,50}$/.test(modelo);
+    conmod = /^[a-zA-Z0-9ñÑ\- ]{1,50}$/.test(modelo);
     concap = /^[0-9]{1,10}$/.test(capacidad);
     if (conmat == false) { consigna++; }
     if (conmod == false) { consigna++; }
@@ -45,7 +45,7 @@ export const avionbaja = async (req, res) => {
 }
 
 export const aviondelete = async (req, res) => {
-    let matricula = req.body.matriculahtml.toUpperCase();
+    let matricula = (req.body.matriculahtml || "").toUpperCase();
     let auxsql = "DELETE FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';";
     let auxsql2 = "SELECT * FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';";
     try {
@@ -62,7 +62,7 @@ export const aviondelete = async (req, res) => {
     } catch (error) {
         console.log(error);
         let muestro = true, borrado = false;
-        res.render('aviones/avionbaja', { muestro, borrado });
+        res.render('aviones/avionbaja', { muestro, borrado, matricula });
     }
 }
 
@@ -85,7 +85,7 @@ export const avionbusqueda = async (req, res) => {
 }
 
 export const avionsearch = async (req, res) => {
-    let matricula = req.body.matriculahtml.toUpperCase();
+    let matricula = (req.body.matriculahtml || "").toUpperCase();
     let auxsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';";
     let muestro = true;
     try {
@@ -111,8 +111,7 @@ export const avionmodificaciones = async (req, res) => {
 
 export const avionmodificacionagarre = async (req, res) => {
     let muestro = true, muestro2 = false, cambiado = false;
-    let matricula;
-    matricula = req.body.matriculahtml.toUpperCase();
+    let matricula = (req.body.matriculahtml || "").toUpperCase();
     try {
         let auxsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';";
         const [registros, col] = await bdd.query(auxsql);
@@ -132,14 +131,14 @@ export const avionmodificacion = async (req, res) => {
     let muestro = true, muestro2 = true, encontrado = true, cambiado = false;
     let registros = [], registros2 = [];
 
-    let matriculaoriginal = req.body.matriculaoriginal.toUpperCase();
-    let matricula = req.body.matriculahtml2.toUpperCase();
-    let modelo = req.body.modelohtml.toUpperCase();
-    let capacidad = req.body.capacidadhtml;
+    let matriculaoriginal = (req.body.matriculaoriginal || "").toUpperCase();
+    let matricula = (req.body.matriculahtml2 || "").toUpperCase();
+    let modelo = (req.body.modelohtml || "").toUpperCase();
+    let capacidad = req.body.capacidadhtml || "";
 
     let consigna = 0;
     let conmat = true; if (matricula != "") { conmat = /^[a-zA-Z0-9-]{1,10}$/.test(matricula); }
-    let conmod = true; if (modelo != "") { conmod = /^[a-zA-ZñÑ ]{1,50}$/.test(modelo); }
+    let conmod = true; if (modelo != "") { conmod = /^[a-zA-Z0-9ñÑ\- ]{1,50}$/.test(modelo); }
     let concap = true; if (capacidad != "") { concap = /^[0-9]{1,10}$/.test(capacidad); }
 
     if (conmat == false) { consigna++; }

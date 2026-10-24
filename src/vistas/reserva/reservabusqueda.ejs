@@ -71,6 +71,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <% if (typeof registros2 != 'undefined' && registros2.length > 0) { %>
                     <p>Datos del vuelo:</p>
                     <table>
                         <thead>
@@ -110,6 +111,8 @@
                             </tr>
                         </tbody>
                     </table>
+                    <% } %>
+                    <% if (typeof registros3 != 'undefined' && registros3.length > 0) { %>
                     <p>Datos del usuario:</p>
                     <table>
                         <thead>
@@ -152,6 +155,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <% } %>
 
                 </div>
                 <% }else{%>

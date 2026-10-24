@@ -21,6 +21,7 @@
                 <button class="bvolver">volver al menu</button>
             </a>
         </nav>
+        <% if(registros!=null && registros.length>0){ %>
         <table>
             <thead>
                 <tr>
@@ -31,8 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% if(registros.length>0){
-                    let i = 0;
+                <% let i = 0;
                     registros.forEach(aeropuerto=>{ %>
                     <tr class="<% if(i%2==0){%>tdpar<%}else{%>tdimpar<%}i++;%>">
                         <td>
@@ -49,13 +49,17 @@
                         </td>
                     </tr>
                     <% }) %>
-                        <% } else{%>
-                            <div class="pneg">
-                                <p>No hay resgistros</p>
-                            </div>
-                            <% }%>
             </tbody>
         </table>
+        <% } else if(registros!=null && registros.length==0){%>
+            <div class="pneg">
+                <p>No hay registros</p>
+            </div>
+        <% } else if(registros==null){%>
+            <div class="pneg">
+                <p>Error al obtener los registros</p>
+            </div>
+        <% }%>
 
     </div>
 </body>

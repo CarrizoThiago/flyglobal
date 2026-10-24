@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../../styles/index.css">
     <link rel="stylesheet" href="../../styles/button.css">
     <link rel="stylesheet" href="../../styles/panel.css">
     <link rel="stylesheet" href="../../styles/tabla.css">
@@ -136,14 +136,13 @@
             </div>
             <%}else{%>
                 <div class="pneg">
-                    <p>No se pudo subir el regsitro.</p>
+                    <p>No se pudo subir el registro.</p>
                 </div>
 
                 <div class="pneg">
                     <%if(conid==false){%>
                         <p>El id
-                            es incorrecto. <br> Este debe tener un largo de entre 1 y 10 caracteres sin
-                            caracteres especiales y/o numeros, ademas no puede ser nulo. <br> Arreglelo y subalo.
+                            es incorrecto. <br> Este debe tener un largo de entre 1 y 10 caracteres y solo debe contener numeros, ademas no puede ser nulo. <br> Arreglelo y subalo.
                         </p>
                         <%}%>
                             <%if(conpasaporte==false){%>
@@ -165,8 +164,7 @@
                                                     <%if(conema==false){%>
                                                         <p>
                                                             El email es incorrecto. <br> Este debe tener un largo de
-                                                            entre 2 y 50
-                                                            .</p>
+                                                            entre 2 y 50 caracteres.</p>
                                                         <%}%>
                                                             <%if(contele==false){%>
                                                                 <p>

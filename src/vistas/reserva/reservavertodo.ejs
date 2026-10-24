@@ -22,7 +22,7 @@
                 <button class="bvolver">volver al menu</button>
             </a>
         </nav>
-        <%if(registros.length>0){%>
+        <%if(registros!=null && registros.length>0){%>
             <table>
                 <thead>
                     <tr>
@@ -60,9 +60,15 @@
                                     <%}%>
                 </tbody>
             </table>
-            <%}else{%>
-                <p>No hay resgistros</p>
-                <% }%>
+            <%}else if(registros!=null && registros.length==0){%>
+                <div class="pneg">
+                    <p>No hay registros</p>
+                </div>
+            <%}else if(registros==null){%>
+                <div class="pneg">
+                    <p>Error al obtener los registros</p>
+                </div>
+            <%}%>
     </div>
 
 </body>

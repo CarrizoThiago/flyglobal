@@ -38,11 +38,15 @@
                 </tr>
             </table>
         </form>
-        <% if( muestro==true ){ if(exito==false){ %>
+        <% if( muestro==true ){ if(err==true){ %>
             <div class="pneg">
-                <p>No se encontro el usuario.</p>
+                <p>No se pudo ejecutar la query o hubo un error en la base de datos.</p>
             </div>
-            <% }else{if (registros.length>0){ %>
+            <% }else if(exito==false || !registros || registros.length==0){ %>
+            <div class="pneg">
+                <p>No se encontro un usuario con ese id.</p>
+            </div>
+            <% }else{ %>
                 <div class="ppos">
                     <table>
                         <thead>
@@ -85,20 +89,12 @@
                             </tr>
                         </tbody>
                     </table>
-
-                    <%}else{ %>
-                        <div class="pneg">
-                            <p>No se encontro un usuario con ese id.</p>
-                        </div>
-                        <%}} if(err==true){%>
-                            <div class="pneg">
-                                <p>No se pudo ejecutar la query.</p>
-                            </div>
-                            <%}}else{%>
-                                <div class="pneu">
-                                    <p>Nose a buscado algo aun.</p>
-                                </div>
-                                <%}%>
+                </div>
+            <% } }else{%>
+                <div class="pneu">
+                    <p>No se ha buscado algo aún.</p>
+                </div>
+            <%}%>
                 </div>
 
 </body>

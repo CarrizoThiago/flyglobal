@@ -53,7 +53,11 @@ export const vuelobusqueda = async (req, res) => {
 export const vuelosearch = async (req, res) => {
     let auxsql, muestro = true, err = false, registros = [], registros2 = [], col = [], col2 = [], id;
     try {
-        id = req.body.idhtml;
+        id = req.body.idhtml || "";
+        if (!id || !/^[0-9]+$/.test(id)) {
+            res.render('vuelo/vuelobusqueda', { muestro, err: false, registros: [], registros2: [] });
+            return;
+        }
         auxsql = "SELECT * FROM vuelo WHERE idvuelo = " + id + ";";
         [registros, col] = await bdd.query(auxsql);
         if (registros.length == 0 || registros[0].idvuelo == null) {
@@ -62,12 +66,10 @@ export const vuelosearch = async (req, res) => {
             [registros2, col2] = await bdd.query(ressql);
         }
 
-
-
         res.render('vuelo/vuelobusqueda', { muestro, err, registros, registros2 });
     } catch (error) {
         err = true;
-        res.render('vuelo/vuelobusqueda', { muestro, err, registros });
+        res.render('vuelo/vuelobusqueda', { muestro, err, registros: [], registros2: [] });
     }
 
 }

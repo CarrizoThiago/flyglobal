@@ -85,17 +85,17 @@
                     </tbody>
                 </table>
             </div>
+            <%}else if(err==true){ %>
+                <div class="pneg">
+                    <p>No se pudo eliminar el usuario.</p> <br>
+                    <p>No se pudo ejecutar la query o el usuario tiene reservas asociadas.</p>
+                </div>
             <%}else{ %>
                 <div class="pneg">
                     <p>No se pudo eliminar el usuario.</p> <br>
-                    <p>verifique que el id sea correcto.</p>
+                    <p>Verifique que el id sea correcto.</p>
                 </div>
-                <%} if(err==true){%>
-                    <div class="pneg">
-                        <p>No se pudo eliminar el usuario.</p> <br>
-                        <p>No se pudo ejecutar la query.</p>
-                    </div>
-                    <%}}%>
+            <%}}%>
     </div>
 
 </body>
