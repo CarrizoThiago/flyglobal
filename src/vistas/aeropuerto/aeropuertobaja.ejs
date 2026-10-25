@@ -70,13 +70,48 @@
                     </tbody>
                 </table>
             </div>
-            <%}else{ %>
+            <%}else{ if(registros2.length> 0){ %>
                 <div class="pneg">
-                    <p>No se pudo eliminar el aeropuerto.</p> <br>
-                    <p>Verifique que el codigo IATA sea correcto o que no tenga vuelos asociados.</p>
+                    <p>No se pudo borrar el aeropuerto.</p><br>
+                    <p>Para eliminarlo no tiene que haber vuelos asociados al mismo.</p><br>
+                    <p>Vuelo asociados:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>IDvuelo</th>
+                                <th>Numero de vuelo</th>
+                                <th>Origen</th>
+                                <th>Destino</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%for(let i=0;i<registros2.length;i++){%>
+                                <tr <%if(i%2==0){%>class="tdpar"<%}else{%>class="tdimpar"<%}%>>
+                                            <td>
+                                                <%= registros2[i].idvuelo%>
+                                            </td>
+                                            <td>
+                                                <%= registros2[i].numerovuelo%>
+                                            </td>
+                                            <td>
+                                                <%= registros2[i].aeropuerto_codigoiata_origen%>
+                                            </td>
+                                            <td>
+                                                <%= registros2[i].aeropuerto_codigoiata_destino%>
+                                            </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+
                 </div>
-                <%}%>
+                <%}else{%>
+                    <div class="pneg">
+                        <p>No se pudo eliminar el aeropuerto.</p> <br>
+                        <p>Verifique que el codigo IATA sea correcto o que no tenga vuelos asociados.</p>
+                    </div>
                     <%}%>
+                        <%}}%>
     </div>
 
 </body>

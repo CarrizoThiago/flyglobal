@@ -93,31 +93,44 @@ export const aeropuertoNuevo = async (req, res) => {
 export const aeropuertobaja = async (req, res) => {
     let muestro = false;
     let exito = false;
-    res.render('aeropuerto/aeropuertobaja', { muestro, exito });
+    let registros = [];
+    res.render('aeropuerto/aeropuertobaja', { muestro, exito, registros });
 }
 export const aeropuertodelete = async (req, res) => {
     let iata = (req.body.iatahtml || req.body.iatahmtl || "").toUpperCase();
     let exito = false;
+    let registros = [], registros2 = [], col = [];
     try {
         let getsql = "SELECT * FROM aeropuerto WHERE codigoiata = '" + iata + "';";
-        const [registros, col] = await bdd.query(getsql);
+        [registros, col] = await bdd.query(getsql);
         let muestro = true;
         if (registros.length == 0 || registros[0].codigoiata == null) {
             exito = false;
-            res.render('aeropuerto/aeropuertobaja', { muestro, exito });
-        } else {
-            let auxsql = "DELETE FROM aeropuerto WHERE codigoiata = '" + iata + "';";
-            await bdd.query(auxsql);
-            console.log(iata);
-            console.log("Aeropuerto eliminado");
-            exito = true;
             res.render('aeropuerto/aeropuertobaja', { muestro, exito, registros });
+        } else {
+            try {
+                let auxsql2 = "SELECT * FROM vuelo WHERE aeropuerto_codigoiata_origen = '" + iata + "' OR aeropuerto_codigoiata_destino = '" + iata + "'";
+                [registros2] = await bdd.query(auxsql2);
+                if (registros2.length > 0) {
+                    exito = false;
+                } else {
+                    let auxsql = "DELETE FROM aeropuerto WHERE codigoiata = '" + iata + "';";
+                    await bdd.query(auxsql);
+                    console.log(iata);
+                    console.log("Aeropuerto eliminado");
+                    exito = true;
+                }
+            } catch (error) {
+                console.log(error);
+                exito = false;
+            }
+            res.render('aeropuerto/aeropuertobaja', { muestro, exito, registros, registros2 });
         }
     } catch (error) {
         console.log(error);
         let muestro = true;
         let exito = false;
-        res.render('aeropuerto/aeropuertobaja', { muestro, exito });
+        res.render('aeropuerto/aeropuertobaja', { muestro, exito, registros2 });
     }
 }
 
