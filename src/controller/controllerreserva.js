@@ -60,10 +60,10 @@ export const reservanuevo = async (req, res) => {
     let idreserva, idvuelo, fecha, asiento, costo, idusuario;
     let muestro = true, subido = false, err = false;
     let consigna = 0;
-    let convuelo = true, confecha = true, conasiento = true, concosto = true, conusuario = true;
+    let convuelo = true, confecha = true, conasiento = true, conasiento2 = true, concosto = true, conusuario = true, concapacidad = true, confechavuelo = true;
 
     let regUsu = [], regVue = [], col = [];
-    const fechaActual = new Date().toLocaleDateString('en-CA');
+    const fechaActual = new Date().toLocaleString('sv-SE');
     idvuelo = req.body.idvuelohtml;
     fecha = fechaActual;
     if (req.body.asientohtml) {
@@ -78,10 +78,28 @@ export const reservanuevo = async (req, res) => {
 
     if (/^[0-9]{1,10}$/.test(idvuelo)) {
         try {
-            [regVue, col] = await bdd.query("SELECT * FROM vuelo WHERE idvuelo = '" + idvuelo + "';");
+            let auxsql = "SELECT vuelo.*, avion.capacidad FROM vuelo INNER JOIN avion ON vuelo.avion_matricula = avion.matricula WHERE vuelo.idvuelo = '" + idvuelo + "';";
+            [regVue, col] = await bdd.query(auxsql);
             if (regVue.length == 0) {
                 convuelo = false;
                 consigna++;
+            } else {
+                let [regres] = await bdd.query("SELECT * FROM reserva WHERE vuelo_idvuelo = '" + idvuelo + "';");
+                if (regres.length >= regVue[0].capacidad) {
+                    concapacidad = false;
+                    consigna++;
+                }
+                for (let i = 0; i < regres.length; i++) {
+                    if (regres[i].asiento == asiento) {
+                        conasiento2 = false;
+                        consigna++;
+                    }
+                }
+                if (regVue[0].fecha_salida < fechaActual) {
+                    confechavuelo = false;
+                    consigna++;
+                }
+
             }
         } catch (error) {
             convuelo = false;
@@ -91,9 +109,6 @@ export const reservanuevo = async (req, res) => {
         convuelo = false;
         consigna++;
     }
-
-    confecha = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(fecha) && !isNaN(Date.parse(fecha));
-    if (confecha == false) { consigna++; }
 
     conasiento = /^[a-zA-Z0-9]{1,5}$/.test(asiento);
     if (conasiento == false) { consigna++; }
@@ -140,13 +155,13 @@ export const reservanuevo = async (req, res) => {
             res.render('reserva/reservaalta', { muestro, subido, err, idreserva, idvuelo, fecha, asiento, costo, idusuario, regUsu, regVue });
         } else {
             subido = false;
-            res.render('reserva/reservaalta', { muestro, subido, err, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
+            res.render('reserva/reservaalta', { muestro, subido, err, conasiento2, confechavuelo, concapacidad, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
         }
     } catch (error) {
         console.log(error);
         subido = false;
         err = true;
-        res.render('reserva/reservaalta', { muestro, subido, err, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
+        res.render('reserva/reservaalta', { muestro, subido, err, conasiento2, confechavuelo, concapacidad, convuelo, confecha, conasiento, concosto, conusuario, idreserva, idvuelo, fecha, asiento, costo, idusuario });
     }
 }
 
@@ -259,7 +274,7 @@ export const reservamodificacion = async (req, res) => {
 
     let confecha = true;
     if (fecha != "") {
-        confecha = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(fecha) && !isNaN(Date.parse(fecha));
+        confecha = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(fecha) && !isNaN(Date.parse(fecha));
         if (confecha == false) { consigna++; }
     }
 

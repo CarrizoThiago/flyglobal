@@ -109,7 +109,7 @@
                                     <label for="fechahtml">Fecha de la reserva: </label>
                                 </td>
                                 <td class="tdinput">
-                                    <input type="text" name="fechahtml" id="fechahtml" placeholder="YYYY-MM-DD">
+                                    <input type="text" name="fechahtml" id="fechahtml" placeholder="YYYY-MM-DD HH:MM:SS">
                                 </td>
                             </tr>
                             <tr>
@@ -201,7 +201,7 @@
                                             <p>ID de vuelo incorrecto o no existe en la base de datos.</p>
                                         <%}%>
                                         <%if(confecha==false){%>
-                                            <p>Fecha incorrecta, formato requerido: YYYY-MM-DD.</p>
+                                            <p>Fecha incorrecta, formato requerido: YYYY-MM-DD HH:MM:SS.</p>
                                         <%}%>
                                         <%if(conasiento==false){%>
                                             <p>Asiento asignado incorrecto, debe tener hasta 5 caracteres alfanumericos.</p>

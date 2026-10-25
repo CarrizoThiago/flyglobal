@@ -9,7 +9,8 @@ export async function conectar() {
                 host: 'localhost',
                 database: 'ruiz_bd',
                 user: 'root',
-                password: 'RiverPlate1986!'
+                password: 'RiverPlate1986!',
+                dateStrings: true
             });
             console.log('conexion exitosa');
         }

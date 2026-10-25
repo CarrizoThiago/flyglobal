@@ -190,26 +190,32 @@
                         <p>El ID de vuelo es incorrecto o no existe en la base de datos.<br>Debe ser numerico y
                             corresponder a un vuelo registrado.</p>
                         <% } %>
-                            <% if(confecha==false){ %>
-                                <p>La fecha de la reserva es incorrecta.<br>Formato requerido: YYYY-MM-DD.</p>
+                            <% if(conasiento==false){ %>
+                                <p>El asiento asignado es incorrecto.<br>Debe tener hasta 5 caracteres
+                                    alfanumericos.</p>
                                 <% } %>
-                                    <% if(conasiento==false){ %>
-                                        <p>El asiento asignado es incorrecto.<br>Debe tener hasta 5 caracteres
-                                            alfanumericos.</p>
+                                    <% if(concosto==false){ %>
+                                        <p>El costo es incorrecto.<br>Debe ser numerico (de 1 a 10
+                                            digitos).</p>
                                         <% } %>
-                                            <% if(concosto==false){ %>
-                                                <p>El costo es incorrecto.<br>Debe ser numerico (de 1 a 10
-                                                    digitos).</p>
+                                            <% if(conusuario==false){ %>
+                                                <p>El ID de usuario es incorrecto o no existe en la base
+                                                    de datos.<br>Debe ser numerico y corresponder a un
+                                                    usuario registrado.</p>
                                                 <% } %>
-                                                    <% if(conusuario==false){ %>
-                                                        <p>El ID de usuario es incorrecto o no existe en la base
-                                                            de datos.<br>Debe ser numerico y corresponder a un
-                                                            usuario registrado.</p>
+                                                    <% if(err==true){ %>
+                                                        <p>Error al ejecutar la query en la base de
+                                                            datos.</p>
                                                         <% } %>
-                                                            <% if(err==true){ %>
-                                                                <p>Error al ejecutar la query en la base de
-                                                                    datos.</p>
+                                                            <% if(conasiento2==false){ %>
+                                                                <p>El asiento asignado ya esta ocupado.</p>
                                                                 <% } %>
+                                                                    <% if(concapacidad==false){ %>
+                                                                        <p>El vuelo esta lleno.</p>
+                                                                        <% } %>
+                                                                            <% if(confechavuelo==false){ %>
+                                                                                <p>El vuelo ya ha despegado.</p>
+                                                                                <% } %>
                 </div>
                 <% } } %>
     </div>
