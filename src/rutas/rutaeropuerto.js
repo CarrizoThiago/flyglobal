@@ -1,11 +1,13 @@
 import express from "express";
-import { aeropuerto, aeropuertoVerTodo, aeropuertoAlta, aeropuertoNuevo, aeropuertobaja, aeropuertodelete, aeropuertobusqueda, aeropuertosearch, aeropuertomodificaciones, aeropuertomodificacionesagarre, aeropuertomodificacion } from "../controller/controlleraeropuerto.js";
+import { aeropuerto, aeropuertoVerTodo, aeropuertoactualizado, aeropuertoAlta, aeropuertoNuevo, aeropuertobaja, aeropuertodelete, aeropuertobusqueda, aeropuertosearch, aeropuertomodificaciones, aeropuertomodificacionesagarre, aeropuertomodificacion } from "../controller/controlleraeropuerto.js";
 
 const raeropuerto = express.Router();
 
 raeropuerto.get('/aeropuerto', aeropuerto);
 
 raeropuerto.get('/aeropuertovertodo', aeropuertoVerTodo)
+
+raeropuerto.post('/aeropuertoactualizado', aeropuertoactualizado)
 
 raeropuerto.get('/aeropuertoalta', aeropuertoAlta)
 

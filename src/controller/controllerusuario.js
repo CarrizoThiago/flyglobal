@@ -189,7 +189,7 @@ export const usuariomodificacionagarre = async (req, res) => {
 export const usuariomodificacion = async (req, res) => {
     let muestro = true, muestro2 = true, encontrado = true, cambiado = false;
     let registros = [], registros2 = [];
-    let conid, conpasaporte, connom, conape, conema, contele, concontra;
+    let conid, conid2 = true, conpasaporte, conpasaporte2 = true, connom, conape, conema, contele, concontra;
     let consigna = 0;
 
     let idoriginal = req.body.idoriginal || "";
@@ -203,11 +203,35 @@ export const usuariomodificacion = async (req, res) => {
 
     if (id != "") {
         conid = /^[0-9]{1,10}$/.test(id);
+        if (conid && id != idoriginal) {
+            try {
+                const [regId] = await bdd.query("SELECT idusuario FROM usuario WHERE idusuario = '" + id + "';");
+                if (regId.length > 0) {
+                    conid2 = false;
+                    consigna++;
+                }
+            } catch (error) {
+                conid2 = false;
+                consigna++;
+            }
+        }
     } else {
         conid = true;
     }
     if (pasaporte != "") {
         conpasaporte = /^[A-Z 0-9]{2,9}$/.test(pasaporte);
+        if (conpasaporte) {
+            try {
+                const [regPass] = await bdd.query("SELECT pasaporte FROM usuario WHERE pasaporte = '" + pasaporte + "' AND idusuario != '" + idoriginal + "';");
+                if (regPass.length > 0) {
+                    conpasaporte2 = false;
+                    consigna++;
+                }
+            } catch (error) {
+                conpasaporte2 = false;
+                consigna++;
+            }
+        }
     } else {
         conpasaporte = true;
     }
@@ -281,5 +305,5 @@ export const usuariomodificacion = async (req, res) => {
         cambiado = false;
     }
 
-    res.render('usuario/usuariomodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conid, conpasaporte, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
+    res.render('usuario/usuariomodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conid, conid2, conpasaporte, conpasaporte2, connom, conape, conema, contele, concontra, id, pasaporte, nombre, apellido, email, telefono, contraseña });
 }

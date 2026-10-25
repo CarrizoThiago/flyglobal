@@ -277,9 +277,21 @@ export const vuelomodificacion = async (req, res) => {
     }
 
     let consigna = 0;
-    let conid = true;
+    let conid = true, conid2 = true;
     if (id != "") {
         conid = /^[0-9]{1,10}$/.test(id);
+        if (conid && id != idoriginal) {
+            try {
+                const [regId] = await bdd.query("SELECT idvuelo FROM vuelo WHERE idvuelo = '" + id + "';");
+                if (regId.length > 0) {
+                    conid2 = false;
+                    consigna++;
+                }
+            } catch (error) {
+                conid2 = false;
+                consigna++;
+            }
+        }
     }
     if (conid == false) { consigna++; }
 
@@ -395,5 +407,5 @@ export const vuelomodificacion = async (req, res) => {
         cambiado = false;
     }
 
-    res.render('vuelo/vuelomodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conid, connum, coniataorigen, coniatadestino, confechasalida, confechallegada, conmatricula, id, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula });
+    res.render('vuelo/vuelomodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conid, conid2, connum, coniataorigen, coniatadestino, confechasalida, confechallegada, conmatricula, id, numerovuelo, iataorigen, iatadestino, fechasalida, fechallegada, matricula });
 }

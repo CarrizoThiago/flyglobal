@@ -22,44 +22,81 @@
             </a>
         </nav>
         <% if(registros!=null && registros.length>0){ %>
-        <table>
-            <thead>
-                <tr>
-                    <th>IATA</th>
-                    <th>Nombre</th>
-                    <th>Ciudad</th>
-                    <th>Pais</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% let i = 0;
-                    registros.forEach(aeropuerto=>{ %>
-                    <tr class="<% if(i%2==0){%>tdpar<%}else{%>tdimpar<%}i++;%>">
-                        <td>
-                            <%=aeropuerto.codigoiata %>
+            <form action="/aeropuertoactualizado" method="post">
+                <input type="hidden" name="min" value="<%= 0 %>">
+                <input type="hidden" name="max" value="<%= 15 %>">
+                <table>
+                    <tr>
+                        <td class="tdlabel">
+                            <label for="buscarxhtml">Buscar por:</label>
                         </td>
-                        <td>
-                            <%=aeropuerto.nombre %>
-                        </td>
-                        <td>
-                            <%=aeropuerto.ciudad %>
-                        </td>
-                        <td>
-                            <%=aeropuerto.pais %>
+                        <td class="tdinput">
+                            <select name="buscarxhtml" id="">
+                                <option value="">Ver todos los Aeropuertos</option>
+                                <option value="ARGENTINA">Ver solo Aeropuertos de Nacionales</option>
+                            </select>
                         </td>
                     </tr>
-                    <% }) %>
-            </tbody>
-        </table>
-        <% } else if(registros!=null && registros.length==0){%>
-            <div class="pneg">
-                <p>No hay registros</p>
-            </div>
-        <% } else if(registros==null){%>
-            <div class="pneg">
-                <p>Error al obtener los registros</p>
-            </div>
-        <% }%>
+                    <tr>
+                        <td colspan="2" class="tdbutton">
+                            <button class="bmove" type="submit">Actualizar</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IATA</th>
+                        <th>Nombre</th>
+                        <th>Ciudad</th>
+                        <th>Pais</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(let i=min; i<registros.length && i< max; i++){ %>
+                        <tr class="<% if(i%2==0){%>tdpar<%}else{%>tdimpar<%}%>">
+                            <td>
+                                <%=registros[i].codigoiata %>
+                            </td>
+                            <td>
+                                <%=registros[i].nombre %>
+                            </td>
+                            <td>
+                                <%=registros[i].ciudad %>
+                            </td>
+                            <td>
+                                <%=registros[i].pais %>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+            <% if(registros.length>max){%>
+                <form action="/aeropuertoactualizado" method="post">
+                    <input type="hidden" name="min" value="<%=min+15 %>">
+                    <input type="hidden" name="max" value="<%=max+15 %>">
+                    <input type="hidden" name="buscarxhtml" value="<%= buscarxhtml %>">
+                    <button class="bmove" type="submit">Siguiente -></button>
+                </form>
+                <% } %>
+                    <% if(min> 0){%>
+                        <form action="/aeropuertoactualizado" method="post">
+                            <input type="hidden" name="min" value="<%=min-15 %>">
+                            <input type="hidden" name="max" value="<%=max-15 %>">
+                            <input type="hidden" name="buscarxhtml" value="<%= buscarxhtml %>">
+                            <button class="bmove" type="submit"><- Anterior </button>
+                        </form>
+                        <% } %>
+                            <% } else if(registros!=null && registros.length==0){%>
+                                <div class="pneg">
+                                    <p>No hay registros</p>
+                                </div>
+                                <% } else if(registros==null){%>
+                                    <div class="pneg">
+                                        <p>Error al obtener los registros</p>
+                                    </div>
+                                    <% }%>
 
     </div>
 </body>

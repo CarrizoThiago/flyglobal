@@ -137,7 +137,22 @@ export const avionmodificacion = async (req, res) => {
     let capacidad = req.body.capacidadhtml || "";
 
     let consigna = 0;
-    let conmat = true; if (matricula != "") { conmat = /^[a-zA-Z0-9-]{1,10}$/.test(matricula); }
+    let conmat = true, conmat2 = true;
+    if (matricula != "") {
+        conmat = /^[a-zA-Z0-9-]{1,10}$/.test(matricula);
+        if (conmat && matricula != matriculaoriginal) {
+            try {
+                const [regMat] = await bdd.query("SELECT matricula FROM `ruiz_bd`.`avion` WHERE `matricula` = '" + matricula + "';");
+                if (regMat.length > 0) {
+                    conmat2 = false;
+                    consigna++;
+                }
+            } catch (error) {
+                conmat2 = false;
+                consigna++;
+            }
+        }
+    }
     let conmod = true; if (modelo != "") { conmod = /^[a-zA-Z0-9ñÑ\- ]{1,50}$/.test(modelo); }
     let concap = true; if (capacidad != "") { concap = /^[0-9]{1,10}$/.test(capacidad); }
 
@@ -171,5 +186,5 @@ export const avionmodificacion = async (req, res) => {
         cambiado = false;
     }
 
-    res.render('aviones/avionmodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conmat, conmod, concap, matricula, modelo, capacidad });
+    res.render('aviones/avionmodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conmat, conmat2, conmod, concap, matricula, modelo, capacidad });
 }

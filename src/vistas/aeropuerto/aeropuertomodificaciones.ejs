@@ -167,6 +167,10 @@
                                                 codigo IATA no es valido: <%= iata %> debe tener 3 letras exactas sin
                                                     caracteres especiales y/o numeros.</p>
                                             <%}%>
+                                        <%if(coniata2==false){%>
+                                            <p>
+                                                El codigo IATA ya esta tomado: <%= iata %>.</p>
+                                            <%}%>
                                                 <%if(connom==false){%>
                                                     <p
                                                        >

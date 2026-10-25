@@ -210,6 +210,9 @@
                                         <%if(conid==false){%>
                                             <p>ID de vuelo incorrecto, debe ser numerico de 1 a 10 digitos.</p>
                                         <%}%>
+                                        <%if(conid2==false){%>
+                                            <p>El ID de vuelo ya esta tomado: <%= id %>.</p>
+                                        <%}%>
                                         <%if(connum==false){%>
                                             <p>Numero de vuelo incorrecto, debe ser numerico de 1 a 10 digitos.</p>
                                         <%}%>

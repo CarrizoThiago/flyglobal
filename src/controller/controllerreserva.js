@@ -220,9 +220,21 @@ export const reservamodificacion = async (req, res) => {
     let idusuario = req.body.idusuariohtml;
 
     let consigna = 0;
-    let conid = true;
+    let conid = true, conid2 = true;
     if (id != "") {
         conid = /^[0-9]{1,10}$/.test(id);
+        if (conid && id != idoriginal) {
+            try {
+                const [regId] = await bdd.query("SELECT idreserva FROM reserva WHERE idreserva = '" + id + "';");
+                if (regId.length > 0) {
+                    conid2 = false;
+                    consigna++;
+                }
+            } catch (error) {
+                conid2 = false;
+                consigna++;
+            }
+        }
     }
     if (conid == false) { consigna++; }
 
@@ -317,7 +329,7 @@ export const reservamodificacion = async (req, res) => {
         cambiado = false;
     }
 
-    res.render('reserva/reservamodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conid, convuelo, confecha, conasiento, concosto, conusuario, id, idvuelo, fecha, asiento, costo, idusuario });
+    res.render('reserva/reservamodificaciones', { muestro, muestro2, registros, registros2, encontrado, cambiado, conid, conid2, convuelo, confecha, conasiento, concosto, conusuario, id, idvuelo, fecha, asiento, costo, idusuario });
 }
 
 

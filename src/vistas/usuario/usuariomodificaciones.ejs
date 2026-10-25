@@ -226,10 +226,19 @@
                                                     solo deben ser numeros.
                                             </p>
                                             <%}%>
+                                        <%if(conid2==false){%>
+                                            <p>
+                                                El ID ya esta tomado: <%= id %>.
+                                            </p>
+                                            <%}%>
                                                 <%if(conpasaporte==false){%>
                                                     <p>
                                                         El pasaporte no es valido: <%= pasaporte %> puede tener de 2 a
                                                             9 letras y/o numeros.</p>
+                                                    <%}%>
+                                                <%if(conpasaporte2==false){%>
+                                                    <p>
+                                                        El pasaporte ya existe.</p>
                                                     <%}%>
                                                         <%if(connom==false){%>
                                                             <p>

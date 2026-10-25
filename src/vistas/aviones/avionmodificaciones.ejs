@@ -150,6 +150,10 @@
                                                 Matricula incorrecta, Esta como mucho debe de tener 10 caracteres
                                                 alfanumericos.</p>
                                             <%}%>
+                                        <%if(conmat2==false){%>
+                                            <p>
+                                                La matricula ya esta tomada: <%= matricula %>.</p>
+                                            <%}%>
                                                 <%if(conmod==false){%>
                                                     <p>
                                                         Modelo incorrecto, Esta como mucho debe de tener 50 caracteres

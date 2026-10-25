@@ -25,10 +25,22 @@
             <table>
                 <tr>
                     <td class="tdlabel">
-                        <label for="iatahtml">Codigo IATA:</label>
+                        <label for="buscarxhtml">Buscar por:</label>
                     </td>
                     <td class="tdinput">
-                        <input type="text" name="iatahtml" placeholder="codigo iata">
+                        <select name="buscarxhtml">
+                            <option value="codigoiata">Codigo IATA</option>
+                            <option value="ciudad">Ciudad</option>
+                            <option value="pais">Pais</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="inputhtml">Ingrese:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="inputhtml" placeholder="Busqueda...">
                     </td>
                 </tr>
                 <tr>
@@ -54,20 +66,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="tdpar">
-                                <td>
-                                    <%=registros[0].codigoiata %>
-                                </td>
-                                <td>
-                                    <%=registros[0].nombre %>
-                                </td>
-                                <td>
-                                    <%=registros[0].ciudad %>
-                                </td>
-                                <td>
-                                    <%=registros[0].pais %>
-                                </td>
-                            </tr>
+                            <% for(let i=0; i<registros.length; i++){ %>
+                                <tr <%if(i%2==0){%>class="tdpar"<%}else{%>class="tdimpar"<%}%>>
+                                            <td>
+                                                <%=registros[i].codigoiata %>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].nombre %>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].ciudad %>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].pais %>
+                                            </td>
+                                </tr>
+                                <%}%>
                         </tbody>
                     </table>
                     <%} }else{%>

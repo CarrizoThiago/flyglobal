@@ -194,6 +194,9 @@
                                         <%if(conid==false){%>
                                             <p>ID de reserva incorrecto, debe ser numerico de 1 a 10 digitos.</p>
                                         <%}%>
+                                        <%if(conid2==false){%>
+                                            <p>El ID de reserva ya esta tomado: <%= id %>.</p>
+                                        <%}%>
                                         <%if(convuelo==false){%>
                                             <p>ID de vuelo incorrecto o no existe en la base de datos.</p>
                                         <%}%>
