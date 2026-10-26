@@ -7,14 +7,67 @@ export const reservamenu = async (req, res) => {
 }
 
 export const reservavertodo = async (req, res) => {
-    let auxsql = "select * from reserva;", registros = [], col = [];
+    let busco = "";
+    let auxsql;
+    switch (busco) {
+        case "ARG":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo INNER JOIN aeropuerto aero_origen ON vuelo.aeropuerto_codigoiata_origen = aero_origen.codigoiata INNER JOIN aeropuerto aero_destino ON vuelo.aeropuerto_codigoiata_destino = aero_destino.codigoiata WHERE aero_origen.pais = 'ARGENTINA' AND aero_destino.pais = 'ARGENTINA' ORDER BY reserva.idreserva ASC;";
+            break;
+        case "INT":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo INNER JOIN aeropuerto aero_origen ON vuelo.aeropuerto_codigoiata_origen = aero_origen.codigoiata INNER JOIN aeropuerto aero_destino ON vuelo.aeropuerto_codigoiata_destino = aero_destino.codigoiata WHERE aero_origen.pais != 'ARGENTINA' OR aero_destino.pais != 'ARGENTINA' ORDER BY reserva.idreserva ASC;";
+            break;
+        case "V":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo WHERE vuelo.fecha_salida >= NOW() ORDER BY reserva.idreserva ASC;";
+            break;
+        case "NV":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo WHERE vuelo.fecha_salida < NOW() ORDER BY reserva.idreserva ASC;";
+            break;
+        case "":
+        default:
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo ORDER BY reserva.idreserva ASC;";
+            break;
+    }
+    let registros = [], col = [], min = 0, max = 15;
     try {
         [registros, col] = await bdd.query(auxsql);
-        res.render('reserva/reservavertodo', { registros });
+        res.render('reserva/reservavertodo', { registros, min, max, busco });
     } catch (error) {
         console.log(error);
         registros = null;
-        res.render('reserva/reservavertodo', { registros });
+        res.render('reserva/reservavertodo', { registros, min, max, busco });
+    }
+}
+
+export const reservaactualizado = async (req, res) => {
+    let min = parseInt(req.body.minhtml || req.body.min), max = parseInt(req.body.maxhtml || req.body.max);
+    let busco = req.body.buscarxhtml || "";
+    let auxsql;
+    switch (busco) {
+        case "ARG":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo INNER JOIN aeropuerto aero_origen ON vuelo.aeropuerto_codigoiata_origen = aero_origen.codigoiata INNER JOIN aeropuerto aero_destino ON vuelo.aeropuerto_codigoiata_destino = aero_destino.codigoiata WHERE aero_origen.pais = 'ARGENTINA' AND aero_destino.pais = 'ARGENTINA' ORDER BY reserva.idreserva ASC;";
+            break;
+        case "INT":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo INNER JOIN aeropuerto aero_origen ON vuelo.aeropuerto_codigoiata_origen = aero_origen.codigoiata INNER JOIN aeropuerto aero_destino ON vuelo.aeropuerto_codigoiata_destino = aero_destino.codigoiata WHERE aero_origen.pais != 'ARGENTINA' OR aero_destino.pais != 'ARGENTINA' ORDER BY reserva.idreserva ASC;";
+            break;
+        case "V":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo WHERE vuelo.fecha_salida >= NOW() ORDER BY reserva.idreserva ASC;";
+            break;
+        case "NV":
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo WHERE vuelo.fecha_salida < NOW() ORDER BY reserva.idreserva ASC;";
+            break;
+        case "":
+        default:
+            auxsql = "SELECT reserva.*, vuelo.aeropuerto_codigoiata_origen, vuelo.aeropuerto_codigoiata_destino FROM reserva INNER JOIN vuelo ON reserva.vuelo_idvuelo = vuelo.idvuelo ORDER BY reserva.idreserva ASC;";
+            break;
+    }
+    let registros = [], col = [];
+    try {
+        [registros, col] = await bdd.query(auxsql);
+        res.render('reserva/reservavertodo', { registros, min, max, busco });
+    } catch (error) {
+        console.log(error);
+        registros = null;
+        res.render('reserva/reservavertodo', { registros, min, max, busco });
     }
 }
 

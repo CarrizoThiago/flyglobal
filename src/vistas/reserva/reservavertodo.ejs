@@ -22,12 +22,41 @@
                 <button class="bvolver">volver al menu</button>
             </a>
         </nav>
+
+        <form action="/reservaactualizado" method="post">
+            <input type="hidden" name="min" value="<%= 0 %>">
+            <input type="hidden" name="max" value="<%= 15 %>">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="buscarxhtml">Buscar por:</label>
+                    </td>
+                    <td class="tdinput">
+                        <select name="buscarxhtml" id="">
+                            <option value="">Ver todas las reservas</option>
+                            <option value="ARG">Ver solo Reservas de Vuelos Nacionales</option>
+                            <option value="INT">Ver solo Reservas de Vuelos Internacionales</option>
+                            <option value="V">Ver solo Reservas de Vuelos vigentes</option>
+                            <option value="NV">Ver solo Reservas de Vuelos no vigentes</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tdbutton">
+                        <button class="bmove" type="submit">Actualizar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
         <%if(registros!=null && registros.length>0){%>
+
             <table>
                 <thead>
                     <tr>
                         <th>IDreserva</th>
                         <th>IDvuelo</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
                         <th>Fechas de la reserva</th>
                         <th>Asiento asignado</th>
                         <th>Costo</th>
@@ -36,13 +65,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(let i=0;i<registros.length;i++){%>
+                    <%for(let i=min;i<registros.length && i < max ; i++){%>
                         <tr<%if(i%2==0) {%> class="tdpar"<% }else{%> class="tdimpar"<% }%> >
                                     <td>
                                         <%=registros[i].idreserva%>
                                     </td>
                                     <td>
                                         <%=registros[i].vuelo_idvuelo%>
+                                    </td>
+                                    <td>
+                                        <%=registros[i].aeropuerto_codigoiata_origen%>
+                                    </td>
+                                    <td>
+                                        <%=registros[i].aeropuerto_codigoiata_destino%>
                                     </td>
                                     <td>
                                         <%=registros[i].fecha%>
@@ -60,15 +95,31 @@
                                     <%}%>
                 </tbody>
             </table>
-            <%}else if(registros!=null && registros.length==0){%>
-                <div class="pneg">
-                    <p>No hay registros</p>
-                </div>
-            <%}else if(registros==null){%>
-                <div class="pneg">
-                    <p>Error al obtener los registros</p>
-                </div>
-            <%}%>
+            <% if(registros.length>max){%>
+                <form action="/reservaactualizado" method="post">
+                    <input type="hidden" name="buscarxhtml" value="<%=busco %>">
+                    <input type="hidden" name="minhtml" value="<%=min+15 %>">
+                    <input type="hidden" name="maxhtml" value="<%=max+15 %>">
+                    <button class="bmove" type="submit">Siguiente -></button>
+                </form>
+                <% } %>
+                    <% if(min> 0){%>
+                        <form action="/reservaactualizado" method="post">
+                            <input type="hidden" name="buscarxhtml" value="<%=busco %>">
+                            <input type="hidden" name="minhtml" value="<%=min-15 %>">
+                            <input type="hidden" name="maxhtml" value="<%=max-15 %>">
+                            <button class="bmove" type="submit"><- Anterior </button>
+                        </form>
+                        <% } %>
+                            <%}else if(registros!=null && registros.length==0){%>
+                                <div class="pneg">
+                                    <p>No hay registros</p>
+                                </div>
+                                <%}else if(registros==null){%>
+                                    <div class="pneg">
+                                        <p>Error al obtener los registros</p>
+                                    </div>
+                                    <%}%>
     </div>
 
 </body>

@@ -1,11 +1,12 @@
 import express from "express";
-import { reservamenu, reservavertodo, reservabusqueda, reservasearch, reservaalta, reservanuevo, reservabaja, reservadelete, reservamodificaciones, reservamodificacionagarre, reservamodificacion } from "../controller/controllerreserva.js";
+import { reservamenu, reservavertodo, reservaactualizado, reservabusqueda, reservasearch, reservaalta, reservanuevo, reservabaja, reservadelete, reservamodificaciones, reservamodificacionagarre, reservamodificacion } from "../controller/controllerreserva.js";
 
 const rreserva = express.Router();
 
 rreserva.get('/reserva', reservamenu);
 
 rreserva.get('/reservavertodo', reservavertodo);
+rreserva.post('/reservaactualizado', reservaactualizado);
 
 rreserva.get('/reservabusqueda', reservabusqueda);
 rreserva.post('/reservasearch', reservasearch);
