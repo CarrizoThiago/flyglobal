@@ -43,59 +43,112 @@
                 <p>No se pudo ejecutar la query o hubo un error en la base de datos.</p>
             </div>
             <% }else if(exito==false || !registros || registros.length==0){ %>
-            <div class="pneg">
-                <p>No se encontro un usuario con ese id.</p>
-            </div>
-            <% }else{ %>
-                <div class="ppos">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>pasaporte</th>
-                                <th>nombre</th>
-                                <th>apellido</th>
-                                <th>email</th>
-                                <th>telefono</th>
-                                <th>contraseña</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="tdpar">
-                                <td>
-                                    <%=registros[0].idusuario %>
-                                </td>
-                                <td>
-                                    <%=registros[0].pasaporte %>
-                                </td>
-                                <td>
-                                    <%=registros[0].nombre %>
-                                </td>
-                                <td>
-                                    <%=registros[0].apellido %>
-                                </td>
-                                <td>
-                                    <%=registros[0].email %>
-                                </td>
-                                <td>
-                                    <%=registros[0].telefono %>
-                                </td>
-                                <td>
-                                    <%if(registros[0].contraseña !=null && registros[0].contraseña !="" ){%>
-                                        <%=registros[0].contraseña %>
-                                            <%}else{%>Usuario sin contraseña.
+                <div class="pneg">
+                    <p>No se encontro un usuario con ese id.</p>
+                </div>
+                <% }else{ %>
+                    <div class="ppos">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>pasaporte</th>
+                                    <th>nombre</th>
+                                    <th>apellido</th>
+                                    <th>email</th>
+                                    <th>telefono</th>
+                                    <th>contraseña</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="tdpar">
+                                    <td>
+                                        <%=registros[0].idusuario %>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].pasaporte %>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].nombre %>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].apellido %>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].email %>
+                                    </td>
+                                    <td>
+                                        <%=registros[0].telefono %>
+                                    </td>
+                                    <td>
+                                        <%if(registros[0].contraseña !=null && registros[0].contraseña !="" ){%>
+                                            <%=registros[0].contraseña %>
+                                                <%}else{%>Usuario sin contraseña.
+                                                    <%}%>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <%if(registros2.length>0){%>
+                            <p>Historial de reservas del usuario:</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>IDvuelo</th>
+                                        <th>Fecha de la reserva</th>
+                                        <th>Asiento asignado</th>
+                                        <th>Costo</th>
+                                        <th>IDusuario</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% let gastado=0;for(let i=0; i < registros2.length; i++){gastado
+                                        +=registros2[i].costo;%>
+                                        <%if(i%2==0){%>
+                                            <tr class="tdpar">
+                                                <%}else{%>
+                                            <tr class="tdimpar">
                                                 <%}%>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            <% } }else{%>
-                <div class="pneu">
-                    <p>No se ha buscado algo aún.</p>
-                </div>
-            <%}%>
-                </div>
+                                                    <td>
+                                                        <%=registros2[i].idreserva %>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].vuelo_idvuelo%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].fecha%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].asiento%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].costo%>
+                                                    </td>
+                                                    <td>
+                                                        <%=registros2[i].usuario_idusuario%>
+                                                    </td>
+                                            </tr>
+                                            <%}%>
+                                                <tr style="background-color: #009639; font-weight:bold;">
+                                                    <td colspan="4">Total gastado:</td>
+                                                    <td colspan="2">
+                                                        ARG$ <%=gastado%>
+                                                    </td>
+
+                                                </tr>
+                                </tbody>
+                            </table>
+                            <%}else{%>
+                                <p class="pneu">Este usuario no tiene reservas a su nombre.</p>
+                                <%}%>
+                    </div>
+                    <% } }else{%>
+                        <div class="pneu">
+                            <p>No se ha buscado algo aún.</p>
+                        </div>
+                        <%}%>
+    </div>
 
 </body>
 

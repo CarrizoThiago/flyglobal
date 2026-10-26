@@ -167,8 +167,10 @@ export const usuariosearch = async (req, res) => {
         } else {
             let auxsql = "SELECT * FROM usuario WHERE idusuario = " + id + ";";
             const [registros, col] = await bdd.query(auxsql);
+            let ressql = "SELECT * FROM reserva WHERE usuario_idusuario = " + id + ";";
+            const [registros2, col2] = await bdd.query(ressql);
             exito = true;
-            res.render('usuario/usuariobusqueda', { muestro, exito, registros, err });
+            res.render('usuario/usuariobusqueda', { muestro, exito, registros, registros2, err });
         }
     } catch (error) {
         console.log(error);
