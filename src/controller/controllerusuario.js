@@ -99,13 +99,28 @@ export const usuarionuevo = async (req, res) => {
 
 export const usuariovertodo = async (req, res) => {
     const sql = "select * from usuario";
+    let min = 0, max = 15, paginas;
     try {
         const [registros, col] = await bdd.query(sql);
-        res.render('usuario/usuariovertodo', { registros });
+        res.render('usuario/usuariovertodo', { registros, min, max });
     } catch (error) {
         console.log(error);
         const registros = null;
-        res.render('usuario/usuariovertodo', { registros });
+        res.render('usuario/usuariovertodo', { registros, min, max });
+    }
+}
+
+export const usuarioactualizado = async (req, res) => {
+    const sql = "select * from usuario";
+    let min = parseInt(req.body.minhtml);
+    let max = parseInt(req.body.maxhtml);
+    try {
+        const [registros, col] = await bdd.query(sql);
+        res.render('usuario/usuariovertodo', { registros, min, max });
+    } catch (error) {
+        console.log(error);
+        const registros = null;
+        res.render('usuario/usuariovertodo', { registros, min, max });
     }
 }
 

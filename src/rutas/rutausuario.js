@@ -1,11 +1,13 @@
 import express from "express";
-import { usuariomenu, usuarioalta, usuariovertodo, usuarionuevo, usuariobaja, usuariodelete, usuariobusqueda, usuariosearch, usuariomodificaciones, usuariomodificacionagarre, usuariomodificacion } from "../controller/controllerusuario.js";
+import { usuariomenu, usuarioalta, usuariovertodo, usuarioactualizado, usuarionuevo, usuariobaja, usuariodelete, usuariobusqueda, usuariosearch, usuariomodificaciones, usuariomodificacionagarre, usuariomodificacion } from "../controller/controllerusuario.js";
 
 const rusuario = express.Router();
 
 rusuario.get('/usuario', usuariomenu)
 
 rusuario.get('/usuariovertodo', usuariovertodo)
+
+rusuario.post('/usuarioactualizado', usuarioactualizado)
 
 rusuario.get('/usuarioalta', usuarioalta)
 

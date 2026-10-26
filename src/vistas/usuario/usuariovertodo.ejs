@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 <% if(registros!=null && registros.length>0){ %>
-                    <% for(let i=0; i<registros.length; i++){ %>
+                    <% for(let i=min; i<registros.length && i<max; i++){ %>
                         <tr class="<% if(i%2==0){%>tdpar<%}else{%>tdimpar<%};%>">
                             <td>
                                 <%= registros[i].idusuario %>
@@ -74,6 +74,19 @@
                                     <%} %>
             </tbody>
         </table>
+        <% if(registros!=null && registros.length>max){%>
+            <form action="/usuarioactualizado" method="post">
+                <input type="hidden" name="minhtml" value="<%=min+15 %>">
+                <input type="hidden" name="maxhtml" value="<%=max+15 %>">
+                <button class="bmove" type="submit">Siguiente -></button>
+            </form>
+            <% }if(registros!=null && min>0){%>
+                <form action="/usuarioactualizado" method="post">
+                    <input type="hidden" name="minhtml" value="<%=min-15 %>">
+                    <input type="hidden" name="maxhtml" value="<%=max-15 %>">
+                    <button class="bmove" type="submit"><- Anterior </button>
+                </form>
+                <% } %>
     </div>
 </body>
 
