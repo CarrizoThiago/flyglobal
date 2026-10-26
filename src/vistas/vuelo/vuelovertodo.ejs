@@ -22,6 +22,34 @@
                 <button class="bvolver">volver al menu</button>
             </a>
         </nav>
+        <form action="/vueloactualizado" method="post">
+            <input type="hidden" name="minhtml" value="<%= 0 %>">
+            <input type="hidden" name="maxhtml" value="<%= 15 %>">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="buscarxhtml">Buscar por:</label>
+                    </td>
+                    <td class="tdinput">
+                        <select name="buscarxhtml">
+                            <option value="">Ver todos los Vuelos</option>
+                            <option value="ARG">Ver solo Vuelos de Nacionales</option>
+                            <option value="INT">Ver solo Vuelos Internacionales</option>
+                            <option value="V">Ver solo Vuelos vigentes</option>
+                            <option value="NV">Ver solo Vuelos no vigentes</option>
+                            <option value="L">Ver solo Vuelos llenos</option>
+                            <option value="NL">Ver solo Vuelos x llenar</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tdbutton">
+                        <button class="bmove" type="submit">Actualizar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
         <%if(muestro==true){%>
             <%if(registros!=null && registros.length>0){%>
                 <table>
@@ -37,7 +65,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%for(let i=0;i<registros.length;i++){%>
+                        <%for(let i=min;i<registros.length && i < max;i++){%>
                             <tr<%if(i%2==0) {%> class="tdpar"<% }else{%> class="tdimpar"<% }%> >
                                         <td>
                                             <%=registros[i].idvuelo%>
@@ -64,23 +92,32 @@
                                         <%}%>
                     </tbody>
                 </table>
-                <%}else if(registros!=null && registros.length==0){%>
-                    <div class="pneg">
-                        <p>No hay registros</p>
-                    </div>
-                <%}else if(registros==null){%>
-                    <div class="pneg">
-                        <p>Error al obtener los registros</p>
-                    </div>
-                <% }}%>
-                        <table>
-                            <form action="/vuelovervigente" method="post">
-                                <td class="tdbutton" colspan="2"><button class="bb">Solo ver vigentes</button></td>
+                <% if(registros.length>max){%>
+                    <form action="/vueloactualizado" method="post">
+                        <input type="hidden" name="minhtml" value="<%=min+15 %>">
+                        <input type="hidden" name="maxhtml" value="<%=max+15 %>">
+                        <input type="hidden" name="buscarxhtml" value="<%= buscarx %>">
+                        <button class="bmove" type="submit">Siguiente -></button>
+                    </form>
+                    <% } %>
+                        <% if(min> 0){%>
+                            <form action="/vueloactualizado" method="post">
+                                <input type="hidden" name="minhtml" value="<%=min-15 %>">
+                                <input type="hidden" name="maxhtml" value="<%=max-15 %>">
+                                <input type="hidden" name="buscarxhtml" value="<%= buscarx %>">
+                                <button class="bmove" type="submit"><- Anterior </button>
                             </form>
-                            <form action="/vuelovertodo" method="post">
-                                <td class="tdbutton" colspan="2"><button class="bb">Ver todos</button></td>
-                            </form>
-                        </table>
+                            <% } %>
+                                <%}else if(registros!=null && registros.length==0){%>
+                                    <div class="pneg">
+                                        <p>No hay registros</p>
+                                    </div>
+                                    <%}else if(registros==null){%>
+                                        <div class="pneg">
+                                            <p>Error al obtener los registros</p>
+                                        </div>
+                                        <% }}%>
+
 
 
 

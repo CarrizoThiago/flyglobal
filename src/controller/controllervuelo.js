@@ -14,34 +14,56 @@ export const vuelover = async (req, res) => {
 export const vuelovertodo = async (req, res) => {
     let auxsql = "SELECT * FROM ruiz_bd.vuelo;";
 
-    let registros = [], col = [], muestro = true;
+    let registros = [], col = [], muestro = true, min = 0, max = 15;
 
     try {
         [registros, col] = await bdd.query(auxsql);
         console.log(registros);
-        res.render('vuelo/vuelovertodo', { muestro, registros });
+        res.render('vuelo/vuelovertodo', { muestro, registros, min, max });
 
     } catch (error) {
         console.log(error);
         let registros = null;
-        res.render('vuelo/vuelovertodo', { muestro, registros });
+        res.render('vuelo/vuelovertodo', { muestro, registros, min, max });
     }
 }
 
-export const vuelovervigente = async (req, res) => {
-    let auxsql = "SELECT * FROM ruiz_bd.vuelo where fecha_salida >= now();";
-
-    let registros = [], col = [], muestro = true;
-
+export const vueloactualizado = async (req, res) => {
+    let muestro = true, registros = [], col = [];
+    let min = parseInt(req.body.minhtml);
+    let max = parseInt(req.body.maxhtml);
+    let buscarx = req.body.buscarxhtml;
+    let auxsql;
+    switch (buscarx) {
+        case "":
+            auxsql = "SELECT * FROM ruiz_bd.vuelo;";
+            break;
+        case "ARG":
+            auxsql = "SELECT * FROM ruiz_bd.vuelo INNER JOIN aeropuerto aer1 ON vuelo.aeropuerto_codigoiata_origen = aer1.codigoiata INNER JOIN aeropuerto aer2 ON vuelo.aeropuerto_codigoiata_destino = aer2.codigoiata WHERE  aer1.pais = 'ARGENTINA' AND aer2.pais = 'ARGENTINA' ORDER BY vuelo.idvuelo;";
+            break;
+        case "INT":
+            auxsql = "SELECT * FROM ruiz_bd.vuelo INNER JOIN aeropuerto aer1 ON vuelo.aeropuerto_codigoiata_origen = aer1.codigoiata INNER JOIN aeropuerto aer2 ON vuelo.aeropuerto_codigoiata_destino = aer2.codigoiata WHERE  aer1.pais != 'ARGENTINA' OR aer2.pais != 'ARGENTINA' ORDER BY vuelo.idvuelo;";
+            break;
+        case "V":
+            auxsql = "SELECT * FROM ruiz_bd.vuelo WHERE  vuelo.fecha_salida > NOW() ORDER BY vuelo.idvuelo;";
+            break;
+        case "NV":
+            auxsql = "SELECT * FROM ruiz_bd.vuelo WHERE  vuelo.fecha_salida < NOW() ORDER BY vuelo.idvuelo;";
+            break;
+        case "L":
+            auxsql = "SELECT * FROM ruiz_bd.vuelo  WHERE  (SELECT COUNT(*) FROM ruiz_bd.reserva WHERE reserva.vuelo_idvuelo = vuelo.idvuelo) = (SELECT capacidad FROM ruiz_bd.avion WHERE avion.matricula = vuelo.avion_matricula) ORDER BY vuelo.idvuelo;";
+            break;
+        case "NL":
+            auxsql = "SELECT * FROM ruiz_bd.vuelo WHERE  (SELECT COUNT(*) FROM ruiz_bd.reserva WHERE reserva.vuelo_idvuelo = vuelo.idvuelo) < (SELECT capacidad FROM ruiz_bd.avion WHERE avion.matricula = vuelo.avion_matricula) ORDER BY vuelo.idvuelo;";
+            break;
+    }
     try {
         [registros, col] = await bdd.query(auxsql);
-        console.log(registros);
-        res.render('vuelo/vuelovertodo', { muestro, registros });
-
+        res.render('vuelo/vuelovertodo', { muestro, registros, min, max, buscarx });
     } catch (error) {
         console.log(error);
         let registros = null;
-        res.render('vuelo/vuelovertodo', { muestro, registros });
+        res.render('vuelo/vuelovertodo', { muestro, registros, min, max, buscarx });
     }
 }
 
