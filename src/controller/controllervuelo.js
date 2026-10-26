@@ -73,19 +73,41 @@ export const vuelobusqueda = async (req, res) => {
 }
 
 export const vuelosearch = async (req, res) => {
-    let auxsql, muestro = true, err = false, registros = [], registros2 = [], col = [], col2 = [], id;
+    let auxsql, muestro = true, err = false, registros = [], registros2 = [], col = [], col2 = [], buscarx, input, ids;
     try {
-        id = req.body.idhtml || "";
-        if (!id || !/^[0-9]+$/.test(id)) {
-            res.render('vuelo/vuelobusqueda', { muestro, err: false, registros: [], registros2: [] });
-            return;
+        buscarx = req.body.buscarxhtml || "";
+        input = req.body.inputhtml || "";
+        switch (buscarx) {
+            case "aeropuerto_codigoiata_origen":
+                auxsql = "SELECT * FROM vuelo WHERE aeropuerto_codigoiata_origen = '" + input + "';";
+                break;
+            case "aeropuerto_codigoiata_destino":
+                auxsql = "SELECT * FROM vuelo WHERE aeropuerto_codigoiata_destino = '" + input + "';";
+                break;
+            case "avion_matricula":
+                auxsql = "SELECT * FROM vuelo WHERE avion_matricula = '" + input + "';";
+                break;
+            case "idvuelo":
+                auxsql = "SELECT * FROM vuelo WHERE idvuelo = '" + input + "';";
+                break;
         }
-        auxsql = "SELECT * FROM vuelo WHERE idvuelo = " + id + ";";
-        [registros, col] = await bdd.query(auxsql);
-        if (registros.length == 0 || registros[0].idvuelo == null) {
+        if (input != "") {
+            [registros, col] = await bdd.query(auxsql);
+            if (registros.length == 0 || registros[0].idvuelo == null) {
+            } else {
+                for (let i = 0; i < registros.length; i++) {
+                    if (i == 0) {
+                        ids = registros[i].idvuelo;
+                    } else {
+                        ids = ids + "," + registros[i].idvuelo;
+                    }
+                }
+                let ressql = "SELECT * FROM ruiz_bd.reserva where vuelo_idvuelo in (" + ids + ");";
+                [registros2, col2] = await bdd.query(ressql);
+
+            }
         } else {
-            let ressql = "SELECT * FROM ruiz_bd.reserva where vuelo_idvuelo = " + id + ";";
-            [registros2, col2] = await bdd.query(ressql);
+            muestro = false;
         }
 
         res.render('vuelo/vuelobusqueda', { muestro, err, registros, registros2 });

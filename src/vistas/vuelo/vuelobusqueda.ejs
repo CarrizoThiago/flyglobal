@@ -23,10 +23,23 @@
             <table>
                 <tr>
                     <td class="tdlabel">
-                        <label for="idhtml">ID de vuelo</label>
+                        <label for="buscarxhtml">Buscar por:</label>
                     </td>
                     <td class="tdinput">
-                        <input type="text" name="idhtml" placeholder="ID de vuelo">
+                        <select name="buscarxhtml">
+                            <option value="idvuelo">IDvuelo</option>
+                            <option value="aeropuerto_codigoiata_origen">Aeropuerto Origen</option>
+                            <option value="aeropuerto_codigoiata_destino">Aeropuerto Destino</option>
+                            <option value="avion_matricula">Avion</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="inputhtml">Ingrese:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="inputhtml" placeholder="Busqueda...">
                     </td>
                 </tr>
                 <tr>
@@ -63,29 +76,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="tdpar">
-                                        <td>
-                                            <%=registros[0].idvuelo%>
-                                        </td>
-                                        <td>
-                                            <%=registros[0].numerovuelo%>
-                                        </td>
-                                        <td>
-                                            <%=registros[0].aeropuerto_codigoiata_origen%>
-                                        </td>
-                                        <td>
-                                            <%=registros[0].aeropuerto_codigoiata_destino%>
-                                        </td>
-                                        <td>
-                                            <%=registros[0].fecha_salida%>
-                                        </td>
-                                        <td>
-                                            <%=registros[0].fecha_llegada%>
-                                        </td>
-                                        <td>
-                                            <%=registros[0].avion_matricula%>
-                                        </td>
-                                    </tr>
+                                    <% for(let i=0; i<registros.length; i++){ %>
+                                        <tr class="<% if(i%2==0){%>tdpar<%}else{%>tdimpar<%}%>">
+                                            <td>
+                                                <%=registros[i].idvuelo%>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].numerovuelo%>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].aeropuerto_codigoiata_origen%>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].aeropuerto_codigoiata_destino%>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].fecha_salida%>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].fecha_llegada%>
+                                            </td>
+                                            <td>
+                                                <%=registros[i].avion_matricula%>
+                                            </td>
+                                        </tr>
+                                        <%}%>
                                 </tbody>
                             </table>
                             <% if (registros2.length> 0) { %>
@@ -102,7 +117,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <% for (let i=0; i < registros2.length; i++) { %>
+                                        <% let gananciabruta=0;for (let i=0; i < registros2.length; i++) { gananciabruta
+                                            +=registros2[i].costo;%>
                                             <tr <% if(i%2==0){%> class="tdpar" <%}else{%> class="tdimpar" <%}%> >
                                                         <td>
                                                             <%=registros2[i].idreserva%>
@@ -126,6 +142,11 @@
 
                                             </tr>
                                             <%}%>
+                                                <tr style="background-color: #009639; font-weight:bold;">
+                                                    <td colspan="4">Ganancia Bruta del vuelo:</td>
+                                                    <td colspan="2">ARG$ <%=gananciabruta%>
+                                                    </td>
+                                                </tr>
                                     </tbody>
                                 </table>
                                 <%}%>
