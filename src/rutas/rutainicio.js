@@ -4,6 +4,7 @@ import { ravion } from "./rutaavion.js";
 import { rusuario } from "./rutausuario.js";
 import { rvuelo } from "./rutavuelo.js";
 import { rreserva } from "./rutareserva.js";
+import { restadistica } from "./rutaestadistica.js";
 const rinicio = express.Router();
 
 rinicio.get('/', (req, res) => {
@@ -19,5 +20,7 @@ rinicio.use(rusuario);
 rinicio.use(rvuelo);
 
 rinicio.use(rreserva);
+
+rinicio.use(restadistica);
 
 export { rinicio };
