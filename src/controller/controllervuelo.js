@@ -141,8 +141,8 @@ export const vuelonuevo = async (req, res) => {
     } else {
         iatadestino = "";
     }
-    fechasalida = req.body.fechasalidahtml;
-    fechallegada = req.body.fechallegadahtml;
+    fechasalida = req.body.fechasalidahtml.replace('T', ' ') + ":00";
+    fechallegada = req.body.fechallegadahtml.replace('T', ' ') + ":00";
     if (req.body.matriculahtml) {
         matricula = req.body.matriculahtml.toUpperCase();
     } else {
@@ -200,10 +200,10 @@ export const vuelonuevo = async (req, res) => {
         consigna++;
     }
 
-    confechasalida = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(fechasalida) && !isNaN(Date.parse(fechasalida));
+    confechasalida = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(fechasalida) && !isNaN(Date.parse(fechasalida)) && fechasalida > new Date().toISOString();
     if (confechasalida == false) { consigna++; }
 
-    confechallegada = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(fechallegada) && !isNaN(Date.parse(fechallegada));
+    confechallegada = /^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}$/.test(fechallegada) && !isNaN(Date.parse(fechallegada)) && fechallegada > fechasalida;
     if (confechallegada == false) { consigna++; }
 
     try {

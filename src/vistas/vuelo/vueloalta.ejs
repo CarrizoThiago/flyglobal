@@ -52,7 +52,7 @@
                         <label for="fechasalidahtml">Fecha de salida:</label>
                     </td>
                     <td class="tdinput">
-                        <input type="text" name="fechasalidahtml" placeholder="YYYY-MM-DD HH:MM:SS">
+                        <input type="datetime-local" name="fechasalidahtml" placeholder="YYYY-MM-DD HH:MM:SS">
                     </td>
                 </tr>
                 <tr>
@@ -60,7 +60,7 @@
                         <label for="fechallegadahtml">Fecha de llegada:</label>
                     </td>
                     <td class="tdinput">
-                        <input type="text" name="fechallegadahtml" placeholder="YYYY-MM-DD HH:MM:SS">
+                        <input type="datetime-local" name="fechallegadahtml" placeholder="YYYY-MM-DD HH:MM:SS">
                     </td>
                 </tr>
                 <tr>
@@ -137,12 +137,13 @@
                                             datos.<br>Debe tener 3 letras y corresponder a un aeropuerto registrado.</p>
                                         <% } %>
                                             <% if(confechasalida==false){ %>
-                                                <p>La fecha de salida es incorrecta.<br>Formato requerido: YYYY-MM-DD
-                                                    HH:MM:SS.</p>
+                                                <p>La fecha de salida es incorrecta.<br>Debe ser POSTERIOR A LA FECHA
+                                                    ACTUAL, ademas debe mencionar horas, minutos y segundos.</p>
                                                 <% } %>
                                                     <% if(confechallegada==false){ %>
-                                                        <p>La fecha de llegada es incorrecta.<br>Formato requerido:
-                                                            YYYY-MM-DD HH:MM:SS.</p>
+                                                        <p>La fecha de llegada es incorrecta.<br>DEBE SER POSTERIOR A LA
+                                                            FECHA DE SALIDA, ademas debe mencionar horas, minutos y
+                                                            segundos.</p>
                                                         <% } %>
                                                             <% if(conmatricula==false){ %>
                                                                 <p>La matricula del avion es incorrecta o no existe en
