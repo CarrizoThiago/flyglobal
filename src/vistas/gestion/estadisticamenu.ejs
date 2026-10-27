@@ -14,9 +14,11 @@
             <h1>Estadisicas de Fly Global.</h1>
         </header>
         <div class="botonera">
-            <div class="boton">
-                <h3>Estadisicas Generales</h3>
-            </div>
+            <form action="/estadisticageneral" method="post">
+                <button type="submit" class="boton">
+                    <h3>Estadisicas Generales</h3>
+                </button>
+            </form>
             <div class="botoncin">
                 <h5>Estadistica de aeropuertos</h5>
             </div>
@@ -40,9 +42,169 @@
         </div>
         <div class="resultadocontainer">
             <%switch(muestro){ case 0: %>
-                <p>esperando-instrucciones: . . .</p>
+                <p>esperando-instrucciones . . . <br> admin@admin:</p>
                 <%break;%>
                     <%case 1:%>
+                        <div class="ancho">
+                            <p>admin@admin: cd opt <br> admin@admin:/opt ./estadisticas generales <br></p>
+                        </div>
+                        <div class="ancho">
+                            <h3>ESTADISTICAS GENERALES</h3>
+                        </div>
+                        <div class="ancho">
+                            <div class="medioAncho">
+                                <h3>STATS VUELOS</h3>
+                                <p>VUELOS TOTALES: <%= vuelostotales %>
+                                </p>
+                                <p>FLOTA TOTAL: <%=flotatotal %>
+                                </p>
+                                <div class="barra">
+                                    <div class="label">
+                                        <label for="">VUELOS VIGENTES: <%= vuelosvigentes %></label>
+                                    </div>
+                                    <div class="relleno">
+                                        <div
+                                            style="background-color: #009639; height: 100%; width: <%=(vuelosvigentes/vuelostotales)*100 %>%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="barra">
+                                    <div class="label">
+                                        <label for="">VUELOS NO VIGENTES: <%=vuelosnovigentes %></label>
+                                    </div>
+                                    <div class="relleno">
+                                        <div
+                                            style="background-color: #C8102E; height: 100%; width: <%=(vuelosnovigentes/vuelostotales)*100 %>%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>CAPACIDAD PASAJEROS TOTAL: <%=capacidadpasajeros %>
+                                </p>
+                                <div class="barra">
+                                    <div class="label">
+                                        <label for="">TOTAL PASAJEROS: <%=pasajerostotales %></label>
+                                    </div>
+                                    <div class="relleno">
+                                        <div
+                                            style=" background-color: #009639; height: 100%; width: <%=(pasajerostotales/capacidadpasajeros)*100 %>%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="barra">
+                                    <div class="label">
+                                        <label for="">ASIENTOS VACIOS:
+                                            <%=capacidadpasajeros-pasajerostotales%></label>
+                                    </div>
+                                    <div class="relleno">
+                                        <div
+                                            style="background-color: #C8102E; height: 100%; width: <%=(capacidadpasajeros-pasajerostotales)/capacidadpasajeros*100 %>%">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>OCUPACION MEDIA: <%=ocupacionmedia %>%%
+                                </p>
+                            </div>
+                            <div class="medioAncho">
+                                <h3>STATS USUARIOS</h3>
+                                <p>TOTAL USUARIOS: <%=usuariosregistrados %>
+                                </p>
+                                <p>EMPLEADOS: <%=empleadosregistrados %>
+                                </p>
+                                <p>RESERVAS TOTALES: <%=reservastotales %>
+                                </p>
+                                <p>RESERVAS POR USUARIO: <%=reservaspromedio %>
+                                </p>
+                                <p>GASTO PROMEDIO USUARIO: ARG$ <%=gastopromediousuario %>
+                                </p>
+                                <p>INGRESOS TOTALES: ARG$ <%=ingresosbrutos %>
+                                </p>
+                                <p>GASTO PROMEDIO RESERVA: ARG$ <%=gastopromedioreserva %>
+                                </p>
+
+
+
+                            </div>
+                        </div>
+                        <div class="ancho">
+                            <div class="medioAncho">
+                                <h3>DESTINOS MAS POPULARES</h3>
+                                <table>
+                                    <thead>
+                                        <th>PUESTO</th>
+                                        <th>CODIGO IATA</th>
+                                        <th>NOMBRE</th>
+                                        <th>CIUDAD</th>
+                                        <th>PAIS</th>
+                                        <th>RESERVAS</th>
+                                    </thead>
+                                    <tbody>
+                                        <%for(let i=0;i<destinospopulares.length-10;i++){%>
+                                            <tr <%if (i==0){%>style="color: gold;"<%}%>>
+                                                    <td>
+                                                        #<%=i+1 %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][0] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][1] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][2] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][3] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][4] %>
+                                                    </td>
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="medioAncho">
+                                <h3>DESTINOS MENOS POPULARES</h3>
+                                <table>
+                                    <thead>
+                                        <th>PUESTO</th>
+                                        <th>CODIGO IATA</th>
+                                        <th>NOMBRE</th>
+                                        <th>CIUDAD</th>
+                                        <th>PAIS</th>
+                                        <th>RESERVAS</th>
+                                    </thead>
+                                    <tbody>
+                                        <%for(let i=destinospopulares.length-1;i>=destinospopulares.length-10;i--){%>
+                                            <tr <%if(i==destinospopulares.length-1){%>style="color: #C8102E;"
+                                                <%}%>>
+                                                    <td>
+                                                        #<%=20-i %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][0] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][1] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][2] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][3] %>
+                                                    </td>
+                                                    <td>
+                                                        <%=destinospopulares[i][4] %>
+                                                    </td>
+                                            </tr>
+                                            <% } %>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+
 
                         <%break;%>
                             <% } %>
