@@ -20,25 +20,23 @@
         <a href="/avion">
             <button class="bvolver">Volver al Menu</button>
         </a>
-        <div class="pneu">
-            <form action="/avionsearch" method="post">
-                <table>
-                    <tr>
-                        <td class="tdlabel">
-                            <label for="matricula">Matricula:</label>
-                        </td>
-                        <td class="tdinput">
-                            <input type="text" name="matriculahtml" id="matricula">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdbutton" colspan="2">
-                            <button type="submit" class="bb">Buscar</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+        <form action="/avionsearch" method="post">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="matricula">Matricula:</label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="matriculahtml" id="matricula">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdbutton" colspan="2">
+                        <button type="submit" class="bb">Buscar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
         <%if(muestro){ if(encontrado){%>
             <div class="ppos">
                 <p>Avion encontrado.</p>
@@ -64,6 +62,44 @@
                         </tr>
                     </tbody>
                 </table>
+                <%if(registro2.length> 0){%>
+                    <p>Vuelos con este avion:</p>
+                    <table>
+                        <thead>
+                            <th>IDvuelo</th>
+                            <th>Numero de vuelo</th>
+                            <th>Origen</th>
+                            <th>Destino</th>
+                            <th>Fecha de salida</th>
+                            <th>Fecha de llegada</th>
+                        </thead>
+                        <tbody>
+                            <%for(let i=0; i<registro2.length;i++){%>
+                                <tr <%if( i%2==0){%> class="tdpar"<%}else{%>class="tdimpar"<%}%> >
+                                            <td>
+                                                <%=registro2[i].idvuelo%>
+                                            </td>
+                                            <td>
+                                                <%=registro2[i].numerovuelo%>
+                                            </td>
+                                            <td>
+                                                <%=registro2[i].aeropuerto_codigoiata_origen%>
+                                            </td>
+                                            <td>
+                                                <%=registro2[i].aeropuerto_codigoiata_destino%>
+                                            </td>
+                                            <td>
+                                                <%=registro2[i].fecha_salida%>
+                                            </td>
+                                            <td>
+                                                <%=registro2[i].fecha_llegada%>
+                                            </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                    <%}%>
+
 
             </div>
             <%}else{%>

@@ -1,5 +1,5 @@
 import express from "express";
-import { avionmenu, avionalta, avionnuevo, avionbaja, aviondelete, avionmodificaciones, avionmodificacionagarre, avionmodificacion, avionvertodo, avionbusqueda, avionsearch } from "../controller/controlleravion.js";
+import { avionmenu, avionalta, avionnuevo, avionbaja, aviondelete, avionmodificaciones, avionmodificacionagarre, avionmodificacion, avionvertodo, avionbusqueda, avionsearch, avionactualizado } from "../controller/controlleravion.js";
 const ravion = express.Router();
 
 ravion.get('/avion', avionmenu)
@@ -19,6 +19,8 @@ ravion.post('/avionmodificacionagarre', avionmodificacionagarre)
 ravion.post('/avionmodificacion', avionmodificacion)
 
 ravion.get('/avionvertodo', avionvertodo)
+
+ravion.post('/avionactualizado', avionactualizado)
 
 ravion.get('/avionbusqueda', avionbusqueda)
 

@@ -67,18 +67,45 @@ export const aviondelete = async (req, res) => {
 }
 
 export const avionvertodo = async (req, res) => {
+    let min = 0, max = 15, buscarx = "";
     const auxsql = "SELECT * FROM `ruiz_bd`.`avion`;";
     try {
         const [registro, col] = await bdd.query(auxsql);
         console.log(registro);
-        res.render('aviones/avionvertodo', { registro });
+        res.render('aviones/avionvertodo', { registro, buscarx, min, max });
     } catch (error) {
         console.log(error);
         let registro = [];
-        res.render('aviones/avionvertodo', { registro });
+        res.render('aviones/avionvertodo', { registro, buscarx, min, max });
     }
 }
 
+export const avionactualizado = async (req, res) => {
+    let min = parseInt(req.body.minhtml), max = parseInt(req.body.maxhtml), buscarx = req.body.buscarxhtml;
+    let auxsql;
+    switch (buscarx) {
+        case "": auxsql = "SELECT * FROM `ruiz_bd`.`avion`;";
+            break;
+        case "100": auxsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE capacidad <100;";
+            break;
+        case "200": auxsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE capacidad <200;";
+            break;
+        case "300":
+            auxsql = "SELECT * FROM `ruiz_bd`.`avion` WHERE capacidad >200;";
+            break;
+    }
+    try {
+        const [registro, col] = await bdd.query(auxsql);
+        console.log(registro);
+        res.render('aviones/avionvertodo', { registro, buscarx, min, max });
+
+    } catch (error) {
+        console.log(error);
+        let registro = [];
+        res.render('aviones/avionvertodo', { registro, buscarx, min, max });
+    }
+
+}
 export const avionbusqueda = async (req, res) => {
     let muestro = false;
     res.render('aviones/avionbusqueda', { muestro });
@@ -95,7 +122,9 @@ export const avionsearch = async (req, res) => {
             res.render('aviones/avionbusqueda', { muestro, encontrado, matricula });
         } else {
             let encontrado = true;
-            res.render('aviones/avionbusqueda', { muestro, encontrado, matricula, registro });
+            auxsql = "SELECT * FROM vuelo WHERE avion_matricula = '" + matricula + "';";
+            const [registro2, col2] = await bdd.query(auxsql);
+            res.render('aviones/avionbusqueda', { muestro, encontrado, matricula, registro, registro2 });
         }
     } catch (error) {
         console.log(error);

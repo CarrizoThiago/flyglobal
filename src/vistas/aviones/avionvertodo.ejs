@@ -20,6 +20,31 @@
         <a href="/avion">
             <button class="bvolver">Volver al menu</button>
         </a>
+        <form action="/avionactualizado" method="post">
+            <input type="hidden" name="minhtml" value="0">
+            <input type="hidden" name="maxhtml" value="15">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="buscarxhtml">Buscar:</label>
+                    </td>
+                    <td class="tdinput">
+                        <select name="buscarxhtml">
+                            <option value="">Todos</option>
+                            <option value="100">Menos de 100 pasajeros</option>
+                            <option value="200">Menos de 200 pasajeros</option>
+                            <option value="300">Mas de 200 pasajeros</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <td colspan="2" class="tdbutton">
+                    <button type="submit" class="bb">Actualizar</button>
+                </td>
+
+            </table>
+
+        </form>
         <%if(registro!=null && registro.length==0){%>
             <div class="pneg">
                 <p>No se encontro ningun avion.</p>
@@ -34,7 +59,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%for(let i=0;i<registro.length;i++) {%>
+                        <%for(let i=min;i<registro.length && i<max;i++) {%>
                             <tr <% if(i%2==0){%> class="tdpar" <%}else{%> class="tdimpar" <%}%> >
                                         <td>
                                             <%= registro[i].matricula %>
@@ -49,11 +74,27 @@
                             <%}%>
                     </tbody>
                 </table>
-                <%}else{%>
-                    <div class="pneg">
-                        <p>Error al obtener los registros de aviones.</p>
-                    </div>
-                <%}%>
+                <%if(registro.length>max){%>
+                    <form action="/avionactualizado" method="post">
+                        <input type="hidden" name="buscarxhtml" value="<%=buscarx%>">
+                        <input type="hidden" name="minhtml" value="<%=min + 15%>">
+                        <input type="hidden" name="maxhtml" value="<%=max + 15%>">
+                        <button type="submit" class="bb">Siguiente -></button>
+                    </form>
+                    <%}%>
+                        <%if(min> 0){%>
+                            <form action="/avionactualizado" method="post">
+                                <input type="hidden" name="buscarxhtml" value="<%=buscarx%>">
+                                <input type="hidden" name="minhtml" value="<%=min - 15%>">
+                                <input type="hidden" name="maxhtml" value="<%=max - 15%>">
+                                <button type="submit" class="bb"><- Anterior</button>
+                            </form>
+                            <%}%>
+                                <%}else{%>
+                                    <div class="pneg">
+                                        <p>Error al obtener los registros de aviones.</p>
+                                    </div>
+                                    <%}%>
     </div>
 
 </body>

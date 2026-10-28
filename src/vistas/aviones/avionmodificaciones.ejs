@@ -22,25 +22,24 @@
             <button class="bvolver">volver al menu</button>
         </a>
 
-        <div class="pneu">
-            <form action="/avionmodificacionagarre" method="post">
-                <table>
-                    <tr>
-                        <td class="tdlabel">
-                            <label for="matriculahtml">Matricula: </label>
-                        </td>
-                        <td class="tdinput">
-                            <input type="text" name="matriculahtml">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="tdbutton" colspan="2">
-                            <button type="submit" class="bb">ubicar</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+        <form action="/avionmodificacionagarre" method="post">
+            <table>
+                <tr>
+                    <td class="tdlabel">
+                        <label for="matriculahtml">Matricula: </label>
+                    </td>
+                    <td class="tdinput">
+                        <input type="text" name="matriculahtml">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tdbutton" colspan="2">
+                        <button type="submit" class="bb">ubicar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
         <% if(muestro){if(encontrado){%>
             <div class="ppos">
                 <p>Se encontro el avion.</p> <br>
@@ -150,20 +149,22 @@
                                                 Matricula incorrecta, Esta como mucho debe de tener 10 caracteres
                                                 alfanumericos.</p>
                                             <%}%>
-                                        <%if(conmat2==false){%>
-                                            <p>
-                                                La matricula ya esta tomada: <%= matricula %>.</p>
-                                            <%}%>
-                                                <%if(conmod==false){%>
+                                                <%if(conmat2==false){%>
                                                     <p>
-                                                        Modelo incorrecto, Esta como mucho debe de tener 50 caracteres
-                                                        alfanumericos.</p>
+                                                        La matricula ya esta tomada: <%= matricula %>.</p>
                                                     <%}%>
-                                                        <%if(concap==false){%>
+                                                        <%if(conmod==false){%>
                                                             <p>
-                                                                Capacidad incorrecta, Esta como mucho debe de tener 10
-                                                                digitos y solo numericos.</p>
+                                                                Modelo incorrecto, Esta como mucho debe de tener 50
+                                                                caracteres
+                                                                alfanumericos.</p>
                                                             <%}%>
+                                                                <%if(concap==false){%>
+                                                                    <p>
+                                                                        Capacidad incorrecta, Esta como mucho debe de
+                                                                        tener 10
+                                                                        digitos y solo numericos.</p>
+                                                                    <%}%>
 
                                     </div>
                                     <%} }%>
