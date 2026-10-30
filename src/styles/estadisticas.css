@@ -79,6 +79,7 @@ header {
     width: 49%;
     border: 2px solid #D9D9D6;
     min-height: 100%;
+    padding: 1%;
 }
 
 .barra {
@@ -87,6 +88,7 @@ header {
     display: flex;
     flex-direction: row;
     gap: 2%;
+    margin-bottom: 1%;
 }
 
 .label {

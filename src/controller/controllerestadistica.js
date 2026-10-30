@@ -103,3 +103,59 @@ export const estadisticageneral = async (req, res) => {
 
     res.render("gestion/estadisticamenu", { muestro, destinospopulares, vuelostotales, vuelosvigentes, vuelosnovigentes, pasajerostotales, ocupacionmedia, capacidadpasajeros, usuariosregistrados, reservastotales, ingresosbrutos, gastopromedioreserva, reservaspromedio, gastopromediousuario, empleadosregistrados, flotatotal });
 }
+
+export const estadisticaaeropuertos = async (req, res) => {
+    let muestro = 2;
+    let destinospopulares = [], auxiliardestino = [], vuelosxmes = [], maximoxmes, promedioanual;
+    let totalaeropuertos, aeropuertosxpais = [], aeropuertoxpaismax;
+    let auxreg = [], auxcol = [], i = 0, auxsql, auxsql2;
+    let aux1, aux2;
+
+    try {
+        auxsql = "SELECT * from aeropuerto;";
+        let [iatareg, iatacol] = await bdd.query(auxsql);
+        for (i = 0; i < iatareg.length; i++) {
+            auxsql2 = "SELECT COUNT(idreserva) AS total FROM vuelo INNER JOIN reserva ON idvuelo = vuelo_idvuelo where aeropuerto_codigoiata_destino = '" + iatareg[i].codigoiata + "';";
+            [auxreg, auxcol] = await bdd.query(auxsql2);
+            auxiliardestino[i] = parseInt(auxreg[0].total);
+            iatareg[i].total = (auxiliardestino[i]);
+        }
+        iatareg.sort((a, b) => b.total - a.total);
+        for (i = 0; i < 10; i++) {
+            destinospopulares[i] = [iatareg[i].codigoiata, iatareg[i].nombre, iatareg[i].ciudad, iatareg[i].pais, parseInt(iatareg[i].total)];
+        }
+        aux2 = 0;
+        for (i = iatareg.length - 1; i >= iatareg.length - 10; i--) {
+            destinospopulares[10 + aux2] = [iatareg[i].codigoiata, iatareg[i].nombre, iatareg[i].ciudad, iatareg[i].pais, parseInt(iatareg[i].total)];
+            aux2++;
+        }
+
+        aux2 = 0;
+        maximoxmes = 0;
+        for (i = 0; i < 12; i++) {
+            auxsql = "SELECT COUNT(*) AS total FROM vuelo WHERE (aeropuerto_codigoiata_destino = '" + destinospopulares[0][0] + "' OR aeropuerto_codigoiata_origen = '" + destinospopulares[0][0] + "') AND MONTH(fecha_salida) = " + (i + 1) + ";";
+            [auxreg, auxcol] = await bdd.query(auxsql);
+            vuelosxmes[i] = parseInt(auxreg[0].total);
+            if (vuelosxmes[i] > maximoxmes) {
+                maximoxmes = vuelosxmes[i];
+            }
+            aux2 += parseInt(auxreg[0].total);
+        }
+        promedioanual = aux2 / 12;
+
+        auxsql = "SELECT COUNT(*) AS total FROM aeropuerto;";
+        [auxreg, auxcol] = await bdd.query(auxsql);
+        totalaeropuertos = parseInt(auxreg[0].total);
+
+        auxsql = "SELECT pais, COUNT(*) AS total FROM aeropuerto GROUP BY pais;";
+        [aeropuertosxpais, auxcol] = await bdd.query(auxsql);
+        aeropuertosxpais.sort((a, b) => b.total - a.total);
+        aeropuertoxpaismax = parseInt(aeropuertosxpais[0].total);
+
+        res.render("gestion/estadisticamenu", { muestro, destinospopulares, vuelosxmes, maximoxmes, promedioanual, totalaeropuertos, aeropuertosxpais, aeropuertoxpaismax });
+
+    } catch (error) {
+        console.error("Error general en estadistica:", error);
+    }
+
+}
