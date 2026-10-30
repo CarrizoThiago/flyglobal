@@ -24,9 +24,11 @@
                     <h5>Estadistica de aeropuertos</h5>
                 </button>
             </form>
-            <div class="botoncin">
-                <h5>Estadistica de aviones</h5>
-            </div>
+            <form action="/estadisticaaviones" method="post">
+                <button class="botoncin">
+                    <h5>Estadistica de aviones</h5>
+                </button>
+            </form>
             <div class="botoncin">
                 <h5>Estadistica de usuarios</h5>
             </div>
@@ -449,7 +451,228 @@
                                     </div>
                                 </div>
                                 <%break;%>
-                                    <% } %>
+                                    <%case 3:%>
+                                        <div class="ancho">
+                                            <p>admin@admin: cd opt <br> admin@admin:/opt ./estadisticas aviones <br></p>
+                                        </div>
+                                        <div class="ancho">
+                                            <h3>ESTADISTICAS DE AVIONES</h3>
+                                        </div>
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>AVIONES POR MODELO</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>MODELO</th>
+                                                        <th>AVIONES</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=0;i<avionespormodelo.length;i++){%>
+                                                            <tr>
+                                                                <td> #<%=i+1%>
+                                                                </td>
+                                                                <td>
+                                                                    <%=avionespormodelo[i].modelo%>
+                                                                </td>
+                                                                <td>
+                                                                    <%=avionespormodelo[i].capacidad%>
+                                                                </td>
+                                                                <td>
+                                                                    <%=avionespormodelo[i].total%>
+                                                                </td>
+                                                            </tr>
+                                                            <%}%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>Meses de <%= avionespopulares[0][0]%> - <%= avionespopulares[0][1]%>
+                                                </h3>
+                                                <p>MESES/VUELOS</p>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ENERO:<%=vuelosxmes[0]%> </label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[0]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">FEBRERO:<%=vuelosxmes[1]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[1]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MARZO:<%=vuelosxmes[2]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[2]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ABRIL:<%=vuelosxmes[3]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[3]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MAYO:<%=vuelosxmes[4]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[4]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JUNIO:<%=vuelosxmes[5]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[5]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JULIO:<%=vuelosxmes[6]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[6]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">AGOSTO:<%=vuelosxmes[7]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[7]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">SEPTIEMBRE:<%=vuelosxmes[8]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[8]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">OCTUBRE:<%=vuelosxmes[9]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[9]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">NOVIEMBRE:<%=vuelosxmes[10]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[10]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">DICIEMBRE:<%=vuelosxmes[11]%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[11]/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">PROMEDIO ANUAL: <%= promedioanual%></label>
+                                                    </div>
+                                                    <div class="relleno"
+                                                        style="background-color: #009639; height: 100%; width: <%= (promedioanual/maximoxmes)*100%>%;">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>AVIONES MAS UTILIZADOS</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>MATRICULA</th>
+                                                        <th>MODELO</th>
+                                                        <th>CAPACIDAD</th>
+                                                        <th>VUELOS</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=0;i<avionespopulares.length-10;i++){%>
+                                                            <tr <%if (i==0){%>style="color: gold;"<%}%>>
+                                                                    <td>
+                                                                        #<%=i+1 %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][0] %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][1] %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][2] %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][3] %>
+                                                                    </td>
+                                                            </tr>
+                                                            <% } %>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>AVIONES MENOS UTILIZADOS</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>MATRICULA</th>
+                                                        <th>MODELO</th>
+                                                        <th>CAPACIDAD</th>
+                                                        <th>VUELOS</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=avionespopulares.length-1;i>=
+                                                            avionespopulares.length-10;i--){%>
+                                                            <tr <%if(i==avionespopulares.length-1){%>style="color:
+                                                                #C8102E;"
+                                                                <%}%>>
+                                                                    <td>
+                                                                        #<%=20-i %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][0] %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][1] %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][2] %>
+                                                                    </td>
+                                                                    <td>
+                                                                        <%=avionespopulares[i][3] %>
+                                                                    </td>
+                                                            </tr>
+                                                            <% } %>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                        <%break;%>
+                                            <% } %>
         </div>
     </div>
 

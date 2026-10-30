@@ -159,3 +159,62 @@ export const estadisticaaeropuertos = async (req, res) => {
     }
 
 }
+
+export const estadisticaaviones = async (req, res) => {
+    let muestro = 3;
+    let avionespopulares = [], auxiliarvuelos = [], vuelosxmes = [], maximoxmes, promedioanual;
+    let totalaviones, avionespormodelo = [], avionpormodelomax;
+    let auxreg = [], auxcol = [], i = 0, auxsql, auxsql2;
+    let aux1, aux2;
+
+    try {
+        auxsql = "SELECT * from avion;";
+        let [avionreg, avioncol] = await bdd.query(auxsql);
+        for (i = 0; i < avionreg.length; i++) {
+            auxsql2 = "SELECT COUNT(idvuelo) AS total FROM vuelo WHERE avion_matricula = '" + avionreg[i].matricula + "';";
+            [auxreg, auxcol] = await bdd.query(auxsql2);
+            auxiliarvuelos[i] = parseInt(auxreg[0].total);
+            avionreg[i].total = (auxiliarvuelos[i]);
+        }
+        avionreg.sort((a, b) => b.total - a.total);
+        for (i = 0; i < 10; i++) {
+            avionespopulares[i] = [avionreg[i].matricula, avionreg[i].modelo, avionreg[i].capacidad, parseInt(avionreg[i].total)];
+        }
+        aux2 = 0;
+        for (i = avionreg.length - 1; i >= avionreg.length - 10; i--) {
+            avionespopulares[10 + aux2] = [avionreg[i].matricula, avionreg[i].modelo, avionreg[i].capacidad, parseInt(avionreg[i].total)];
+            aux2++;
+        }
+
+        aux2 = 0;
+        maximoxmes = 0;
+        for (i = 0; i < 12; i++) {
+            auxsql = "SELECT COUNT(*) AS total FROM vuelo WHERE avion_matricula = '" + avionespopulares[0][0] + "' AND MONTH(fecha_salida) = " + (i + 1) + ";";
+            [auxreg, auxcol] = await bdd.query(auxsql);
+            vuelosxmes[i] = parseInt(auxreg[0].total);
+            if (vuelosxmes[i] > maximoxmes) {
+                maximoxmes = vuelosxmes[i];
+            }
+            aux2 += parseInt(auxreg[0].total);
+        }
+        if (maximoxmes == 0) {
+            maximoxmes = 1;
+        }
+        promedioanual = aux2 / 12;
+
+        auxsql = "SELECT COUNT(*) AS total FROM avion;";
+        [auxreg, auxcol] = await bdd.query(auxsql);
+        totalaviones = parseInt(auxreg[0].total);
+
+        auxsql = "SELECT modelo, capacidad, COUNT(*) AS total FROM avion GROUP BY modelo;";
+        [avionespormodelo, auxcol] = await bdd.query(auxsql);
+        avionespormodelo.sort((a, b) => b.total - a.total);
+        avionpormodelomax = parseInt(avionespormodelo[0].total);
+
+        res.render("gestion/estadisticamenu", { muestro, avionespopulares, vuelosxmes, maximoxmes, promedioanual, totalaviones, avionespormodelo, avionpormodelomax });
+
+    } catch (error) {
+        console.error("Error general en estadistica:", error);
+    }
+
+}
