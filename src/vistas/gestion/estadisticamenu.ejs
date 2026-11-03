@@ -29,15 +29,21 @@
                     <h5>Estadistica de aviones</h5>
                 </button>
             </form>
-            <div class="botoncin">
-                <h5>Estadistica de usuarios</h5>
-            </div>
-            <div class="botoncin">
-                <h5>Estadistica de vuelos</h5>
-            </div>
-            <div class="botoncin">
-                <h5>Estadistica de reservas</h5>
-            </div>
+            <form action="/estadisticavuelos" method="post">
+                <button class="botoncin">
+                    <h5>Estadistica de vuelos</h5>
+                </button>
+            </form>
+            <form action="/estadisticausuarios" method="post">
+                <button class="botoncin">
+                    <h5>Estadistica de usuarios</h5>
+                </button>
+            </form>
+            <form action="/estadisticareservas" method="post">
+                <button class="botoncin">
+                    <h5>Estadistica de reservas</h5>
+                </button>
+            </form>
             <a href="/" style="text-decoration: none; color: #D9D9D6;">
                 <div class="botoncin">
                     <h5>Volver</h5>
@@ -475,9 +481,7 @@
                                                                 <td>
                                                                     <%=avionespormodelo[i].modelo%>
                                                                 </td>
-                                                                <td>
-                                                                    <%=avionespormodelo[i].capacidad%>
-                                                                </td>
+
                                                                 <td>
                                                                     <%=avionespormodelo[i].total%>
                                                                 </td>
@@ -669,6 +673,548 @@
                                                     </tbody>
                                                 </table>
 
+                                            </div>
+                                        </div>
+                                        <%break;%>
+                                    <%case 4:%>
+                                        <div class="ancho">
+                                            <p>admin@admin: cd opt <br> admin@admin:/opt ./estadisticas vuelos <br></p>
+                                        </div>
+                                        <div class="ancho">
+                                            <h3>ESTADISTICAS DE VUELOS</h3>
+                                        </div>
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>ESTADO GENERAL DE VUELOS</h3>
+                                                <p>VUELOS TOTALES: <%= vuelostotales %></p>
+                                                <p>VUELOS EN EL AIRE: <%= vuelosaire %></p>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">VUELOS VIGENTES: <%= vuelosvigentes %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #009639; height: 100%; width: <%=(vuelosvigentes/vuelostotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">VUELOS NO VIGENTES: <%= vuelosnovigentes %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #C8102E; height: 100%; width: <%=(vuelosnovigentes/vuelostotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                                <h3>VUELOS POR ORIGEN</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>ORIGEN</th>
+                                                        <th>VUELOS</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=0;i<vuelospororigen.length && i<6;i++){%>
+                                                            <tr>
+                                                                <td>#<%=i+1%></td>
+                                                                <td><%=vuelospororigen[i].aeropuerto_codigoiata_origen%></td>
+                                                                <td><%=vuelospororigen[i].total%></td>
+                                                            </tr>
+                                                        <%}%>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>Distribucion de vuelos por mes</h3>
+                                                <p>MESES/VUELOS</p>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ENERO:<%=vuelosxmes[0]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[0]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">FEBRERO:<%=vuelosxmes[1]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[1]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MARZO:<%=vuelosxmes[2]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[2]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ABRIL:<%=vuelosxmes[3]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[3]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MAYO:<%=vuelosxmes[4]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[4]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JUNIO:<%=vuelosxmes[5]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[5]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JULIO:<%=vuelosxmes[6]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[6]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">AGOSTO:<%=vuelosxmes[7]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[7]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">SEPTIEMBRE:<%=vuelosxmes[8]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[8]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">OCTUBRE:<%=vuelosxmes[9]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[9]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">NOVIEMBRE:<%=vuelosxmes[10]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[10]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">DICIEMBRE:<%=vuelosxmes[11]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(vuelosxmes[11]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">PROMEDIO ANUAL: <%= promedioanual%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%= (promedioanual/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>VUELOS MAS DEMANDADOS</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>ID</th>
+                                                        <th>NUMERO</th>
+                                                        <th>ORIGEN</th>
+                                                        <th>DESTINO</th>
+                                                        <th>AVION</th>
+                                                        <th>RESERVAS</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=0;i<topvuelos.length-10;i++){%>
+                                                            <tr <%if (i==0){%>style="color: gold;"<%}%>>
+                                                                <td>#<%=i+1 %></td>
+                                                                <td><%=topvuelos[i][0] %></td>
+                                                                <td><%=topvuelos[i][1] %></td>
+                                                                <td><%=topvuelos[i][2] %></td>
+                                                                <td><%=topvuelos[i][3] %></td>
+                                                                <td><%=topvuelos[i][4] %></td>
+                                                                <td><%=topvuelos[i][5] %></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>VUELOS MENOS DEMANDADOS</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>ID</th>
+                                                        <th>NUMERO</th>
+                                                        <th>ORIGEN</th>
+                                                        <th>DESTINO</th>
+                                                        <th>AVION</th>
+                                                        <th>RESERVAS</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=topvuelos.length-1;i>=topvuelos.length-10;i--){%>
+                                                            <tr <%if(i==topvuelos.length-1){%>style="color: #C8102E;"<%}%>>
+                                                                <td>#<%=20-i %></td>
+                                                                <td><%=topvuelos[i][0] %></td>
+                                                                <td><%=topvuelos[i][1] %></td>
+                                                                <td><%=topvuelos[i][2] %></td>
+                                                                <td><%=topvuelos[i][3] %></td>
+                                                                <td><%=topvuelos[i][4] %></td>
+                                                                <td><%=topvuelos[i][5] %></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <%break;%>
+                                    <%case 5:%>
+                                        <div class="ancho">
+                                            <p>admin@admin: cd opt <br> admin@admin:/opt ./estadisticas usuarios <br></p>
+                                        </div>
+                                        <div class="ancho">
+                                            <h3>ESTADISTICAS DE USUARIOS</h3>
+                                        </div>
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>STATS USUARIOS</h3>
+                                                <p>TOTAL REGISTRADOS: <%= usuariostotales %></p>
+                                                <p>CLIENTES: <%= clientesregistrados %></p>
+                                                <p>EMPLEADOS: <%= empleadosregistrados %></p>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">CON RESERVAS: <%= usuariosconreserva %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #009639; height: 100%; width: <%=(usuariosconreserva/usuariostotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">SIN RESERVAS: <%= usuariossinreserva %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #C8102E; height: 100%; width: <%=(usuariossinreserva/usuariostotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>Meses de <%= usuariospopulares[0][2] %></h3>
+                                                <p>MESES/RESERVAS</p>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ENERO:<%=reservasxmes[0]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[0]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">FEBRERO:<%=reservasxmes[1]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[1]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MARZO:<%=reservasxmes[2]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[2]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ABRIL:<%=reservasxmes[3]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[3]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MAYO:<%=reservasxmes[4]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[4]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JUNIO:<%=reservasxmes[5]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[5]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JULIO:<%=reservasxmes[6]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[6]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">AGOSTO:<%=reservasxmes[7]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[7]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">SEPTIEMBRE:<%=reservasxmes[8]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[8]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">OCTUBRE:<%=reservasxmes[9]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[9]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">NOVIEMBRE:<%=reservasxmes[10]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[10]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">DICIEMBRE:<%=reservasxmes[11]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[11]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">PROMEDIO ANUAL: <%= promedioanual%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%= (promedioanual/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>USUARIOS CON MAS RESERVAS</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>ID</th>
+                                                        <th>PASAPORTE</th>
+                                                        <th>NOMBRE Y APELLIDO</th>
+                                                        <th>EMAIL</th>
+                                                        <th>RESERVAS</th>
+                                                        <th>GASTO TOTAL</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=0;i<usuariospopulares.length-10;i++){%>
+                                                            <tr <%if (i==0){%>style="color: gold;"<%}%>>
+                                                                <td>#<%=i+1 %></td>
+                                                                <td><%=usuariospopulares[i][0] %></td>
+                                                                <td><%=usuariospopulares[i][1] %></td>
+                                                                <td><%=usuariospopulares[i][2] %></td>
+                                                                <td><%=usuariospopulares[i][3] %></td>
+                                                                <td><%=usuariospopulares[i][4] %></td>
+                                                                <td>ARG$ <%=usuariospopulares[i][5] %></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>USUARIOS CON MENOS RESERVAS</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>ID</th>
+                                                        <th>PASAPORTE</th>
+                                                        <th>NOMBRE Y APELLIDO</th>
+                                                        <th>EMAIL</th>
+                                                        <th>RESERVAS</th>
+                                                        <th>GASTO TOTAL</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=usuariospopulares.length-1;i>=usuariospopulares.length-10;i--){%>
+                                                            <tr <%if(i==usuariospopulares.length-1){%>style="color: #C8102E;"<%}%>>
+                                                                <td>#<%=20-i %></td>
+                                                                <td><%=usuariospopulares[i][0] %></td>
+                                                                <td><%=usuariospopulares[i][1] %></td>
+                                                                <td><%=usuariospopulares[i][2] %></td>
+                                                                <td><%=usuariospopulares[i][3] %></td>
+                                                                <td><%=usuariospopulares[i][4] %></td>
+                                                                <td>ARG$ <%=usuariospopulares[i][5] %></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <%break;%>
+                                    <%case 6:%>
+                                        <div class="ancho">
+                                            <p>admin@admin: cd opt <br> admin@admin:/opt ./estadisticas reservas <br></p>
+                                        </div>
+                                        <div class="ancho">
+                                            <h3>ESTADISTICAS DE RESERVAS</h3>
+                                        </div>
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>RESUMEN DE RESERVAS E INGRESOS</h3>
+                                                <p>RESERVAS TOTALES: <%= reservastotales %></p>
+                                                <p>INGRESOS TOTALES: ARG$ <%= ingresostotales %></p>
+                                                <p>GASTO PROMEDIO POR RESERVA: ARG$ <%= gastopromedioreserva %></p>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">RESERVAS VIGENTES: <%= reservasvigentes %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #009639; height: 100%; width: <%=(reservasvigentes/reservastotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">RESERVAS NO VIGENTES: <%= reservasnovigentes %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #C8102E; height: 100%; width: <%=(reservasnovigentes/reservastotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">RESERVAS NACIONALES: <%= reservasnacionales %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #009639; height: 100%; width: <%=(reservasnacionales/reservastotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">RESERVAS INTERNACIONALES: <%= reservasinternacionales %></label>
+                                                    </div>
+                                                    <div class="relleno">
+                                                        <div style="background-color: #C8102E; height: 100%; width: <%=(reservasinternacionales/reservastotales)*100%>%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>Distribucion de reservas por mes</h3>
+                                                <p>MESES/RESERVAS</p>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ENERO:<%=reservasxmes[0]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[0]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">FEBRERO:<%=reservasxmes[1]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[1]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MARZO:<%=reservasxmes[2]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[2]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">ABRIL:<%=reservasxmes[3]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[3]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">MAYO:<%=reservasxmes[4]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[4]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JUNIO:<%=reservasxmes[5]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[5]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">JULIO:<%=reservasxmes[6]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[6]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">AGOSTO:<%=reservasxmes[7]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[7]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">SEPTIEMBRE:<%=reservasxmes[8]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[8]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">OCTUBRE:<%=reservasxmes[9]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[9]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">NOVIEMBRE:<%=reservasxmes[10]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[10]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">DICIEMBRE:<%=reservasxmes[11]%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%=(reservasxmes[11]/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                                <div class="barra">
+                                                    <div class="label">
+                                                        <label for="">PROMEDIO ANUAL: <%= promedioanual%></label>
+                                                    </div>
+                                                    <div class="relleno" style="background-color: #009639; height: 100%; width: <%= (promedioanual/maximoxmes)*100%>%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ancho">
+                                            <div class="medioAncho">
+                                                <h3>VUELOS CON MAYOR RECAUDACION</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>ID</th>
+                                                        <th>NUMERO</th>
+                                                        <th>ORIGEN</th>
+                                                        <th>DESTINO</th>
+                                                        <th>RESERVAS</th>
+                                                        <th>RECAUDACION</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=0;i<reservaspopulares.length-10;i++){%>
+                                                            <tr <%if (i==0){%>style="color: gold;"<%}%>>
+                                                                <td>#<%=i+1 %></td>
+                                                                <td><%=reservaspopulares[i][0] %></td>
+                                                                <td><%=reservaspopulares[i][1] %></td>
+                                                                <td><%=reservaspopulares[i][2] %></td>
+                                                                <td><%=reservaspopulares[i][3] %></td>
+                                                                <td><%=reservaspopulares[i][4] %></td>
+                                                                <td>ARG$ <%=reservaspopulares[i][5] %></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="medioAncho">
+                                                <h3>VUELOS CON MENOR RECAUDACION</h3>
+                                                <table>
+                                                    <thead>
+                                                        <th>PUESTO</th>
+                                                        <th>ID</th>
+                                                        <th>NUMERO</th>
+                                                        <th>ORIGEN</th>
+                                                        <th>DESTINO</th>
+                                                        <th>RESERVAS</th>
+                                                        <th>RECAUDACION</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%for(let i=reservaspopulares.length-1;i>=reservaspopulares.length-10;i--){%>
+                                                            <tr <%if(i==reservaspopulares.length-1){%>style="color: #C8102E;"<%}%>>
+                                                                <td>#<%=20-i %></td>
+                                                                <td><%=reservaspopulares[i][0] %></td>
+                                                                <td><%=reservaspopulares[i][1] %></td>
+                                                                <td><%=reservaspopulares[i][2] %></td>
+                                                                <td><%=reservaspopulares[i][3] %></td>
+                                                                <td><%=reservaspopulares[i][4] %></td>
+                                                                <td>ARG$ <%=reservaspopulares[i][5] %></td>
+                                                            </tr>
+                                                        <% } %>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                         <%break;%>
