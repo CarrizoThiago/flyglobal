@@ -87,17 +87,33 @@ header {
     height: 2em;
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 2%;
     margin-bottom: 1%;
 }
 
 .label {
-    width: 25%;
+    width: 48%;
+    min-width: 48%;
+    max-width: 48%;
+    flex: 0 0 48%;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .relleno {
-    width: 73%;
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+    flex: 0 0 50%;
     height: 100%;
+    box-sizing: border-box;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 th,
